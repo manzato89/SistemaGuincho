@@ -113,7 +113,7 @@
             // 
             this.btn_NovoServico.BackColor = System.Drawing.SystemColors.Control;
             this.btn_NovoServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_NovoServico.Location = new System.Drawing.Point(166, 139);
+            this.btn_NovoServico.Location = new System.Drawing.Point(170, 139);
             this.btn_NovoServico.Name = "btn_NovoServico";
             this.btn_NovoServico.Size = new System.Drawing.Size(88, 28);
             this.btn_NovoServico.TabIndex = 8;
