@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SistemaGuincho
 {
-    public partial class Form1 : Form
+    public partial class Frm_Categoria : Form
     {
-        public Form1()
+        public Frm_Categoria()
         {
             InitializeComponent();
         }
