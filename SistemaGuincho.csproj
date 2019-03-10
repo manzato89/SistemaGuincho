@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -103,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tag-alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaGuincho.DAL\SistemaGuincho.DAL.csproj">
+      <Project>{b0a6c7d5-a335-4ee5-befe-f8b168e93281}</Project>
+      <Name>SistemaGuincho.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
