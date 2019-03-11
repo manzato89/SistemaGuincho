@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView_Categoria = new System.Windows.Forms.DataGridView();
             this.btn_CancCategoria = new System.Windows.Forms.Button();
             this.btn_ExcluirCategoria = new System.Windows.Forms.Button();
@@ -37,14 +38,26 @@
             this.lbl_DescCategoria = new System.Windows.Forms.Label();
             this.txt_codCategoria = new System.Windows.Forms.TextBox();
             this.lbl_codCategoria = new System.Windows.Forms.Label();
+            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descricaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Categoria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView_Categoria
             // 
+            this.dataGridView_Categoria.AllowUserToAddRows = false;
+            this.dataGridView_Categoria.AllowUserToDeleteRows = false;
+            this.dataGridView_Categoria.AutoGenerateColumns = false;
             this.dataGridView_Categoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Categoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codigoDataGridViewTextBoxColumn,
+            this.descricaoDataGridViewTextBoxColumn});
+            this.dataGridView_Categoria.DataSource = this.categoriaBindingSource;
             this.dataGridView_Categoria.Location = new System.Drawing.Point(49, 194);
             this.dataGridView_Categoria.Name = "dataGridView_Categoria";
+            this.dataGridView_Categoria.ReadOnly = true;
             this.dataGridView_Categoria.Size = new System.Drawing.Size(673, 245);
             this.dataGridView_Categoria.TabIndex = 25;
             // 
@@ -124,6 +137,24 @@
             this.lbl_codCategoria.TabIndex = 13;
             this.lbl_codCategoria.Text = "Código";
             // 
+            // categoriaBindingSource
+            // 
+            this.categoriaBindingSource.DataSource = typeof(SistemaGuincho.DAL.Categoria);
+            // 
+            // codigoDataGridViewTextBoxColumn
+            // 
+            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
+            this.codigoDataGridViewTextBoxColumn.HeaderText = "Código";
+            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
+            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descricaoDataGridViewTextBoxColumn
+            // 
+            this.descricaoDataGridViewTextBoxColumn.DataPropertyName = "Descricao";
+            this.descricaoDataGridViewTextBoxColumn.HeaderText = "Descrição";
+            this.descricaoDataGridViewTextBoxColumn.Name = "descricaoDataGridViewTextBoxColumn";
+            this.descricaoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Frm_Categoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,7 +172,9 @@
             this.Name = "Frm_Categoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Categoria";
+            this.Load += new System.EventHandler(this.Frm_Categoria_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Categoria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +191,8 @@
         private System.Windows.Forms.Label lbl_DescCategoria;
         private System.Windows.Forms.TextBox txt_codCategoria;
         private System.Windows.Forms.Label lbl_codCategoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descricaoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource categoriaBindingSource;
     }
 }

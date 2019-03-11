@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaGuincho.DAL;
 
 namespace SistemaGuincho
 {
@@ -15,6 +16,11 @@ namespace SistemaGuincho
         public Frm_Categoria()
         {
             InitializeComponent();
+        }
+
+        private void Frm_Categoria_Load(object sender, EventArgs e)
+        {
+            this.categoriaBindingSource.DataSource = DataContextFactory.DataContext.Categoria;
         }
     }
 }
