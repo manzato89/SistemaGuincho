@@ -30,17 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView_Categoria = new System.Windows.Forms.DataGridView();
+            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descricaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btn_CancCategoria = new System.Windows.Forms.Button();
             this.btn_ExcluirCategoria = new System.Windows.Forms.Button();
-            this.btn_CadCategoria = new System.Windows.Forms.Button();
+            this.btn_GravCategoria = new System.Windows.Forms.Button();
             this.btn_NovoCategoria = new System.Windows.Forms.Button();
             this.txt_DescCategoria = new System.Windows.Forms.TextBox();
             this.lbl_DescCategoria = new System.Windows.Forms.Label();
             this.txt_codCategoria = new System.Windows.Forms.TextBox();
             this.lbl_codCategoria = new System.Windows.Forms.Label();
-            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descricaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Categoria)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -61,6 +61,25 @@
             this.dataGridView_Categoria.Size = new System.Drawing.Size(673, 245);
             this.dataGridView_Categoria.TabIndex = 25;
             // 
+            // codigoDataGridViewTextBoxColumn
+            // 
+            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
+            this.codigoDataGridViewTextBoxColumn.HeaderText = "Código";
+            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
+            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descricaoDataGridViewTextBoxColumn
+            // 
+            this.descricaoDataGridViewTextBoxColumn.DataPropertyName = "Descricao";
+            this.descricaoDataGridViewTextBoxColumn.HeaderText = "Descrição";
+            this.descricaoDataGridViewTextBoxColumn.Name = "descricaoDataGridViewTextBoxColumn";
+            this.descricaoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // categoriaBindingSource
+            // 
+            this.categoriaBindingSource.DataSource = typeof(SistemaGuincho.DAL.Categoria);
+            this.categoriaBindingSource.CurrentChanged += new System.EventHandler(this.categoriaBindingSource_CurrentChanged);
+            // 
             // btn_CancCategoria
             // 
             this.btn_CancCategoria.BackColor = System.Drawing.SystemColors.Control;
@@ -71,6 +90,7 @@
             this.btn_CancCategoria.TabIndex = 24;
             this.btn_CancCategoria.Text = "Cancelar";
             this.btn_CancCategoria.UseVisualStyleBackColor = false;
+            this.btn_CancCategoria.Click += new System.EventHandler(this.btn_CancCategoria_Click);
             // 
             // btn_ExcluirCategoria
             // 
@@ -82,17 +102,19 @@
             this.btn_ExcluirCategoria.TabIndex = 23;
             this.btn_ExcluirCategoria.Text = "Excluir";
             this.btn_ExcluirCategoria.UseVisualStyleBackColor = false;
+            this.btn_ExcluirCategoria.Click += new System.EventHandler(this.btn_ExcluirCategoria_Click);
             // 
-            // btn_CadCategoria
+            // btn_GravCategoria
             // 
-            this.btn_CadCategoria.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_CadCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CadCategoria.Location = new System.Drawing.Point(290, 123);
-            this.btn_CadCategoria.Name = "btn_CadCategoria";
-            this.btn_CadCategoria.Size = new System.Drawing.Size(88, 28);
-            this.btn_CadCategoria.TabIndex = 22;
-            this.btn_CadCategoria.Text = "Cadastrar";
-            this.btn_CadCategoria.UseVisualStyleBackColor = false;
+            this.btn_GravCategoria.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_GravCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_GravCategoria.Location = new System.Drawing.Point(290, 123);
+            this.btn_GravCategoria.Name = "btn_GravCategoria";
+            this.btn_GravCategoria.Size = new System.Drawing.Size(88, 28);
+            this.btn_GravCategoria.TabIndex = 22;
+            this.btn_GravCategoria.Text = "Gravar";
+            this.btn_GravCategoria.UseVisualStyleBackColor = false;
+            this.btn_GravCategoria.Click += new System.EventHandler(this.btn_GravCategoria_Click);
             // 
             // btn_NovoCategoria
             // 
@@ -104,9 +126,11 @@
             this.btn_NovoCategoria.TabIndex = 21;
             this.btn_NovoCategoria.Text = "Novo";
             this.btn_NovoCategoria.UseVisualStyleBackColor = false;
+            this.btn_NovoCategoria.Click += new System.EventHandler(this.btn_NovoCategoria_Click);
             // 
             // txt_DescCategoria
             // 
+            this.txt_DescCategoria.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Descricao", true));
             this.txt_DescCategoria.Location = new System.Drawing.Point(278, 46);
             this.txt_DescCategoria.Name = "txt_DescCategoria";
             this.txt_DescCategoria.Size = new System.Drawing.Size(444, 20);
@@ -123,6 +147,7 @@
             // 
             // txt_codCategoria
             // 
+            this.txt_codCategoria.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Codigo", true));
             this.txt_codCategoria.Location = new System.Drawing.Point(92, 46);
             this.txt_codCategoria.Name = "txt_codCategoria";
             this.txt_codCategoria.Size = new System.Drawing.Size(108, 20);
@@ -137,24 +162,6 @@
             this.lbl_codCategoria.TabIndex = 13;
             this.lbl_codCategoria.Text = "Código";
             // 
-            // categoriaBindingSource
-            // 
-            this.categoriaBindingSource.DataSource = typeof(SistemaGuincho.DAL.Categoria);
-            // 
-            // codigoDataGridViewTextBoxColumn
-            // 
-            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.HeaderText = "Código";
-            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
-            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descricaoDataGridViewTextBoxColumn
-            // 
-            this.descricaoDataGridViewTextBoxColumn.DataPropertyName = "Descricao";
-            this.descricaoDataGridViewTextBoxColumn.HeaderText = "Descrição";
-            this.descricaoDataGridViewTextBoxColumn.Name = "descricaoDataGridViewTextBoxColumn";
-            this.descricaoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // Frm_Categoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,7 +170,7 @@
             this.Controls.Add(this.dataGridView_Categoria);
             this.Controls.Add(this.btn_CancCategoria);
             this.Controls.Add(this.btn_ExcluirCategoria);
-            this.Controls.Add(this.btn_CadCategoria);
+            this.Controls.Add(this.btn_GravCategoria);
             this.Controls.Add(this.btn_NovoCategoria);
             this.Controls.Add(this.txt_DescCategoria);
             this.Controls.Add(this.lbl_DescCategoria);
@@ -185,7 +192,7 @@
         private System.Windows.Forms.DataGridView dataGridView_Categoria;
         private System.Windows.Forms.Button btn_CancCategoria;
         private System.Windows.Forms.Button btn_ExcluirCategoria;
-        private System.Windows.Forms.Button btn_CadCategoria;
+        private System.Windows.Forms.Button btn_GravCategoria;
         private System.Windows.Forms.Button btn_NovoCategoria;
         private System.Windows.Forms.TextBox txt_DescCategoria;
         private System.Windows.Forms.Label lbl_DescCategoria;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_codServico = new System.Windows.Forms.Label();
             this.txt_codServico = new System.Windows.Forms.TextBox();
             this.txt_DescServico = new System.Windows.Forms.TextBox();
@@ -37,11 +38,17 @@
             this.lbl_CatServico = new System.Windows.Forms.Label();
             this.cbb_CatServicos = new System.Windows.Forms.ComboBox();
             this.btn_NovoServico = new System.Windows.Forms.Button();
-            this.btn_CadServico = new System.Windows.Forms.Button();
+            this.btn_GravServico = new System.Windows.Forms.Button();
             this.btn_ExcluirServico = new System.Windows.Forms.Button();
             this.btn_CancServico = new System.Windows.Forms.Button();
             this.dataGridView_Servico = new System.Windows.Forms.DataGridView();
+            this.servicoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descricaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoriaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Servico)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.servicoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_codServico
@@ -55,6 +62,7 @@
             // 
             // txt_codServico
             // 
+            this.txt_codServico.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.servicoBindingSource, "Codigo", true));
             this.txt_codServico.Location = new System.Drawing.Point(78, 46);
             this.txt_codServico.Name = "txt_codServico";
             this.txt_codServico.Size = new System.Drawing.Size(108, 20);
@@ -62,6 +70,7 @@
             // 
             // txt_DescServico
             // 
+            this.txt_DescServico.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.servicoBindingSource, "Descricao", true));
             this.txt_DescServico.Location = new System.Drawing.Point(264, 46);
             this.txt_DescServico.Name = "txt_DescServico";
             this.txt_DescServico.Size = new System.Drawing.Size(444, 20);
@@ -78,6 +87,7 @@
             // 
             // txt_VlrServico
             // 
+            this.txt_VlrServico.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.servicoBindingSource, "Valor", true));
             this.txt_VlrServico.Location = new System.Drawing.Point(78, 86);
             this.txt_VlrServico.Name = "txt_VlrServico";
             this.txt_VlrServico.Size = new System.Drawing.Size(108, 20);
@@ -103,6 +113,7 @@
             // 
             // cbb_CatServicos
             // 
+            this.cbb_CatServicos.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.servicoBindingSource, "Categoria", true));
             this.cbb_CatServicos.FormattingEnabled = true;
             this.cbb_CatServicos.Location = new System.Drawing.Point(265, 84);
             this.cbb_CatServicos.Name = "cbb_CatServicos";
@@ -119,17 +130,19 @@
             this.btn_NovoServico.TabIndex = 8;
             this.btn_NovoServico.Text = "Novo";
             this.btn_NovoServico.UseVisualStyleBackColor = false;
+            this.btn_NovoServico.Click += new System.EventHandler(this.btn_NovoServico_Click);
             // 
-            // btn_CadServico
+            // btn_GravServico
             // 
-            this.btn_CadServico.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_CadServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CadServico.Location = new System.Drawing.Point(276, 139);
-            this.btn_CadServico.Name = "btn_CadServico";
-            this.btn_CadServico.Size = new System.Drawing.Size(88, 28);
-            this.btn_CadServico.TabIndex = 9;
-            this.btn_CadServico.Text = "Cadastrar";
-            this.btn_CadServico.UseVisualStyleBackColor = false;
+            this.btn_GravServico.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_GravServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_GravServico.Location = new System.Drawing.Point(276, 139);
+            this.btn_GravServico.Name = "btn_GravServico";
+            this.btn_GravServico.Size = new System.Drawing.Size(88, 28);
+            this.btn_GravServico.TabIndex = 9;
+            this.btn_GravServico.Text = "Gravar";
+            this.btn_GravServico.UseVisualStyleBackColor = false;
+            this.btn_GravServico.Click += new System.EventHandler(this.btn_GravServico_Click);
             // 
             // btn_ExcluirServico
             // 
@@ -141,6 +154,7 @@
             this.btn_ExcluirServico.TabIndex = 10;
             this.btn_ExcluirServico.Text = "Excluir";
             this.btn_ExcluirServico.UseVisualStyleBackColor = false;
+            this.btn_ExcluirServico.Click += new System.EventHandler(this.btn_ExcluirServico_Click);
             // 
             // btn_CancServico
             // 
@@ -152,14 +166,50 @@
             this.btn_CancServico.TabIndex = 11;
             this.btn_CancServico.Text = "Cancelar";
             this.btn_CancServico.UseVisualStyleBackColor = false;
+            this.btn_CancServico.Click += new System.EventHandler(this.btn_CancServico_Click);
             // 
             // dataGridView_Servico
             // 
+            this.dataGridView_Servico.AutoGenerateColumns = false;
             this.dataGridView_Servico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Servico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.codigoDataGridViewTextBoxColumn,
+            this.descricaoDataGridViewTextBoxColumn,
+            this.valorDataGridViewTextBoxColumn,
+            this.categoriaDataGridViewTextBoxColumn});
+            this.dataGridView_Servico.DataSource = this.servicoBindingSource;
             this.dataGridView_Servico.Location = new System.Drawing.Point(35, 210);
             this.dataGridView_Servico.Name = "dataGridView_Servico";
             this.dataGridView_Servico.Size = new System.Drawing.Size(673, 245);
             this.dataGridView_Servico.TabIndex = 12;
+            // 
+            // servicoBindingSource
+            // 
+            this.servicoBindingSource.DataSource = typeof(SistemaGuincho.DAL.Servico);
+            // 
+            // codigoDataGridViewTextBoxColumn
+            // 
+            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
+            this.codigoDataGridViewTextBoxColumn.HeaderText = "Código";
+            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
+            // 
+            // descricaoDataGridViewTextBoxColumn
+            // 
+            this.descricaoDataGridViewTextBoxColumn.DataPropertyName = "Descricao";
+            this.descricaoDataGridViewTextBoxColumn.HeaderText = "Descrição";
+            this.descricaoDataGridViewTextBoxColumn.Name = "descricaoDataGridViewTextBoxColumn";
+            // 
+            // valorDataGridViewTextBoxColumn
+            // 
+            this.valorDataGridViewTextBoxColumn.DataPropertyName = "Valor";
+            this.valorDataGridViewTextBoxColumn.HeaderText = "Valor";
+            this.valorDataGridViewTextBoxColumn.Name = "valorDataGridViewTextBoxColumn";
+            // 
+            // categoriaDataGridViewTextBoxColumn
+            // 
+            this.categoriaDataGridViewTextBoxColumn.DataPropertyName = "Categoria";
+            this.categoriaDataGridViewTextBoxColumn.HeaderText = "Categoria";
+            this.categoriaDataGridViewTextBoxColumn.Name = "categoriaDataGridViewTextBoxColumn";
             // 
             // Frm_Servico
             // 
@@ -169,7 +219,7 @@
             this.Controls.Add(this.dataGridView_Servico);
             this.Controls.Add(this.btn_CancServico);
             this.Controls.Add(this.btn_ExcluirServico);
-            this.Controls.Add(this.btn_CadServico);
+            this.Controls.Add(this.btn_GravServico);
             this.Controls.Add(this.btn_NovoServico);
             this.Controls.Add(this.cbb_CatServicos);
             this.Controls.Add(this.lbl_CatServico);
@@ -182,7 +232,9 @@
             this.Name = "Frm_Servico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Serviços";
+            this.Load += new System.EventHandler(this.Frm_Servico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Servico)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.servicoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,9 +251,14 @@
         private System.Windows.Forms.Label lbl_CatServico;
         private System.Windows.Forms.ComboBox cbb_CatServicos;
         private System.Windows.Forms.Button btn_NovoServico;
-        private System.Windows.Forms.Button btn_CadServico;
+        private System.Windows.Forms.Button btn_GravServico;
         private System.Windows.Forms.Button btn_ExcluirServico;
         private System.Windows.Forms.Button btn_CancServico;
         private System.Windows.Forms.DataGridView dataGridView_Servico;
+        private System.Windows.Forms.BindingSource servicoBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descricaoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoriaDataGridViewTextBoxColumn;
     }
 }

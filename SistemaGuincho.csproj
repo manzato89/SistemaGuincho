@@ -96,6 +96,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="SistemaGuincho.DAL.Categoria.datasource" />
+    <None Include="SistemaGuincho.DAL.Servico.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
