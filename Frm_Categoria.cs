@@ -34,27 +34,37 @@ namespace SistemaGuincho
             {
 
             this.categoriaBindingSource.EndEdit();
-            DataContextFactory.DataContext.SubmitChanges(); //Atualiza o Banco de Dados
+            DataContextFactory.DataContext.SubmitChanges(); //ATUALIZA AS MUDANÇAS NO BANCO
             MessageBox.Show("A Categoria foi Adicionada com sucesso!");
             }
         }
 
             private bool valida()
             {
-             if (txt_DescCategoria.Text.Trim() == string.Empty) // comando "Trim" metodo para remover espaço string.Empty verifica se a string está vazio
-                {
+             if (txt_DescCategoria.Text.Trim() == string.Empty) // COMANDO "TRIM" METODO PARA REMOVER ESPAÇO STRING.EMPTY VERIFICA SE A STRING ESTÁ VAZIO
+            {
                  MessageBox.Show("O preenchimento do campo é obrigatório.");
-                 txt_DescCategoria.Focus(); //Aponta para o campo "descrição da categoria" de preenchto obrigatorio
-                 return false;
+                 txt_DescCategoria.Focus(); //APONTA PARA O CAMPO "DESCRIÇÃO DA CATEGORIA" DE PREENCHTO OBRIGATORIO
+                return false;
                 }
                 return true;
             }
 
         private void btn_ExcluirCategoria_Click(object sender, EventArgs e)
         {
-            this.categoriaBindingSource.RemoveCurrent();
-            DataContextFactory.DataContext.SubmitChanges();
-            MessageBox.Show("A Categoria foi Excluída!");
+            if (MessageBox.Show("Deseja realmente Excluir?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                == DialogResult.Yes) //ESTE IF FAZ A VALIDAÇÃO EXIBE UM MSG BOX QUESTIONANDO SE DESEJA REALMENTE EXCLUIR O REGISTRO
+            {
+                if (this.CategoriaPossuiServico(this.categoriaAtual))
+                    MessageBox.Show("Você não pode Excluir a categoria, pois está vínculada a serviços!");
+                else
+                {
+                    this.categoriaBindingSource.RemoveCurrent();
+                    DataContextFactory.DataContext.SubmitChanges();
+                    MessageBox.Show("A Categoria foi Excluída!");
+                }
+            }
+            
         }
 
         private void btn_CancCategoria_Click(object sender, EventArgs e)
@@ -67,5 +77,24 @@ namespace SistemaGuincho
         {
 
         }
+
+        public Categoria categoriaAtual // ESTE METODO IRÁ VERIFICAR QUAL É A CATEGORIA ATUAL
+        {
+            get
+            {
+                return (Categoria)this.categoriaBindingSource.Current;
+            }
+        }
+        private bool CategoriaPossuiServico(Categoria categoria) //VERIFICA SE EXISTE SERVICO VINCULADO PARA VALIDAR EXCLUSÃO
+        {
+            var servicos = DataContextFactory.DataContext.Servico.Where
+                (x => x.CodigoCategoria == categoria.Codigo);
+
+            if (servicos.Count() > 0)
+                return true;
+            else
+                return false;
+        }
+        
     }
 }
