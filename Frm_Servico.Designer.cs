@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.lbl_codServico = new System.Windows.Forms.Label();
             this.txt_codServico = new System.Windows.Forms.TextBox();
+            this.servicoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txt_DescServico = new System.Windows.Forms.TextBox();
             this.lbl_DescServico = new System.Windows.Forms.Label();
             this.txt_VlrServico = new System.Windows.Forms.TextBox();
@@ -42,13 +43,15 @@
             this.btn_ExcluirServico = new System.Windows.Forms.Button();
             this.btn_CancServico = new System.Windows.Forms.Button();
             this.dataGridView_Servico = new System.Windows.Forms.DataGridView();
-            this.servicoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descricaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodigoCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoriaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Servico)).BeginInit();
+            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.servicoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Servico)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_codServico
@@ -62,15 +65,19 @@
             // 
             // txt_codServico
             // 
-            this.txt_codServico.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.servicoBindingSource, "Codigo", true));
+            this.txt_codServico.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.servicoBindingSource, "Codigo", true));
             this.txt_codServico.Location = new System.Drawing.Point(78, 46);
             this.txt_codServico.Name = "txt_codServico";
             this.txt_codServico.Size = new System.Drawing.Size(108, 20);
             this.txt_codServico.TabIndex = 1;
             // 
+            // servicoBindingSource
+            // 
+            this.servicoBindingSource.DataSource = typeof(SistemaGuincho.DAL.Servico);
+            // 
             // txt_DescServico
             // 
-            this.txt_DescServico.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.servicoBindingSource, "Descricao", true));
+            this.txt_DescServico.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.servicoBindingSource, "Descricao", true));
             this.txt_DescServico.Location = new System.Drawing.Point(264, 46);
             this.txt_DescServico.Name = "txt_DescServico";
             this.txt_DescServico.Size = new System.Drawing.Size(444, 20);
@@ -87,7 +94,7 @@
             // 
             // txt_VlrServico
             // 
-            this.txt_VlrServico.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.servicoBindingSource, "Valor", true));
+            this.txt_VlrServico.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.servicoBindingSource, "Valor", true));
             this.txt_VlrServico.Location = new System.Drawing.Point(78, 86);
             this.txt_VlrServico.Name = "txt_VlrServico";
             this.txt_VlrServico.Size = new System.Drawing.Size(108, 20);
@@ -114,11 +121,15 @@
             // cbb_CatServicos
             // 
             this.cbb_CatServicos.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.servicoBindingSource, "Categoria", true));
+            this.cbb_CatServicos.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Descricao", true));
+            this.cbb_CatServicos.DataSource = this.categoriaBindingSource;
+            this.cbb_CatServicos.DisplayMember = "Descricao";
             this.cbb_CatServicos.FormattingEnabled = true;
             this.cbb_CatServicos.Location = new System.Drawing.Point(265, 84);
             this.cbb_CatServicos.Name = "cbb_CatServicos";
             this.cbb_CatServicos.Size = new System.Drawing.Size(121, 21);
             this.cbb_CatServicos.TabIndex = 7;
+            this.cbb_CatServicos.ValueMember = "Codigo";
             // 
             // btn_NovoServico
             // 
@@ -170,46 +181,62 @@
             // 
             // dataGridView_Servico
             // 
+            this.dataGridView_Servico.AllowUserToAddRows = false;
+            this.dataGridView_Servico.AllowUserToDeleteRows = false;
             this.dataGridView_Servico.AutoGenerateColumns = false;
             this.dataGridView_Servico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Servico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigoDataGridViewTextBoxColumn,
             this.descricaoDataGridViewTextBoxColumn,
             this.valorDataGridViewTextBoxColumn,
+            this.CodigoCategoria,
             this.categoriaDataGridViewTextBoxColumn});
             this.dataGridView_Servico.DataSource = this.servicoBindingSource;
             this.dataGridView_Servico.Location = new System.Drawing.Point(35, 210);
             this.dataGridView_Servico.Name = "dataGridView_Servico";
+            this.dataGridView_Servico.ReadOnly = true;
             this.dataGridView_Servico.Size = new System.Drawing.Size(673, 245);
             this.dataGridView_Servico.TabIndex = 12;
-            // 
-            // servicoBindingSource
-            // 
-            this.servicoBindingSource.DataSource = typeof(SistemaGuincho.DAL.Servico);
             // 
             // codigoDataGridViewTextBoxColumn
             // 
             this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
             this.codigoDataGridViewTextBoxColumn.HeaderText = "Código";
             this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
+            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // descricaoDataGridViewTextBoxColumn
             // 
             this.descricaoDataGridViewTextBoxColumn.DataPropertyName = "Descricao";
             this.descricaoDataGridViewTextBoxColumn.HeaderText = "Descrição";
             this.descricaoDataGridViewTextBoxColumn.Name = "descricaoDataGridViewTextBoxColumn";
+            this.descricaoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descricaoDataGridViewTextBoxColumn.Width = 200;
             // 
             // valorDataGridViewTextBoxColumn
             // 
             this.valorDataGridViewTextBoxColumn.DataPropertyName = "Valor";
             this.valorDataGridViewTextBoxColumn.HeaderText = "Valor";
             this.valorDataGridViewTextBoxColumn.Name = "valorDataGridViewTextBoxColumn";
+            this.valorDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // CodigoCategoria
+            // 
+            this.CodigoCategoria.DataPropertyName = "CodigoCategoria";
+            this.CodigoCategoria.HeaderText = "Código da Categoria";
+            this.CodigoCategoria.Name = "CodigoCategoria";
+            this.CodigoCategoria.ReadOnly = true;
             // 
             // categoriaDataGridViewTextBoxColumn
             // 
             this.categoriaDataGridViewTextBoxColumn.DataPropertyName = "Categoria";
             this.categoriaDataGridViewTextBoxColumn.HeaderText = "Categoria";
             this.categoriaDataGridViewTextBoxColumn.Name = "categoriaDataGridViewTextBoxColumn";
+            this.categoriaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // categoriaBindingSource
+            // 
+            this.categoriaBindingSource.DataSource = typeof(SistemaGuincho.DAL.Categoria);
             // 
             // Frm_Servico
             // 
@@ -233,8 +260,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Serviços";
             this.Load += new System.EventHandler(this.Frm_Servico_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Servico)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.servicoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Servico)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,6 +287,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descricaoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn valorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoriaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource categoriaBindingSource;
     }
 }

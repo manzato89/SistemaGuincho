@@ -53,11 +53,11 @@ namespace SistemaGuincho
         private void btn_ExcluirCategoria_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Deseja realmente Excluir?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                == DialogResult.Yes) //ESTE IF FAZ A VALIDAÇÃO EXIBE UM MSG BOX QUESTIONANDO SE DESEJA REALMENTE EXCLUIR O REGISTRO
+                == DialogResult.Yes) //ESTE IF FAZ A VALIDAÇÃO E EXIBE UM MSG BOX QUESTIONANDO SE DESEJA REALMENTE EXCLUIR O REGISTRO
             {
-                if (this.CategoriaPossuiServico(this.categoriaAtual))
+                if (this.CategoriaPossuiServico(this.categoriaAtual))//ESTE IF VERIFICA SE A CATEGORIA POSSUI SERVIÇO VINCULADO ANTES DE EXCLUIR
                     MessageBox.Show("Você não pode Excluir a categoria, pois está vínculada a serviços!");
-                else
+                else 
                 {
                     this.categoriaBindingSource.RemoveCurrent();
                     DataContextFactory.DataContext.SubmitChanges();
@@ -78,7 +78,7 @@ namespace SistemaGuincho
 
         }
 
-        public Categoria categoriaAtual // ESTE METODO IRÁ VERIFICAR QUAL É A CATEGORIA ATUAL
+        public Categoria categoriaAtual //ESTE METODO IRÁ VERIFICAR QUAL É A CATEGORIA ATUAL
         {
             get
             {
