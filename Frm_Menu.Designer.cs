@@ -34,6 +34,8 @@
             this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_CadCategoria = new System.Windows.Forms.Button();
             this.btn_CadServico = new System.Windows.Forms.Button();
+            this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviçosCategoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +45,8 @@
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.castrosToolStripMenuItem});
+            this.castrosToolStripMenuItem,
+            this.consultasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(95, 465);
@@ -112,6 +115,22 @@
             this.btn_CadServico.UseVisualStyleBackColor = false;
             this.btn_CadServico.Click += new System.EventHandler(this.btn_CadServico_Click);
             // 
+            // consultasToolStripMenuItem
+            // 
+            this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.serviçosCategoriasToolStripMenuItem});
+            this.consultasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
+            this.consultasToolStripMenuItem.Text = "Consultas";
+            // 
+            // serviçosCategoriasToolStripMenuItem
+            // 
+            this.serviçosCategoriasToolStripMenuItem.Name = "serviçosCategoriasToolStripMenuItem";
+            this.serviçosCategoriasToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.serviçosCategoriasToolStripMenuItem.Text = "Serviços / Categorias";
+            this.serviçosCategoriasToolStripMenuItem.Click += new System.EventHandler(this.serviçosCategoriasToolStripMenuItem_Click);
+            // 
             // Frm_Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,6 +158,8 @@
         private System.Windows.Forms.ToolStripMenuItem serviçosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem categoriasToolStripMenuItem;
         private System.Windows.Forms.Button btn_CadCategoria;
+        private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviçosCategoriasToolStripMenuItem;
     }
 }
 

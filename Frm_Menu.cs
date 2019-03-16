@@ -40,5 +40,11 @@ namespace SistemaGuincho
             Frm_Categoria frm = new Frm_Categoria();
             frm.Show();
         }
+
+        private void serviçosCategoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_ConsultaServicos frm = new Frm_ConsultaServicos();
+            frm.Show();
+        }
     }
 }
