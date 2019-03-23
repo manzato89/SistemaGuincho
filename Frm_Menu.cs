@@ -46,5 +46,16 @@ namespace SistemaGuincho
             Frm_ConsultaServicos frm = new Frm_ConsultaServicos();
             frm.Show();
         }
+
+        private void ordemDeServiçoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_OrdemServico frm = new Frm_OrdemServico();
+            frm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

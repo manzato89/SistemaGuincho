@@ -53,6 +53,12 @@
     <Compile Include="Frm_Categoria.Designer.cs">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_Cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Cliente.Designer.cs">
+      <DependentUpon>Frm_Cliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_ConsultaServicos.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -67,6 +73,12 @@
     <Compile Include="Frm_Menu.Designer.cs">
       <DependentUpon>Frm_Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_OrdemServico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_OrdemServico.Designer.cs">
+      <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_Servico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,12 +90,18 @@
     <EmbeddedResource Include="Frm_Categoria.resx">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Cliente.resx">
+      <DependentUpon>Frm_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm_ConsultaServicos.resx">
       <DependentUpon>Frm_ConsultaServicos.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Menu.resx">
       <DependentUpon>Frm_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_OrdemServico.resx">
+      <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Servico.resx">
       <DependentUpon>Frm_Servico.cs</DependentUpon>
@@ -124,6 +142,21 @@
       <Project>{b0a6c7d5-a335-4ee5-befe-f8b168e93281}</Project>
       <Name>SistemaGuincho.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keyring.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profile-group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calculator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-id.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
