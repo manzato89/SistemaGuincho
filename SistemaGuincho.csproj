@@ -73,6 +73,12 @@
     <Compile Include="Frm_Menu.Designer.cs">
       <DependentUpon>Frm_Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_Orcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Orcamento.Designer.cs">
+      <DependentUpon>Frm_Orcamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_OrdemServico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Menu.resx">
       <DependentUpon>Frm_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Orcamento.resx">
+      <DependentUpon>Frm_Orcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_OrdemServico.resx">
       <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
@@ -127,6 +136,10 @@
     </Compile>
     <None Include="SistemaGuincho.DAL.Categoria.datasource" />
     <None Include="SistemaGuincho.DAL.Servico.datasource" />
+    <None Include="SistemaGuincho.DAL.tb_Cliente.datasource" />
+    <None Include="SistemaGuincho.DAL.tb_item_OS.datasource" />
+    <None Include="SistemaGuincho.DAL.tb_OrdemServico.datasource" />
+    <None Include="SistemaGuincho.DAL.tb_Veiculo.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

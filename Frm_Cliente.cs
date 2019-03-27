@@ -22,9 +22,5 @@ namespace SistemaGuincho
 
         }
 
-        private void Frm_Cliente_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

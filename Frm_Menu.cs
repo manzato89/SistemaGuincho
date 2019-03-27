@@ -57,5 +57,11 @@ namespace SistemaGuincho
         {
 
         }
+
+        private void ordemDeServiçoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Frm_OrdemServico frm = new Frm_OrdemServico();
+            frm.Show();
+        }
     }
 }

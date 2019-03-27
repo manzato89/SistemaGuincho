@@ -42,6 +42,7 @@
             this.btn_Cliente = new System.Windows.Forms.Button();
             this.btn_CadCategoria = new System.Windows.Forms.Button();
             this.btn_CadServico = new System.Windows.Forms.Button();
+            this.ordemDeServiçoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,10 +54,11 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.castrosToolStripMenuItem,
             this.consultasToolStripMenuItem,
-            this.vendasToolStripMenuItem});
+            this.vendasToolStripMenuItem,
+            this.ordemDeServiçoToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(75, 419);
+            this.menuStrip1.Size = new System.Drawing.Size(123, 419);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -67,7 +69,7 @@
             this.categoriasToolStripMenuItem});
             this.castrosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.castrosToolStripMenuItem.Name = "castrosToolStripMenuItem";
-            this.castrosToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
+            this.castrosToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.castrosToolStripMenuItem.Text = "Cadastros";
             // 
             // serviçosToolStripMenuItem
@@ -90,7 +92,7 @@
             this.serviçosCategoriasToolStripMenuItem});
             this.consultasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.consultasToolStripMenuItem.Text = "Consultas";
             // 
             // serviçosCategoriasToolStripMenuItem
@@ -106,7 +108,7 @@
             this.ordemDeServiçoToolStripMenuItem});
             this.vendasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
-            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
+            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.vendasToolStripMenuItem.Text = "Pedidos";
             // 
             // ordemDeServiçoToolStripMenuItem
@@ -227,6 +229,14 @@
             this.btn_CadServico.UseVisualStyleBackColor = false;
             this.btn_CadServico.Click += new System.EventHandler(this.btn_CadServico_Click);
             // 
+            // ordemDeServiçoToolStripMenuItem1
+            // 
+            this.ordemDeServiçoToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ordemDeServiçoToolStripMenuItem1.Name = "ordemDeServiçoToolStripMenuItem1";
+            this.ordemDeServiçoToolStripMenuItem1.Size = new System.Drawing.Size(116, 19);
+            this.ordemDeServiçoToolStripMenuItem1.Text = "Ordem de Serviço";
+            this.ordemDeServiçoToolStripMenuItem1.Click += new System.EventHandler(this.ordemDeServiçoToolStripMenuItem1_Click);
+            // 
             // Frm_Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,6 +276,7 @@
         private System.Windows.Forms.Button btn_Orcamento;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripMenuItem ordemDeServiçoToolStripMenuItem1;
     }
 }
 
