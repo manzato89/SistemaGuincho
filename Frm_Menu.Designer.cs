@@ -36,13 +36,13 @@
             this.serviçosCategoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordemDeServiçoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordemDeServiçoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Orcamento = new System.Windows.Forms.Button();
             this.btn_Cliente = new System.Windows.Forms.Button();
             this.btn_CadCategoria = new System.Windows.Forms.Button();
             this.btn_CadServico = new System.Windows.Forms.Button();
-            this.ordemDeServiçoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,6 +118,14 @@
             this.ordemDeServiçoToolStripMenuItem.Text = "Ordem de Serviço";
             this.ordemDeServiçoToolStripMenuItem.Click += new System.EventHandler(this.ordemDeServiçoToolStripMenuItem_Click);
             // 
+            // ordemDeServiçoToolStripMenuItem1
+            // 
+            this.ordemDeServiçoToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ordemDeServiçoToolStripMenuItem1.Name = "ordemDeServiçoToolStripMenuItem1";
+            this.ordemDeServiçoToolStripMenuItem1.Size = new System.Drawing.Size(116, 19);
+            this.ordemDeServiçoToolStripMenuItem1.Text = "Ordem de Serviço";
+            this.ordemDeServiçoToolStripMenuItem1.Click += new System.EventHandler(this.ordemDeServiçoToolStripMenuItem1_Click);
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
@@ -190,6 +198,7 @@
             this.btn_Cliente.Text = "CLIENTES";
             this.btn_Cliente.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_Cliente.UseVisualStyleBackColor = false;
+            this.btn_Cliente.Click += new System.EventHandler(this.btn_Cliente_Click);
             // 
             // btn_CadCategoria
             // 
@@ -228,14 +237,6 @@
             this.btn_CadServico.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_CadServico.UseVisualStyleBackColor = false;
             this.btn_CadServico.Click += new System.EventHandler(this.btn_CadServico_Click);
-            // 
-            // ordemDeServiçoToolStripMenuItem1
-            // 
-            this.ordemDeServiçoToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ordemDeServiçoToolStripMenuItem1.Name = "ordemDeServiçoToolStripMenuItem1";
-            this.ordemDeServiçoToolStripMenuItem1.Size = new System.Drawing.Size(116, 19);
-            this.ordemDeServiçoToolStripMenuItem1.Text = "Ordem de Serviço";
-            this.ordemDeServiçoToolStripMenuItem1.Click += new System.EventHandler(this.ordemDeServiçoToolStripMenuItem1_Click);
             // 
             // Frm_Menu
             // 

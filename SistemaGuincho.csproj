@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.VisualStudio.TestPlatform.14.0.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.VisualStudio.TestPlatform.14.0.0.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -53,11 +61,14 @@
     <Compile Include="Frm_Categoria.Designer.cs">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_Cliente.cs">
+    <Compile Include="Repositorio\ClienteRepositorio.cs" />
+    <Compile Include="Testes\Debug.cs" />
+    <Compile Include="Utilidades\Util.cs" />
+    <Compile Include="Views\Cliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Cliente.Designer.cs">
-      <DependentUpon>Frm_Cliente.cs</DependentUpon>
+    <Compile Include="Views\Cliente.Designer.cs">
+      <DependentUpon>Cliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm_ConsultaServicos.cs">
       <SubType>Form</SubType>
@@ -91,13 +102,23 @@
     <Compile Include="Frm_Servico.Designer.cs">
       <DependentUpon>Frm_Servico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Cliente.cs" />
+    <Compile Include="Model\CustoAdicional.cs" />
+    <Compile Include="Model\Endereco.cs" />
+    <Compile Include="Model\Faturamento.cs" />
+    <Compile Include="Model\Orcamento.cs" />
+    <Compile Include="Model\FormaPagamento.cs" />
+    <Compile Include="Model\Servico.cs" />
+    <Compile Include="Model\Unidade.cs" />
+    <Compile Include="Model\Veiculo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClienteServices.cs" />
     <EmbeddedResource Include="Frm_Categoria.resx">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_Cliente.resx">
-      <DependentUpon>Frm_Cliente.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Cliente.resx">
+      <DependentUpon>Cliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_ConsultaServicos.resx">
       <DependentUpon>Frm_ConsultaServicos.cs</DependentUpon>
@@ -125,6 +146,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -170,6 +192,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user-id.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

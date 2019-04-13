@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGuincho", "SistemaGuincho.csproj", "{DE307999-0D2D-47BF-8C11-3FC0E299754D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGuincho.DAL", "..\SistemaGuincho.DAL\SistemaGuincho.DAL.csproj", "{B0A6C7D5-A335-4EE5-BEFE-F8B168E93281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGuincho.Tests", "..\UnitTestProject1\SistemaGuincho.Tests.csproj", "{B3D5486A-CC9B-4296-B81B-1BC5E18E89E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{B0A6C7D5-A335-4EE5-BEFE-F8B168E93281}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0A6C7D5-A335-4EE5-BEFE-F8B168E93281}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0A6C7D5-A335-4EE5-BEFE-F8B168E93281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D5486A-CC9B-4296-B81B-1BC5E18E89E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D5486A-CC9B-4296-B81B-1BC5E18E89E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D5486A-CC9B-4296-B81B-1BC5E18E89E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D5486A-CC9B-4296-B81B-1BC5E18E89E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F388880-21CB-4CA5-9A60-0A0A7A367D74}
 	EndGlobalSection
 EndGlobal

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaGuincho.Views;
 
 namespace SistemaGuincho
 {
@@ -62,6 +63,11 @@ namespace SistemaGuincho
         {
             Frm_OrdemServico frm = new Frm_OrdemServico();
             frm.Show();
+        }
+
+        private void btn_Cliente_Click(object sender, EventArgs e) {
+            Cliente formCliente = new Cliente();
+            formCliente.Show();
         }
     }
 }
