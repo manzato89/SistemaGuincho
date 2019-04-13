@@ -61,9 +61,16 @@
     <Compile Include="Frm_Categoria.Designer.cs">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\VeiculoRepositorio.cs" />
     <Compile Include="Repositorio\ClienteRepositorio.cs" />
     <Compile Include="Testes\Debug.cs" />
     <Compile Include="Utilidades\Util.cs" />
+    <Compile Include="Views\AdicionarVeiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AdicionarVeiculo.Designer.cs">
+      <DependentUpon>AdicionarVeiculo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Cliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +123,9 @@
     <Compile Include="Services\ClienteServices.cs" />
     <EmbeddedResource Include="Frm_Categoria.resx">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AdicionarVeiculo.resx">
+      <DependentUpon>AdicionarVeiculo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cliente.resx">
       <DependentUpon>Cliente.cs</DependentUpon>

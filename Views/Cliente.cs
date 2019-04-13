@@ -17,36 +17,44 @@ namespace SistemaGuincho.Views {
         #region Atributos da classe
         private Util.WindowMode windowMode;
 
-        private Model.Cliente cliente;
         private List<Model.Cliente> clientes;
 
         private int index;
+
+        private AdicionarVeiculo adicionarVeiculoForm;
         #endregion
 
-        #region Construtor
+        #region Inicialização da classe
         private void init() {
             InitializeComponent();
             CenterToScreen();
 
-            index = 0;
+            index = -1;
 
             clientes = new List<Model.Cliente>();
 
             windowMode = Util.WindowMode.ModoCriacaoForm;
+            windowModeChanged();
         }
 
         public Cliente(){
             init();
 
-            clientes = ClienteRepositorio.getClientes();
+            getFromRepositorio();
+        }
+
+        private void getFromRepositorio() {
+            clientes = ClienteRepositorio.read();
         }
         #endregion
 
         #region Botões de navegação
         private void btnPrimeiro_Click(object sender, EventArgs e) {
             if (clientes.Count > 0) {
-                index = 0;
-                selecionaCliente();
+                if (index != 0) {
+                    index = 0;
+                    selecionaCliente();
+                }
             }
         }
 
@@ -66,19 +74,22 @@ namespace SistemaGuincho.Views {
 
         private void btnUltimo_Click(object sender, EventArgs e) {
             if (clientes.Count > 0) {
-                index = clientes.Count - 1;
-                selecionaCliente();
+                if (index != clientes.Count - 1) {
+                    index = clientes.Count - 1;
+                    selecionaCliente();
+                }
             }
         }
 
         private void selecionaCliente() {
-            cliente = clientes[index];
             fillFields();
         }
         #endregion
 
         #region CRUD
+        // Aciona a criação de um novo cliente
         private void btnAdicionar_Click(object sender, EventArgs e) {
+            index = 0;
             txtNome.Focus();
             clearFields();
 
@@ -86,24 +97,89 @@ namespace SistemaGuincho.Views {
             windowModeChanged();
         }
 
+
+        // Cancela a edição
         private void btnCancelar_Click(object sender, EventArgs e) {
-            clearFields();
-
-            windowMode = Util.WindowMode.ModoNormal;
-            windowModeChanged();
+            // Verifica se vai inserir um novo registro ou então salvá-lo
+            if (windowMode == Util.WindowMode.ModoDeInsercao) {
+                clearFields();
+            } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
+                fillFields();
+            }
         }
 
+        // Salva as alterações do cliente
         private void btnGravar_Click(object sender, EventArgs e) {
+            // Cria um novo cliente
+            Model.Cliente newCliente;
+
+            // Cria os dados básicos do cliente
+            string nome = txtNome.Text;
+            string cpf = txtCPF.Text;
+            string rg = txtRG.Text;
+            DateTime dtNascimento = new DateTime(); DateTime.TryParseExact(txtDtNascimento.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.NoCurrentDateDefault, out dtNascimento);
+
+            // Cria os dados do endereço do cliente
+            Endereco endereco;
+            string logradouro = txtEndereco.Text;
+            string numero = txtNumero.Text;
+            string complemento = txtComplemento.Text;
+            long cep = -1; long.TryParse(txtCEP.Text, out cep);
+            string bairro = txtBairro.Text;
+            string cidade = txtCidade.Text;
+            string uf = txtUF.Text;
+            endereco = new Endereco(logradouro, numero, bairro, cep, complemento, cidade, uf);
+
+            // Cria os dados de contato do cliente
+            string email = txtEmail.Text;
+            string fone1 = txtFone1.Text;
+            string fone2 = txtFone2.Text;
+
+            newCliente = new Model.Cliente(nome, cpf, rg, endereco, new List<Veiculo>(), dtNascimento, email, fone1, fone2);
+            
+            // Verifica se vai inserir um novo registro ou então salvá-lo
+            if (windowMode == Util.WindowMode.ModoDeInsercao) {
+
+                if (ClienteRepositorio.create(ref newCliente)) {
+                    getFromRepositorio();
+                    btnUltimo_Click(null, null);
+                } else {
+                    clearFields();
+                }
+
+            } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
+                newCliente.veiculos = clientes[index].veiculos;
+                newCliente.id = clientes[index].id;
+
+                if (ClienteRepositorio.update(newCliente)) {
+                    getFromRepositorio();
+                }
+
+                fillFields();
+            }
+
             windowMode = Util.WindowMode.ModoNormal;
             windowModeChanged();
         }
 
+        // Exclui o cliente
         private void btnExcluir_Click(object sender, EventArgs e) {
-            clearFields();
+            if (MessageBox.Show("Confirma a deleção do registro ?" +
+                    Environment.NewLine + Environment.NewLine +
+                    clientes[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                ClienteRepositorio.delete(clientes[index]);
+
+                getFromRepositorio();
+                clearFields();
+            }
         }
 
+        // Atualiza as informações dos clientes
         private void btnAtualizar_Click(object sender, EventArgs e) {
-            clientes = new List<Model.Cliente>();
+            getFromRepositorio();
+
+            if (index > -1)
+                index = clientes.FindIndex(clienteAEncontrar => clienteAEncontrar.id == clientes[index].id);
 
             refreshDataGridView();
         }
@@ -112,24 +188,27 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Comum
         private void fillFields() {
-            if (cliente != null) {
+            if (index > -1 && clientes.Count > 0 && index < clientes.Count && clientes[index] != null) {
                 // Preenche as informações básicas do cliente
-                txtNome.Text = cliente.nome;
-                txtCPF.Text = cliente.cpf;
-                txtRG.Text = cliente.rg;
-                txtDtNascimento.Text = cliente.dataNascimento.ToString("dd/MM/yyyy");
+                txtID.Text = clientes[index].id.ToString();
+                txtNome.Text = clientes[index].nome;
+                txtCPF.Text = clientes[index].cpf;
+                txtRG.Text = clientes[index].rg;
+                txtDtNascimento.Text = clientes[index].dataNascimento.ToString("dd/MM/yyyy");
 
                 // Preenche as informações do endereço do cliente
-                txtEndereco.Text = cliente.endereco.logradouro;
-                txtCEP.Text = cliente.endereco.cep.ToString();
-                txtBairro.Text = cliente.endereco.bairro;
-                txtCidade.Text = cliente.endereco.cidade;
-                txtUF.Text = cliente.endereco.uf;
+                txtEndereco.Text = clientes[index].endereco.logradouro;
+                txtNumero.Text = clientes[index].endereco.numero;
+                txtComplemento.Text = clientes[index].endereco.complemento;
+                txtCEP.Text = clientes[index].endereco.cep.ToString();
+                txtBairro.Text = clientes[index].endereco.bairro;
+                txtCidade.Text = clientes[index].endereco.cidade;
+                txtUF.Text = clientes[index].endereco.uf;
 
                 // Preenche as informações de contato do cliente
-                txtEmail.Text = cliente.email;
-                txtFone1.Text = String.Format("({0}) {1}", cliente.dddFone1.ToString(), cliente.fone1.ToString());
-                txtFone2.Text = String.Format("({0}) {1}", cliente.dddFone2.ToString(), cliente.fone2.ToString());
+                txtEmail.Text = clientes[index].email;
+                txtFone1.Text = clientes[index].fone1;
+                txtFone2.Text = clientes[index].fone2;
 
 
                 refreshDataGridView();
@@ -137,27 +216,38 @@ namespace SistemaGuincho.Views {
                 windowModeChanged();
 
                 // Atualiza o nome do formulário
-                this.Text = String.Format("Cliente: {0} - {1}", cliente.id, cliente.nome);
+                this.Text = String.Format("Cliente: {0} - {1}", clientes[index].id, clientes[index].nome);
 
             }
         }
 
-        private void refreshDataGridView() {
+        private void clearDataGridView() {
             // Seta o datagrid view como nulo
             dgvVeiculos.DataSource = null;
             dgvVeiculos.Refresh();
+        }
+
+        private void refreshDataGridView() {
+            clearDataGridView();
 
             // Verifica se o cliente existe
-            if (cliente != null) {
+            if (index > -1 && clientes.Count > 0 && index < clientes.Count && clientes[index] != null) {
 
-                dgvVeiculos.DataSource = cliente.veiculos;
+                dgvVeiculos.Columns.Clear();
+
+                dgvVeiculos.DataSource = clientes[index].veiculos;
+
+                dgvVeiculos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "Modelo_custom" });
+                dgvVeiculos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "Placa_custom" });
 
                 // Preenche os nomes das colunas
                 for (var iCount = 0; iCount < dgvVeiculos.Columns.Count; iCount++) {
                     switch (dgvVeiculos.Columns[iCount].DataPropertyName) {
                         case nameof(Veiculo.id):
+                        case nameof(Veiculo.modelo):
                         case nameof(Veiculo.ano):
                         case nameof(Veiculo.cor):
+                        case nameof(Veiculo.placa):
                         case nameof(Veiculo.cidadePlaca):
                         case nameof(Veiculo.ufPlaca):
                             dgvVeiculos.Columns[iCount].Visible = false;
@@ -169,14 +259,16 @@ namespace SistemaGuincho.Views {
                             dgvVeiculos.Columns[iCount].ReadOnly = true;
                             break;
 
-                        case nameof(Veiculo.modelo):
+                        case "Modelo_custom":
+                            dgvVeiculos.Columns[iCount].Name = dgvVeiculos.Columns[iCount].DataPropertyName;
                             dgvVeiculos.Columns[iCount].DisplayIndex = 1;
                             dgvVeiculos.Columns[iCount].HeaderText = "Modelo";
                             dgvVeiculos.Columns[iCount].Width = 250;
                             dgvVeiculos.Columns[iCount].ReadOnly = true;
                             break;
 
-                        case nameof(Veiculo.placa):
+                        case "Placa_custom":
+                            dgvVeiculos.Columns[iCount].Name = dgvVeiculos.Columns[iCount].DataPropertyName;
                             dgvVeiculos.Columns[iCount].DisplayIndex = 2;
                             dgvVeiculos.Columns[iCount].HeaderText = "Placa";
                             dgvVeiculos.Columns[iCount].Width = 175;
@@ -188,19 +280,20 @@ namespace SistemaGuincho.Views {
                 //Preenche os campos que vieram sem preenchimento do data set
                 for (var iCount = 0; iCount < dgvVeiculos.Rows.Count; iCount++) {
                     //Modelo - Ano - Cor
-                    dgvVeiculos.Rows[iCount].Cells[nameof(Veiculo.modelo)].Value = String.Format("{0} - {1} - {2}",
-                        cliente.veiculos[iCount].modelo,
-                        cliente.veiculos[iCount].ano,
-                        cliente.veiculos[iCount].cor);
+                    dgvVeiculos.Rows[iCount].Cells["Modelo_custom"].Value = clientes[index].veiculos[iCount].getCustomModelo();
 
                     //Placa (Cidade - Estado)
-                    dgvVeiculos.Rows[iCount].Cells[nameof(Veiculo.placa)].Value = String.Format("{0} ({1} - {2})",
-                        cliente.veiculos[iCount].placa,
-                        cliente.veiculos[iCount].cidadePlaca,
-                        cliente.veiculos[iCount].ufPlaca);
+                    dgvVeiculos.Rows[iCount].Cells["Placa_custom"].Value = clientes[index].veiculos[iCount].getCustomPlaca();
                 }
 
                 dgvVeiculos.Refresh();
+            }
+        }
+
+        private void dgvVeiculos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex > -1) {
+                Veiculo veiculo = clientes[index].veiculos[e.RowIndex];
+                abrirFormVeiculos(veiculo);
             }
         }
 
@@ -208,8 +301,11 @@ namespace SistemaGuincho.Views {
             switch (windowMode) {
                 case Util.WindowMode.ModoNormal:
                 case Util.WindowMode.ModoCriacaoForm:
+                    enableFields(windowMode == Util.WindowMode.ModoNormal);
+
                     btnAdicionar.Enabled = true;
-                    btnExcluir.Enabled = true;
+                    btnExcluir.Enabled = windowMode == Util.WindowMode.ModoNormal;
+                    btnAddVeiculo.Enabled = windowMode == Util.WindowMode.ModoNormal;
 
                     btnCancelar.Enabled = false;
                     btnGravar.Enabled = false;
@@ -224,24 +320,12 @@ namespace SistemaGuincho.Views {
                     break;
 
                 case Util.WindowMode.ModoDeEdicao:
-                    btnAdicionar.Enabled = false;
-                    btnExcluir.Enabled = false;
-
-                    btnCancelar.Enabled = true;
-                    btnGravar.Enabled = true;
-
-                    dgvVeiculos.Enabled = false;
-
-                    btnAtualizar.Enabled = false;
-                    btnPrimeiro.Enabled = false;
-                    btnAnterior.Enabled = false;
-                    btnProximo.Enabled = false;
-                    btnUltimo.Enabled = false;
-                    break;
-
                 case Util.WindowMode.ModoDeInsercao:
+                    enableFields(true);
+
                     btnAdicionar.Enabled = false;
                     btnExcluir.Enabled = false;
+                    btnAddVeiculo.Enabled = false;
 
                     btnCancelar.Enabled = true;
                     btnGravar.Enabled = true;
@@ -255,6 +339,25 @@ namespace SistemaGuincho.Views {
                     btnUltimo.Enabled = false;
                     break;
             }
+        }
+
+        private void enableFields(bool enable) {
+            txtNome.Enabled = enable;
+            txtCPF.Enabled = enable;
+            txtRG.Enabled = enable;
+            txtDtNascimento.Enabled = enable;
+
+            txtEndereco.Enabled = enable;
+            txtCEP.Enabled = enable;
+            txtBairro.Enabled = enable;
+            txtCidade.Enabled = enable;
+            txtUF.Enabled = enable;
+            txtNumero.Enabled = enable;
+            txtComplemento.Enabled = enable;
+
+            txtEmail.Enabled = enable;
+            txtFone1.Enabled = enable;
+            txtFone2.Enabled = enable;
         }
 
         private void fields_keyDown(object sender, KeyEventArgs e) {
@@ -265,6 +368,8 @@ namespace SistemaGuincho.Views {
         }
 
         private void clearFields() {
+            index = -1;
+            
             txtID.Text = "";
             txtNome.Text = "";
             txtCPF.Text = "";
@@ -276,12 +381,43 @@ namespace SistemaGuincho.Views {
             txtBairro.Text = "";
             txtCidade.Text = "";
             txtUF.Text = "";
+            txtNumero.Text = "";
+            txtComplemento.Text = "";
 
             txtEmail.Text = "";
             txtFone1.Text = "";
             txtFone2.Text = "";
+
+            clearDataGridView();
+
+            this.Text = "Clientes";
+
+            windowMode = Util.WindowMode.ModoCriacaoForm;
+            windowModeChanged();
         }
 
+        #endregion
+
+        #region Interfaces - Específico
+        private void btnAddVeiculo_Click(object sender, EventArgs e) {
+            adicionarVeiculoForm = new AdicionarVeiculo(clientes[index]);
+            abrirFormVeiculos();
+        }
+
+        private void abrirFormVeiculos(Veiculo veiculo) {
+            adicionarVeiculoForm = new AdicionarVeiculo(clientes[index], veiculo);
+            abrirFormVeiculos();
+        }
+
+        private void abrirFormVeiculos() {
+            adicionarVeiculoForm.FormClosing += adicionarVeiculoForm_FormClosing;
+            adicionarVeiculoForm.ShowDialog();
+        }
+
+        private void adicionarVeiculoForm_FormClosing(object sender, FormClosingEventArgs e) {
+            clientes[index].veiculos = VeiculoRepositorio.read(clientes[index].id);
+            refreshDataGridView();
+        }
         #endregion
     }
 }

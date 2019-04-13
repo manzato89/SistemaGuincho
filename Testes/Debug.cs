@@ -22,8 +22,8 @@ namespace SistemaGuincho.Testes {
             cliente.rg = "105553864";
             cliente.dataNascimento = new DateTime(1997, 11, 10);
             cliente.email = "diegofilipetheopinto-95@konekoshouten.com.br";
-            cliente.dddFone1 = 14; cliente.fone1 = 37746161;
-            cliente.dddFone2 = 14; cliente.fone2 = 995650146;
+            cliente.fone1 = "(14) 37746161";
+            cliente.fone2 = "(14) 995650146";
 
             endereco = new Endereco();
             endereco.logradouro = "Avenida Doutor Rafael Paes de Barros";
@@ -35,6 +35,7 @@ namespace SistemaGuincho.Testes {
             cliente.endereco = endereco;
 
             veiculo = new Veiculo();
+            veiculo.id = 1;
             veiculo.tpVeiculo = Veiculo.TipoVeiculo.Carro;
             veiculo.placa = "AAA1234";
             veiculo.cidadePlaca = endereco.cidade;
@@ -55,19 +56,21 @@ namespace SistemaGuincho.Testes {
             cliente.rg = "234430497";
             cliente.dataNascimento = new DateTime(1984, 08, 17);
             cliente.email = "franciscaemilly@cntbrasil.com.br";
-            cliente.dddFone1 = 14; cliente.fone1 = 29813704;
-            cliente.dddFone2 = 14; cliente.fone2 = 985762740;
+            cliente.fone1 = "(14) 29813704";
+            cliente.fone2 = "(14) 985762740";
 
             endereco = new Endereco();
             endereco.logradouro = "Praça Gustavo Morales Agulhari";
             endereco.numero = "703";
             endereco.bairro = "Jardim Progresso";
+            endereco.complemento = "Apto 23";
             endereco.cep = 17064253;
             endereco.cidade = "Bauru";
             endereco.uf = "SP";
             cliente.endereco = endereco;
 
             veiculo = new Veiculo();
+            veiculo.id = 2;
             veiculo.tpVeiculo = Veiculo.TipoVeiculo.Carro;
             veiculo.placa = "BBB9717";
             veiculo.cidadePlaca = endereco.cidade;
@@ -78,6 +81,7 @@ namespace SistemaGuincho.Testes {
             cliente.veiculos.Add(veiculo);
 
             veiculo = new Veiculo();
+            veiculo.id = 3;
             veiculo.tpVeiculo = Veiculo.TipoVeiculo.Moto;
             veiculo.placa = "ASJ9006";
             veiculo.cidadePlaca = endereco.cidade;

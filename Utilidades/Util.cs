@@ -13,5 +13,10 @@ namespace SistemaGuincho.Utilidades {
             ModoCriacaoForm
         }
 
+        public static void inicializarRepositorios() {
+            Repositorio.ClienteRepositorio.init();
+            Repositorio.VeiculoRepositorio.init();
+        }
+
     }
 }

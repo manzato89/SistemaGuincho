@@ -17,5 +17,15 @@ namespace SistemaGuincho.Model {
 
         public Endereco() { }
 
+        public Endereco(string logradouro, string numero, string bairro, long cep, string complemento, string cidade, string uf) {
+            this.logradouro = logradouro;
+            this.numero = numero;
+            this.bairro = bairro;
+            this.cep = cep;
+            this.complemento = complemento;
+            this.cidade = cidade;
+            this.uf = uf;
+        }
+
     }
 }

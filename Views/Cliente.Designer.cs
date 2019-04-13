@@ -23,8 +23,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_CdCliente = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -40,7 +40,7 @@
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
-            this.btn_AddVeiculo = new System.Windows.Forms.Button();
+            this.btnAddVeiculo = new System.Windows.Forms.Button();
             this.txtBairro = new System.Windows.Forms.TextBox();
             this.lbl_BairroCliente = new System.Windows.Forms.Label();
             this.txtEndereco = new System.Windows.Forms.TextBox();
@@ -58,6 +58,10 @@
             this.gpb_ddBasicCliente = new System.Windows.Forms.GroupBox();
             this.txtDtNascimento = new System.Windows.Forms.MaskedTextBox();
             this.gpb_LocalCliente = new System.Windows.Forms.GroupBox();
+            this.txtComplemento = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvVeiculos = new System.Windows.Forms.DataGridView();
             this.btnAtualizar = new System.Windows.Forms.Button();
@@ -87,9 +91,9 @@
             // 
             this.txtID.Location = new System.Drawing.Point(71, 28);
             this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(91, 20);
             this.txtID.TabIndex = 1;
-            this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // txtNome
             // 
@@ -97,6 +101,7 @@
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(299, 20);
             this.txtNome.TabIndex = 3;
+            this.txtNome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_NomeCliente
             // 
@@ -114,6 +119,7 @@
             this.txtCPF.Name = "txtCPF";
             this.txtCPF.Size = new System.Drawing.Size(215, 20);
             this.txtCPF.TabIndex = 5;
+            this.txtCPF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_CPFCliente
             // 
@@ -131,6 +137,7 @@
             this.txtRG.Name = "txtRG";
             this.txtRG.Size = new System.Drawing.Size(213, 20);
             this.txtRG.TabIndex = 7;
+            this.txtRG.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_RGCliente
             // 
@@ -159,6 +166,7 @@
             this.txtFone1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtFone1.Size = new System.Drawing.Size(199, 20);
             this.txtFone1.TabIndex = 11;
+            this.txtFone1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // label6
             // 
@@ -218,19 +226,20 @@
             this.btnAdicionar.UseVisualStyleBackColor = false;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
-            // btn_AddVeiculo
+            // btnAddVeiculo
             // 
-            this.btn_AddVeiculo.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_AddVeiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddVeiculo.Image = global::SistemaGuincho.Properties.Resources.keyring;
-            this.btn_AddVeiculo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_AddVeiculo.Location = new System.Drawing.Point(6, 15);
-            this.btn_AddVeiculo.Name = "btn_AddVeiculo";
-            this.btn_AddVeiculo.Size = new System.Drawing.Size(114, 111);
-            this.btn_AddVeiculo.TabIndex = 17;
-            this.btn_AddVeiculo.Text = "Adicionar Veículo";
-            this.btn_AddVeiculo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btn_AddVeiculo.UseVisualStyleBackColor = false;
+            this.btnAddVeiculo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnAddVeiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddVeiculo.Image = global::SistemaGuincho.Properties.Resources.keyring;
+            this.btnAddVeiculo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAddVeiculo.Location = new System.Drawing.Point(6, 15);
+            this.btnAddVeiculo.Name = "btnAddVeiculo";
+            this.btnAddVeiculo.Size = new System.Drawing.Size(114, 111);
+            this.btnAddVeiculo.TabIndex = 17;
+            this.btnAddVeiculo.Text = "Adicionar Veículo";
+            this.btnAddVeiculo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAddVeiculo.UseVisualStyleBackColor = false;
+            this.btnAddVeiculo.Click += new System.EventHandler(this.btnAddVeiculo_Click);
             // 
             // txtBairro
             // 
@@ -239,6 +248,7 @@
             this.txtBairro.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtBairro.Size = new System.Drawing.Size(224, 20);
             this.txtBairro.TabIndex = 21;
+            this.txtBairro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_BairroCliente
             // 
@@ -254,8 +264,9 @@
             // 
             this.txtEndereco.Location = new System.Drawing.Point(79, 24);
             this.txtEndereco.Name = "txtEndereco";
-            this.txtEndereco.Size = new System.Drawing.Size(483, 20);
+            this.txtEndereco.Size = new System.Drawing.Size(254, 20);
             this.txtEndereco.TabIndex = 19;
+            this.txtEndereco.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_enderCliente
             // 
@@ -274,6 +285,7 @@
             this.txtUF.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtUF.Size = new System.Drawing.Size(84, 20);
             this.txtUF.TabIndex = 25;
+            this.txtUF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // label3
             // 
@@ -287,16 +299,17 @@
             // 
             // txtCEP
             // 
-            this.txtCEP.Location = new System.Drawing.Point(621, 24);
+            this.txtCEP.Location = new System.Drawing.Point(731, 24);
             this.txtCEP.Name = "txtCEP";
-            this.txtCEP.Size = new System.Drawing.Size(194, 20);
+            this.txtCEP.Size = new System.Drawing.Size(84, 20);
             this.txtCEP.TabIndex = 23;
+            this.txtCEP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_CepCliente
             // 
             this.lbl_CepCliente.AutoSize = true;
             this.lbl_CepCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CepCliente.Location = new System.Drawing.Point(584, 27);
+            this.lbl_CepCliente.Location = new System.Drawing.Point(694, 27);
             this.lbl_CepCliente.Name = "lbl_CepCliente";
             this.lbl_CepCliente.Size = new System.Drawing.Size(31, 13);
             this.lbl_CepCliente.TabIndex = 22;
@@ -308,6 +321,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(192, 20);
             this.txtEmail.TabIndex = 28;
+            this.txtEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_email
             // 
@@ -326,6 +340,7 @@
             this.txtCidade.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtCidade.Size = new System.Drawing.Size(313, 20);
             this.txtCidade.TabIndex = 30;
+            this.txtCidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // lbl_Cidade
             // 
@@ -344,6 +359,7 @@
             this.txtFone2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtFone2.Size = new System.Drawing.Size(197, 20);
             this.txtFone2.TabIndex = 32;
+            this.txtFone2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // label1
             // 
@@ -382,9 +398,14 @@
             this.txtDtNascimento.Name = "txtDtNascimento";
             this.txtDtNascimento.Size = new System.Drawing.Size(71, 21);
             this.txtDtNascimento.TabIndex = 27;
+            this.txtDtNascimento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
             // gpb_LocalCliente
             // 
+            this.gpb_LocalCliente.Controls.Add(this.txtComplemento);
+            this.gpb_LocalCliente.Controls.Add(this.label4);
+            this.gpb_LocalCliente.Controls.Add(this.txtNumero);
+            this.gpb_LocalCliente.Controls.Add(this.label2);
             this.gpb_LocalCliente.Controls.Add(this.txtCidade);
             this.gpb_LocalCliente.Controls.Add(this.lbl_Cidade);
             this.gpb_LocalCliente.Controls.Add(this.txtUF);
@@ -401,6 +422,42 @@
             this.gpb_LocalCliente.TabIndex = 34;
             this.gpb_LocalCliente.TabStop = false;
             this.gpb_LocalCliente.Text = "Localização";
+            // 
+            // txtComplemento
+            // 
+            this.txtComplemento.Location = new System.Drawing.Point(540, 24);
+            this.txtComplemento.Name = "txtComplemento";
+            this.txtComplemento.Size = new System.Drawing.Size(148, 20);
+            this.txtComplemento.TabIndex = 34;
+            this.txtComplemento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(452, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 13);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Complemento";
+            // 
+            // txtNumero
+            // 
+            this.txtNumero.Location = new System.Drawing.Point(390, 24);
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(56, 20);
+            this.txtNumero.TabIndex = 32;
+            this.txtNumero.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(338, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Número";
             // 
             // groupBox1
             // 
@@ -423,28 +480,29 @@
             this.dgvVeiculos.AllowUserToDeleteRows = false;
             this.dgvVeiculos.AllowUserToOrderColumns = true;
             this.dgvVeiculos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVeiculos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVeiculos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVeiculos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVeiculos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVeiculos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVeiculos.Location = new System.Drawing.Point(126, 15);
             this.dgvVeiculos.MultiSelect = false;
             this.dgvVeiculos.Name = "dgvVeiculos";
             this.dgvVeiculos.Size = new System.Drawing.Size(710, 111);
             this.dgvVeiculos.TabIndex = 36;
+            this.dgvVeiculos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvVeiculos_CellMouseDoubleClick);
             // 
             // btnAtualizar
             // 
@@ -508,7 +566,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btn_AddVeiculo);
+            this.groupBox2.Controls.Add(this.btnAddVeiculo);
             this.groupBox2.Controls.Add(this.dgvVeiculos);
             this.groupBox2.Location = new System.Drawing.Point(21, 337);
             this.groupBox2.Name = "groupBox2";
@@ -567,7 +625,7 @@
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnGravar;
         private System.Windows.Forms.Button btnAdicionar;
-        private System.Windows.Forms.Button btn_AddVeiculo;
+        private System.Windows.Forms.Button btnAddVeiculo;
         private System.Windows.Forms.TextBox txtBairro;
         private System.Windows.Forms.Label lbl_BairroCliente;
         private System.Windows.Forms.TextBox txtEndereco;
@@ -593,5 +651,9 @@
         private System.Windows.Forms.Button btnProximo;
         private System.Windows.Forms.Button btnPrimeiro;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtComplemento;
+        private System.Windows.Forms.Label label4;
     }
 }

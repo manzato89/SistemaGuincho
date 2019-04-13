@@ -18,8 +18,18 @@ namespace SistemaGuincho{
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            Utilidades.Util.inicializarRepositorios();
+
             if (debug){
-                Repositorio.ClienteRepositorio.setClientes(Testes.Debug.getClientesDeTeste());
+                List<Model.Cliente> clientesDeTeste = Testes.Debug.getClientesDeTeste();
+                Repositorio.ClienteRepositorio.update(clientesDeTeste);
+
+                Dictionary<int, List<Model.Veiculo>> veiculosDeTeste = new Dictionary<int, List<Model.Veiculo>>();
+                foreach(Model.Cliente cliente in clientesDeTeste) {
+                    veiculosDeTeste.Add(cliente.id, cliente.veiculos);
+                }
+                Repositorio.VeiculoRepositorio.update(veiculosDeTeste);
+                
             }
 
             Application.Run(new Frm_Menu());

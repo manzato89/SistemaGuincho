@@ -16,14 +16,42 @@ namespace SistemaGuincho.Model {
         public List<Veiculo> veiculos { get; set; }
         public DateTime dataNascimento { get; set; }
         public string email { get; set; }
-        public int dddFone1 { get; set; }
-        public int fone1 { get; set; }
-        public int dddFone2 { get; set; }
-        public int fone2 { get; set; }
+        public string fone1 { get; set; }
+        public string fone2 { get; set; }
 
+        // Construtor básico
+        public Cliente(string nome, string cpf, Endereco endereco, List<Veiculo> veiculos, string fone1) {
+            this.nome = nome;
+            this.cpf = cpf;
+            this.endereco = endereco;
+            this.veiculos = veiculos;
+            this.fone1 = fone1;
+        }
 
+        // Construtor completo
+        public Cliente(string nome, string cpf, string rg, Endereco endereco, List<Veiculo> veiculos, DateTime dataNascimento, string email, string fone1, string fone2) {
+            this.nome = nome;
+            this.cpf = cpf;
+            this.rg = rg;
+            this.endereco = endereco;
+            this.veiculos = veiculos;
+            this.dataNascimento = dataNascimento;
+            this.email = email;
+            this.fone1 = fone1;
+            this.fone2 = fone2;
+        }
+        
+
+        // Construtor em branco
         public Cliente() {
             veiculos = new List<Veiculo>();
+        }
+
+        public override string ToString() {
+            return String.Format("ID: {0}\n" +
+                "Nome: {1}\n" +
+                "CPF: {2}",
+                id, nome, cpf);
         }
 
     }
