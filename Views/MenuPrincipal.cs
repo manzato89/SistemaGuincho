@@ -7,67 +7,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SistemaGuincho.Views;
+using SistemaGuincho.Utilidades;
 
-namespace SistemaGuincho
-{
-    public partial class Frm_Menu : Form
-    {
-        public Frm_Menu()
-        {
+namespace SistemaGuincho.Views{
+
+    public partial class MenuPrincipal : Form{
+        public MenuPrincipal(){
             InitializeComponent();
+            CenterToScreen();
         }
 
-        private void btn_CadServico_Click(object sender, EventArgs e)
-        {
+        private void btn_CadServico_Click(object sender, EventArgs e){
             Frm_Servico frm = new Frm_Servico();
             frm.Show();
         }
 
-        private void btn_CadCategoria_Click(object sender, EventArgs e)
-        {
+        private void btn_CadCategoria_Click(object sender, EventArgs e){
             Frm_Categoria frm = new Frm_Categoria();
             frm.Show();
         }
 
-        private void serviçosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void serviçosToolStripMenuItem_Click(object sender, EventArgs e){
             Frm_Servico frm = new Frm_Servico();
             frm.Show();
         }
 
-        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e){
             Frm_Categoria frm = new Frm_Categoria();
             frm.Show();
         }
 
-        private void serviçosCategoriasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void serviçosCategoriasToolStripMenuItem_Click(object sender, EventArgs e){
             Frm_ConsultaServicos frm = new Frm_ConsultaServicos();
             frm.Show();
         }
 
-        private void ordemDeServiçoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void ordemDeServiçoToolStripMenuItem_Click(object sender, EventArgs e){
             Frm_OrdemServico frm = new Frm_OrdemServico();
             frm.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+        private void button1_Click(object sender, EventArgs e){
 
         }
 
-        private void ordemDeServiçoToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+        private void ordemDeServiçoToolStripMenuItem1_Click(object sender, EventArgs e){
             Frm_OrdemServico frm = new Frm_OrdemServico();
             frm.Show();
         }
 
         private void btn_Cliente_Click(object sender, EventArgs e) {
-            Cliente formCliente = new Cliente();
-            formCliente.Show();
+            new Cliente().ShowDialog();
         }
     }
 }

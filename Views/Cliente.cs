@@ -22,6 +22,7 @@ namespace SistemaGuincho.Views {
         private int index;
 
         private AdicionarVeiculo adicionarVeiculoForm;
+        private ConsultaCliente consultaClienteForm;
         #endregion
 
         #region Inicialização da classe
@@ -41,6 +42,12 @@ namespace SistemaGuincho.Views {
             init();
 
             getFromRepositorio();
+        }
+
+        public Cliente(Model.Cliente cliente) : this() {
+            index = clientes.FindIndex(find => find.id == cliente.id);
+
+            selecionaCliente();
         }
 
         private void getFromRepositorio() {
@@ -184,6 +191,16 @@ namespace SistemaGuincho.Views {
             refreshDataGridView();
         }
 
+        private void btnPesquisar_Click(object sender, EventArgs e) {
+            consultaClienteForm = new ConsultaCliente(Util.TipoConsulta.Edicao);
+            consultaClienteForm.Load += ConsultaClienteForm_Load;
+            consultaClienteForm.Show();
+        }
+
+        private void ConsultaClienteForm_Load(object sender, EventArgs e) {
+            this.Close();
+        }
+
         #endregion
 
         #region Interfaces - Comum
@@ -237,9 +254,6 @@ namespace SistemaGuincho.Views {
 
                 dgvVeiculos.DataSource = clientes[index].veiculos;
 
-                dgvVeiculos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "Modelo_custom" });
-                dgvVeiculos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "Placa_custom" });
-
                 // Preenche os nomes das colunas
                 for (var iCount = 0; iCount < dgvVeiculos.Columns.Count; iCount++) {
                     switch (dgvVeiculos.Columns[iCount].DataPropertyName) {
@@ -259,7 +273,7 @@ namespace SistemaGuincho.Views {
                             dgvVeiculos.Columns[iCount].ReadOnly = true;
                             break;
 
-                        case "Modelo_custom":
+                        case nameof(Veiculo.modelo_2):
                             dgvVeiculos.Columns[iCount].Name = dgvVeiculos.Columns[iCount].DataPropertyName;
                             dgvVeiculos.Columns[iCount].DisplayIndex = 1;
                             dgvVeiculos.Columns[iCount].HeaderText = "Modelo";
@@ -267,7 +281,7 @@ namespace SistemaGuincho.Views {
                             dgvVeiculos.Columns[iCount].ReadOnly = true;
                             break;
 
-                        case "Placa_custom":
+                        case nameof(Veiculo.placa_2):
                             dgvVeiculos.Columns[iCount].Name = dgvVeiculos.Columns[iCount].DataPropertyName;
                             dgvVeiculos.Columns[iCount].DisplayIndex = 2;
                             dgvVeiculos.Columns[iCount].HeaderText = "Placa";
@@ -275,15 +289,6 @@ namespace SistemaGuincho.Views {
                             dgvVeiculos.Columns[iCount].ReadOnly = true;
                             break;
                     }
-                }
-
-                //Preenche os campos que vieram sem preenchimento do data set
-                for (var iCount = 0; iCount < dgvVeiculos.Rows.Count; iCount++) {
-                    //Modelo - Ano - Cor
-                    dgvVeiculos.Rows[iCount].Cells["Modelo_custom"].Value = clientes[index].veiculos[iCount].getCustomModelo();
-
-                    //Placa (Cidade - Estado)
-                    dgvVeiculos.Rows[iCount].Cells["Placa_custom"].Value = clientes[index].veiculos[iCount].getCustomPlaca();
                 }
 
                 dgvVeiculos.Refresh();
@@ -313,6 +318,8 @@ namespace SistemaGuincho.Views {
                     dgvVeiculos.Enabled = true;
 
                     btnAtualizar.Enabled = true;
+                    btnPesquisar.Enabled = true;
+
                     btnPrimeiro.Enabled = true;
                     btnAnterior.Enabled = true;
                     btnProximo.Enabled = true;
@@ -333,6 +340,8 @@ namespace SistemaGuincho.Views {
                     dgvVeiculos.Enabled = false;
 
                     btnAtualizar.Enabled = false;
+                    btnPesquisar.Enabled = false;
+
                     btnPrimeiro.Enabled = false;
                     btnAnterior.Enabled = false;
                     btnProximo.Enabled = false;

@@ -1,6 +1,6 @@
-﻿namespace SistemaGuincho
+﻿namespace SistemaGuincho.Views
 {
-    partial class Frm_Menu
+    partial class MenuPrincipal
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -251,6 +251,7 @@
             this.Controls.Add(this.btn_CadServico);
             this.Controls.Add(this.menuStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.MaximizeBox = false;
             this.Name = "Frm_Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu Principal";

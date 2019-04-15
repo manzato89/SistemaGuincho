@@ -13,6 +13,11 @@ namespace SistemaGuincho.Utilidades {
             ModoCriacaoForm
         }
 
+        public enum TipoConsulta {
+            Selecao,
+            Edicao
+        }
+
         public static void inicializarRepositorios() {
             Repositorio.ClienteRepositorio.init();
             Repositorio.VeiculoRepositorio.init();

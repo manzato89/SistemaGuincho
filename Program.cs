@@ -32,7 +32,7 @@ namespace SistemaGuincho{
                 
             }
 
-            Application.Run(new Frm_Menu());
+            Application.Run(new Views.MenuPrincipal());
         }
 
         public static void setDebug(Form form) {

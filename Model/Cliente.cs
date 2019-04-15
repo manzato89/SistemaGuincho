@@ -48,10 +48,38 @@ namespace SistemaGuincho.Model {
         }
 
         public override string ToString() {
+            return String.Format("{0} - {1} - {2}", id, nome, cpf);
+        }
+
+        public string getCliente() {
             return String.Format("ID: {0}\n" +
                 "Nome: {1}\n" +
                 "CPF: {2}",
                 id, nome, cpf);
+        }
+
+        public string getModeloVeiculos() {
+            String modeloVeiculos = "";
+
+            foreach(Veiculo veiculo in veiculos) {
+                modeloVeiculos = String.Format("{0}{1}, ",
+                    modeloVeiculos, veiculo.getCustomModelo());
+            }
+
+            modeloVeiculos = modeloVeiculos.Substring(0, modeloVeiculos.Length - 2); // Remove a última vírgula e espaço
+            return modeloVeiculos;
+        }
+
+        public string getPlacaVeiculos() {
+            String placaVeiculos = "";
+
+            foreach (Veiculo veiculo in veiculos) {
+                placaVeiculos = String.Format("{0}{1}, ",
+                    placaVeiculos, veiculo.getCustomPlaca());
+            }
+
+            placaVeiculos = placaVeiculos.Substring(0, placaVeiculos.Length - 2); // Remove a última vírgula e espaço
+            return placaVeiculos;
         }
 
     }

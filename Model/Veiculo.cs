@@ -22,6 +22,9 @@ namespace SistemaGuincho.Model {
         public String cidadePlaca { get; set; }
         public String ufPlaca { get; set; }
       
+        public String modelo_2 { get { return getCustomModelo(); } }
+        public String placa_2 { get { return getCustomPlaca(); } }
+
 
         public Veiculo() { }
 
@@ -50,6 +53,10 @@ namespace SistemaGuincho.Model {
         }
 
         public override string ToString() {
+            return String.Format("{0} - {1} - {2}", id, getCustomModelo(), getCustomPlaca());
+        }
+
+        public string getVeiculo() {
             return String.Format("ID: {0}\n" +
                 "Modelo: {1}\n" +
                 "Placa: {2}\n",
