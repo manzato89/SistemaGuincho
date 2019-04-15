@@ -14,5 +14,21 @@ namespace SistemaGuincho.Model {
 
         public Unidade() { }
 
+        public Unidade(string codigo, string descricao) {
+            this.codigo = codigo;
+            this.descricao = descricao;
+        }
+
+        public override string ToString() {
+            return String.Format("{0} - {1}", codigo, descricao);
+        }
+
+        public string getUnidade() {
+            return String.Format("ID: {0}\n" +
+                "Código: {1}\n" +
+                "Descrição: {2}",
+                id, codigo, descricao);
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿namespace SistemaGuincho.Views {
-    partial class Cliente {
+    partial class Clientes {
         /// <summary>
         /// Required designer variable.
         /// </summary>

@@ -21,6 +21,8 @@ namespace SistemaGuincho.Utilidades {
         public static void inicializarRepositorios() {
             Repositorio.ClienteRepositorio.init();
             Repositorio.VeiculoRepositorio.init();
+            Repositorio.ServicoRepositorio.init();
+            Repositorio.UnidadeRepositorio.init();
         }
 
     }

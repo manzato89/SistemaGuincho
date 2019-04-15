@@ -61,6 +61,8 @@
     <Compile Include="Frm_Categoria.Designer.cs">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\UnidadeRepositorio.cs" />
+    <Compile Include="Repositorio\ServicoRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoRepositorio.cs" />
     <Compile Include="Repositorio\ClienteRepositorio.cs" />
     <Compile Include="Testes\Debug.cs" />
@@ -71,11 +73,17 @@
     <Compile Include="Views\AdicionarVeiculo.Designer.cs">
       <DependentUpon>AdicionarVeiculo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Cliente.cs">
+    <Compile Include="Views\Servicos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Cliente.Designer.cs">
-      <DependentUpon>Cliente.cs</DependentUpon>
+    <Compile Include="Views\Servicos.Designer.cs">
+      <DependentUpon>Servicos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Clientes.Designer.cs">
+      <DependentUpon>Clientes.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm_ConsultaServicos.cs">
       <SubType>Form</SubType>
@@ -103,12 +111,6 @@
     <Compile Include="Frm_OrdemServico.Designer.cs">
       <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_Servico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm_Servico.Designer.cs">
-      <DependentUpon>Frm_Servico.cs</DependentUpon>
-    </Compile>
     <Compile Include="Model\Cliente.cs" />
     <Compile Include="Model\CustoAdicional.cs" />
     <Compile Include="Model\Endereco.cs" />
@@ -133,8 +135,11 @@
     <EmbeddedResource Include="Views\AdicionarVeiculo.resx">
       <DependentUpon>AdicionarVeiculo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Cliente.resx">
-      <DependentUpon>Cliente.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Servicos.resx">
+      <DependentUpon>Servicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Clientes.resx">
+      <DependentUpon>Clientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_ConsultaServicos.resx">
       <DependentUpon>Frm_ConsultaServicos.cs</DependentUpon>
@@ -148,9 +153,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_OrdemServico.resx">
       <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm_Servico.resx">
-      <DependentUpon>Frm_Servico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

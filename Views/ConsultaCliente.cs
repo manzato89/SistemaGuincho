@@ -14,7 +14,7 @@ namespace SistemaGuincho.Views {
 
         private Utilidades.Util.TipoConsulta tpConsulta;
 
-        private Views.Cliente formCliente;
+        private Views.Clientes formCliente;
         #endregion
 
         #region Inicialização da classe
@@ -164,7 +164,7 @@ namespace SistemaGuincho.Views {
             if (e.RowIndex > -1) {
                 Model.Cliente cliente = clientes_view[e.RowIndex];
 
-                formCliente = new Views.Cliente(cliente);
+                formCliente = new Views.Clientes(cliente);
                 formCliente.Load += FormCliente_Load;
                 formCliente.Show();
             }

@@ -18,8 +18,7 @@ namespace SistemaGuincho.Views{
         }
 
         private void btn_CadServico_Click(object sender, EventArgs e){
-            Frm_Servico frm = new Frm_Servico();
-            frm.Show();
+            new Views.Servicos().ShowDialog();
         }
 
         private void btn_CadCategoria_Click(object sender, EventArgs e){
@@ -28,8 +27,7 @@ namespace SistemaGuincho.Views{
         }
 
         private void serviçosToolStripMenuItem_Click(object sender, EventArgs e){
-            Frm_Servico frm = new Frm_Servico();
-            frm.Show();
+            new Views.Servicos().ShowDialog();
         }
 
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e){
@@ -57,7 +55,7 @@ namespace SistemaGuincho.Views{
         }
 
         private void btn_Cliente_Click(object sender, EventArgs e) {
-            new Cliente().ShowDialog();
+            new Clientes().ShowDialog();
         }
     }
 }

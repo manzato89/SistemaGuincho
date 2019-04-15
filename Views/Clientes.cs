@@ -12,7 +12,7 @@ using SistemaGuincho.Utilidades;
 using SistemaGuincho.Repositorio;
 
 namespace SistemaGuincho.Views {
-    public partial class Cliente : Form{
+    public partial class Clientes : Form{
 
         #region Atributos da classe
         private Util.WindowMode windowMode;
@@ -38,13 +38,13 @@ namespace SistemaGuincho.Views {
             windowModeChanged();
         }
 
-        public Cliente(){
+        public Clientes(){
             init();
 
             getFromRepositorio();
         }
 
-        public Cliente(Model.Cliente cliente) : this() {
+        public Clientes(Model.Cliente cliente) : this() {
             index = clientes.FindIndex(find => find.id == cliente.id);
 
             selecionaCliente();

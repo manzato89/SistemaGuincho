@@ -7,6 +7,7 @@ using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Testes {
     public static class Debug {
+
         public static List<Cliente> getClientesDeTeste() {
             // Cria clientes https://www.4devs.com.br/gerador_de_pessoas
             List<Cliente> clientes = new List<Cliente>();
@@ -96,5 +97,45 @@ namespace SistemaGuincho.Testes {
 
             return clientes;
         }
+
+        public static List<Unidade> getUnidadesDeTeste() {
+            List<Unidade> unidades = new List<Unidade>();
+
+            Unidade unidade1 = new Unidade("UN", "Unidade");    unidade1.id = 1;
+            Unidade unidade2 = new Unidade("KM", "Kilômetro");  unidade2.id = 2;
+            Unidade unidade3 = new Unidade("MT", "Metro");      unidade3.id = 3;
+            Unidade unidade4 = new Unidade("LT", "Litros");     unidade4.id = 4;
+            Unidade unidade5 = new Unidade("KG", "Quilos");     unidade5.id = 5;
+
+            unidades.Add(unidade1);
+            unidades.Add(unidade2);
+            unidades.Add(unidade3);
+            unidades.Add(unidade4);
+            unidades.Add(unidade5);
+
+            return unidades;
+        }
+
+        public static List<Servico> getServicosDeTeste() {
+            Unidade unidade1 = new Unidade("UN", "Unidade");    unidade1.id = 1;
+            Unidade unidade2 = new Unidade("KM", "Kilômetro");  unidade2.id = 2;
+            Unidade unidade3 = new Unidade("MT", "Metro");      unidade3.id = 3;
+            Unidade unidade4 = new Unidade("LT", "Litros");     unidade4.id = 4;
+            Unidade unidade5 = new Unidade("KG", "Quilos");     unidade5.id = 5;
+
+            List<Servico> servicos = new List<Servico>();
+            Servico servico1 = new Servico("Busca de carro", 15.75f, unidade2);  servico1.id = 1;
+            Servico servico2 = new Servico("Reboque", 40.15f, unidade1);           servico2.id = 2;
+            Servico servico3 = new Servico("Troca de pneu", 9.90f, unidade1);      servico3.id = 3;
+            Servico servico4 = new Servico("Troca de óleo", 22.49f, unidade4);     servico4.id = 4;
+
+            servicos.Add(servico1);
+            servicos.Add(servico2);
+            servicos.Add(servico3);
+            servicos.Add(servico4);
+
+            return servicos;
+        }
+
     }
 }
