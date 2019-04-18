@@ -35,7 +35,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
-            this.btnAdicionar = new System.Windows.Forms.Button();
             this.gpb_ddBasicCliente = new System.Windows.Forms.GroupBox();
             this.cboUnidade = new System.Windows.Forms.ComboBox();
             this.dgvServicos = new System.Windows.Forms.DataGridView();
@@ -50,6 +49,7 @@
             this.lblBuscarPor = new System.Windows.Forms.Label();
             this.lblBusca = new System.Windows.Forms.Label();
             this.txtBusca = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.gpb_ddBasicCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -122,51 +122,45 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelar.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnCancelar.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(209, 12);
+            this.btnCancelar.Image = global::SistemaGuincho.Properties.Resources.sign_ban;
+            this.btnCancelar.Location = new System.Drawing.Point(212, 13);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(88, 27);
+            this.btnCancelar.Size = new System.Drawing.Size(66, 36);
             this.btnCancelar.TabIndex = 15;
-            this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnExcluir
             // 
-            this.btnExcluir.BackColor = System.Drawing.SystemColors.Control;
+            this.btnExcluir.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnExcluir.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluir.Location = new System.Drawing.Point(303, 12);
+            this.btnExcluir.Image = global::SistemaGuincho.Properties.Resources.trashcan;
+            this.btnExcluir.Location = new System.Drawing.Point(147, 13);
             this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(88, 27);
+            this.btnExcluir.Size = new System.Drawing.Size(66, 36);
             this.btnExcluir.TabIndex = 14;
-            this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = false;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnGravar
             // 
-            this.btnGravar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGravar.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnGravar.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnGravar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGravar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGravar.Location = new System.Drawing.Point(115, 12);
+            this.btnGravar.Image = global::SistemaGuincho.Properties.Resources.sign_check;
+            this.btnGravar.Location = new System.Drawing.Point(81, 13);
             this.btnGravar.Name = "btnGravar";
-            this.btnGravar.Size = new System.Drawing.Size(88, 27);
+            this.btnGravar.Size = new System.Drawing.Size(67, 36);
             this.btnGravar.TabIndex = 13;
-            this.btnGravar.Text = "Gravar";
             this.btnGravar.UseVisualStyleBackColor = false;
             this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);
-            // 
-            // btnAdicionar
-            // 
-            this.btnAdicionar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnAdicionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdicionar.Location = new System.Drawing.Point(21, 12);
-            this.btnAdicionar.Name = "btnAdicionar";
-            this.btnAdicionar.Size = new System.Drawing.Size(88, 27);
-            this.btnAdicionar.TabIndex = 12;
-            this.btnAdicionar.Text = "Novo";
-            this.btnAdicionar.UseVisualStyleBackColor = false;
-            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
             // gpb_ddBasicCliente
             // 
@@ -178,7 +172,7 @@
             this.gpb_ddBasicCliente.Controls.Add(this.lbl_NomeCliente);
             this.gpb_ddBasicCliente.Controls.Add(this.txtID);
             this.gpb_ddBasicCliente.Controls.Add(this.lbl_CdCliente);
-            this.gpb_ddBasicCliente.Location = new System.Drawing.Point(20, 48);
+            this.gpb_ddBasicCliente.Location = new System.Drawing.Point(20, 58);
             this.gpb_ddBasicCliente.Name = "gpb_ddBasicCliente";
             this.gpb_ddBasicCliente.Size = new System.Drawing.Size(841, 101);
             this.gpb_ddBasicCliente.TabIndex = 33;
@@ -227,61 +221,71 @@
             // 
             // btnAtualizar
             // 
-            this.btnAtualizar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnAtualizar.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAtualizar.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAtualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAtualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtualizar.Location = new System.Drawing.Point(397, 12);
+            this.btnAtualizar.Image = global::SistemaGuincho.Properties.Resources.sign_sync;
+            this.btnAtualizar.Location = new System.Drawing.Point(277, 13);
             this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(88, 27);
+            this.btnAtualizar.Size = new System.Drawing.Size(65, 36);
             this.btnAtualizar.TabIndex = 37;
-            this.btnAtualizar.Text = "Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = false;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
             // btnUltimo
             // 
             this.btnUltimo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnUltimo.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnUltimo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUltimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUltimo.Location = new System.Drawing.Point(818, 12);
+            this.btnUltimo.Image = global::SistemaGuincho.Properties.Resources.sign_right_end;
+            this.btnUltimo.Location = new System.Drawing.Point(814, 12);
             this.btnUltimo.Name = "btnUltimo";
-            this.btnUltimo.Size = new System.Drawing.Size(43, 27);
+            this.btnUltimo.Size = new System.Drawing.Size(46, 38);
             this.btnUltimo.TabIndex = 41;
-            this.btnUltimo.Text = ">>";
             this.btnUltimo.UseVisualStyleBackColor = false;
             this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
             // 
             // btnAnterior
             // 
             this.btnAnterior.BackColor = System.Drawing.SystemColors.Control;
+            this.btnAnterior.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAnterior.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnterior.Location = new System.Drawing.Point(720, 12);
+            this.btnAnterior.Image = global::SistemaGuincho.Properties.Resources.sign_left;
+            this.btnAnterior.Location = new System.Drawing.Point(724, 12);
             this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(43, 27);
+            this.btnAnterior.Size = new System.Drawing.Size(46, 38);
             this.btnAnterior.TabIndex = 40;
-            this.btnAnterior.Text = "<";
             this.btnAnterior.UseVisualStyleBackColor = false;
             this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
             // 
             // btnProximo
             // 
             this.btnProximo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnProximo.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnProximo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProximo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProximo.Image = global::SistemaGuincho.Properties.Resources.sign_right;
             this.btnProximo.Location = new System.Drawing.Point(769, 12);
             this.btnProximo.Name = "btnProximo";
-            this.btnProximo.Size = new System.Drawing.Size(43, 27);
+            this.btnProximo.Size = new System.Drawing.Size(46, 38);
             this.btnProximo.TabIndex = 39;
-            this.btnProximo.Text = ">";
             this.btnProximo.UseVisualStyleBackColor = false;
             this.btnProximo.Click += new System.EventHandler(this.btnProximo_Click);
             // 
             // btnPrimeiro
             // 
             this.btnPrimeiro.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPrimeiro.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnPrimeiro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrimeiro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrimeiro.Location = new System.Drawing.Point(671, 12);
+            this.btnPrimeiro.Image = global::SistemaGuincho.Properties.Resources.sign_left_end;
+            this.btnPrimeiro.Location = new System.Drawing.Point(679, 12);
             this.btnPrimeiro.Name = "btnPrimeiro";
-            this.btnPrimeiro.Size = new System.Drawing.Size(43, 27);
+            this.btnPrimeiro.Size = new System.Drawing.Size(46, 38);
             this.btnPrimeiro.TabIndex = 38;
-            this.btnPrimeiro.Text = "<<";
             this.btnPrimeiro.UseVisualStyleBackColor = false;
             this.btnPrimeiro.Click += new System.EventHandler(this.btnPrimeiro_Click);
             // 
@@ -289,7 +293,7 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
             this.groupBox2.Controls.Add(this.dgvServicos);
-            this.groupBox2.Location = new System.Drawing.Point(21, 157);
+            this.groupBox2.Location = new System.Drawing.Point(21, 167);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(842, 312);
             this.groupBox2.TabIndex = 36;
@@ -357,11 +361,26 @@
             this.txtBusca.TabIndex = 2;
             this.txtBusca.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBusca_KeyDown);
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Image = global::SistemaGuincho.Properties.Resources.sign_add;
+            this.button5.Location = new System.Drawing.Point(20, 13);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(64, 36);
+            this.button5.TabIndex = 42;
+            this.button5.UseVisualStyleBackColor = false;
+            // 
             // Servicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 481);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(885, 491);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnUltimo);
             this.Controls.Add(this.btnAnterior);
@@ -372,10 +391,10 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnGravar);
-            this.Controls.Add(this.btnAdicionar);
             this.MaximizeBox = false;
             this.Name = "Servicos";
             this.Text = "Serviços";
+            this.Load += new System.EventHandler(this.Servicos_Load);
             this.gpb_ddBasicCliente.ResumeLayout(false);
             this.gpb_ddBasicCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).EndInit();
@@ -398,7 +417,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnGravar;
-        private System.Windows.Forms.Button btnAdicionar;
         private System.Windows.Forms.GroupBox gpb_ddBasicCliente;
         private System.Windows.Forms.DataGridView dgvServicos;
         private System.Windows.Forms.Button btnAtualizar;
@@ -413,5 +431,6 @@
         private System.Windows.Forms.Label lblBuscarPor;
         private System.Windows.Forms.Label lblBusca;
         private System.Windows.Forms.TextBox txtBusca;
+        private System.Windows.Forms.Button button5;
     }
 }

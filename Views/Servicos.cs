@@ -265,7 +265,7 @@ namespace SistemaGuincho.Views {
                 case Util.WindowMode.ModoCriacaoForm:
                     enableFields(windowMode == Util.WindowMode.ModoNormal);
 
-                    btnAdicionar.Enabled = true;
+                   
                     btnExcluir.Enabled = windowMode == Util.WindowMode.ModoNormal;
 
                     btnCancelar.Enabled = false;
@@ -285,7 +285,7 @@ namespace SistemaGuincho.Views {
                 case Util.WindowMode.ModoDeInsercao:
                     enableFields(true);
 
-                    btnAdicionar.Enabled = false;
+               
                     btnExcluir.Enabled = false;
 
                     btnCancelar.Enabled = true;
@@ -393,5 +393,10 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Específico
         #endregion
+
+        private void Servicos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
