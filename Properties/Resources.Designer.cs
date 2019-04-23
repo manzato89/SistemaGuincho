@@ -73,6 +73,26 @@ namespace SistemaGuincho.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cashier_machine {
+            get {
+                object obj = ResourceManager.GetObject("cashier-machine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cashier_machine72 {
+            get {
+                object obj = ResourceManager.GetObject("cashier-machine72", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cone {
             get {
                 object obj = ResourceManager.GetObject("cone", resourceCulture);
