@@ -57,5 +57,9 @@ namespace SistemaGuincho.Views{
         private void btn_Cliente_Click(object sender, EventArgs e) {
             new Clientes().ShowDialog();
         }
+
+        private void btn_Orcamento_Click(object sender, EventArgs e) {
+            new Orcamentos().ShowDialog();
+        }
     }
 }

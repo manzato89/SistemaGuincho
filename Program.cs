@@ -37,6 +37,9 @@ namespace SistemaGuincho{
 
                 // Cria os serviços de teste
                 Repositorio.ServicoRepositorio.update(Testes.Debug.getServicosDeTeste());
+
+                // Cria os orçamentos de teste
+                Repositorio.OrcamentoRepositorio.update(Testes.Debug.getOrcamentosDeTeste());
             }
 
             Application.Run(new Views.MenuPrincipal());

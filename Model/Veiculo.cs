@@ -9,7 +9,9 @@ namespace SistemaGuincho.Model {
 
         public enum TipoVeiculo {
             Carro,
-            Moto
+            Moto,
+            Van,
+            Caminhão
         };
 
         public int id { get; set; }

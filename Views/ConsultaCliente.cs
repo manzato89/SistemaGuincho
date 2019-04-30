@@ -14,6 +14,8 @@ namespace SistemaGuincho.Views {
 
         private Utilidades.Util.TipoConsulta tpConsulta;
 
+        public Cliente clienteSelecionado;
+
         private Views.Clientes formCliente;
         #endregion
 
@@ -162,11 +164,17 @@ namespace SistemaGuincho.Views {
 
         private void dgvClientes_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.RowIndex > -1) {
-                Model.Cliente cliente = clientes_view[e.RowIndex];
+                Cliente cliente = clientes_view[e.RowIndex];
 
-                formCliente = new Views.Clientes(cliente);
-                formCliente.Load += FormCliente_Load;
-                formCliente.Show();
+                if (tpConsulta == Util.TipoConsulta.Edicao) {
+
+                    formCliente = new Views.Clientes(cliente);
+                    formCliente.Load += FormCliente_Load;
+                    formCliente.Show();
+                }else if (tpConsulta == Util.TipoConsulta.Selecao) {
+                    clienteSelecionado = cliente;
+                    this.Close();
+                }
             }
         }
 

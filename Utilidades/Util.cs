@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace SistemaGuincho.Utilidades {
             Repositorio.VeiculoRepositorio.init();
             Repositorio.ServicoRepositorio.init();
             Repositorio.UnidadeRepositorio.init();
+            Repositorio.OrcamentoRepositorio.init();
+        }
+
+        public static String formatValor(float valor) {
+            return string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", valor);
         }
 
     }

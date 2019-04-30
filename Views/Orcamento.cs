@@ -635,7 +635,7 @@ namespace SistemaGuincho.Views {
             } else {
                 // Vai reabrir
 
-                if (MessageBox.Show("Tem certeza que quer reabri o orçamento?",
+                if (MessageBox.Show("Tem certeza que quer reabrir o orçamento?",
                         "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 
                     Orcamento orcamentoAtualizado = orcamentos[index];

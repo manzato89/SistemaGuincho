@@ -12,12 +12,17 @@ namespace SistemaGuincho.Model {
         public Unidade unidade { get; set; }
         public float valor { get; set; }
 
+        public int _quantidade { get; set; }
+        public string _total { get; set; }
+
         public Servico() { }
 
         public Servico(string descricao, float valor, Unidade unidade) {
             this.descricao = descricao;
             this.valor = valor;
             this.unidade = unidade;
+
+            this._quantidade = 1;
         }
 
         public override string ToString() {

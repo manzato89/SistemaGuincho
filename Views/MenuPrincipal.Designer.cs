@@ -65,20 +65,20 @@
             this.categoriasToolStripMenuItem});
             this.castrosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.castrosToolStripMenuItem.Name = "castrosToolStripMenuItem";
-            this.castrosToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
+            this.castrosToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
             this.castrosToolStripMenuItem.Text = "Cadastros";
             // 
             // serviçosToolStripMenuItem
             // 
             this.serviçosToolStripMenuItem.Name = "serviçosToolStripMenuItem";
-            this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.serviçosToolStripMenuItem.Text = "Serviços";
             this.serviçosToolStripMenuItem.Click += new System.EventHandler(this.serviçosToolStripMenuItem_Click);
             // 
             // categoriasToolStripMenuItem
             // 
             this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
-            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.categoriasToolStripMenuItem.Text = "Categorias";
             this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
             // 
@@ -88,7 +88,7 @@
             this.serviçosCategoriasToolStripMenuItem});
             this.consultasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
             this.consultasToolStripMenuItem.Text = "Consultas";
             // 
             // serviçosCategoriasToolStripMenuItem
@@ -104,13 +104,13 @@
             this.ordemDeServiçoToolStripMenuItem});
             this.vendasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
-            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(88, 19);
+            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
             this.vendasToolStripMenuItem.Text = "Pedidos";
             // 
             // ordemDeServiçoToolStripMenuItem
             // 
             this.ordemDeServiçoToolStripMenuItem.Name = "ordemDeServiçoToolStripMenuItem";
-            this.ordemDeServiçoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ordemDeServiçoToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.ordemDeServiçoToolStripMenuItem.Text = "Faturamento";
             this.ordemDeServiçoToolStripMenuItem.Click += new System.EventHandler(this.ordemDeServiçoToolStripMenuItem_Click);
             // 
@@ -150,6 +150,7 @@
             this.btn_Orcamento.Text = "ORÇAMENTO";
             this.btn_Orcamento.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_Orcamento.UseVisualStyleBackColor = false;
+            this.btn_Orcamento.Click += new System.EventHandler(this.btn_Orcamento_Click);
             // 
             // btn_Cliente
             // 

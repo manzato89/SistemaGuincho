@@ -12,7 +12,7 @@ namespace SistemaGuincho.Model {
         public int numFaturamento { get; set; }
         public Cliente cliente { get; set; }
         public List<Servico> servicos { get; set; }
-        public List<CustoAdicional> custosAdicionais { get; set; }
+        public List<Servico> custosAdicionais { get; set; }
         public FormaPagamento formaPagamento { get; set; }
         public List<DateTime> datasPagamento { get; set; }
         public bool fechado { get; set; }

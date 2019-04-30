@@ -36,7 +36,7 @@ namespace SistemaGuincho.Repositorio {
         }
 
         public static Cliente read(int id) {
-            return new Cliente();
+            return clientes.Find(find => find.id == id);
         }
 
         public static bool update(List<Cliente> clientes) {

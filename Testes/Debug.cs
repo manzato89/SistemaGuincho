@@ -95,6 +95,40 @@ namespace SistemaGuincho.Testes {
             clientes.Add(cliente);
             #endregion
 
+            #region Cliente 3
+            cliente = new Cliente();
+            cliente.id = 3;
+            cliente.nome = "Osvaldo Elias Henrique Souza";
+            cliente.cpf = "40327876620";
+            cliente.rg = "451522539";
+            cliente.dataNascimento = new DateTime(1980, 06, 15);
+            cliente.email = "osvaldoeliashenriquesouza__osvaldoeliashenriquesouza@cerimoniallis.com.br";
+            cliente.fone1 = "(35) 35655229";
+            cliente.fone2 = "(35) 984255472";
+
+            endereco = new Endereco();
+            endereco.logradouro = "Rua Júlio de Melo Braga";
+            endereco.numero = "506";
+            endereco.bairro = "Jardim Itamaraty II";
+            endereco.cep = 37710225;
+            endereco.cidade = "Poços de Caldas";
+            endereco.uf = "MG";
+            cliente.endereco = endereco;
+
+            veiculo = new Veiculo();
+            veiculo.id = 3;
+            veiculo.tpVeiculo = Veiculo.TipoVeiculo.Van;
+            veiculo.placa = "CCC1298";
+            veiculo.cidadePlaca = endereco.cidade;
+            veiculo.ufPlaca = endereco.uf;
+            veiculo.cor = "Cinza";
+            veiculo.modelo = "Renault Master 2.3 Standard L2h2 16l 5p";
+            veiculo.ano = 2014;
+            cliente.veiculos.Add(veiculo);
+
+            clientes.Add(cliente);
+            #endregion
+
             return clientes;
         }
 
@@ -135,6 +169,60 @@ namespace SistemaGuincho.Testes {
             servicos.Add(servico4);
 
             return servicos;
+        }
+
+        public static List<Orcamento> getOrcamentosDeTeste() {
+            List<Orcamento> orcamentos = new List<Orcamento>();
+
+            List<Cliente> clientes = getClientesDeTeste();
+            List<Servico> servicos = getServicosDeTeste();
+            Servico servico, custoAdicional;
+
+            // Orçamento 1
+            Orcamento orcamento = new Orcamento(clientes[0], clientes[0].veiculos[0]);
+
+            servico = servicos[0];
+            servico._quantidade = 3;
+            orcamento.servicos.Add(servico);
+
+            servico = servicos[3];
+            servico._quantidade = 1;
+            orcamento.servicos.Add(servico);
+
+            orcamento.fechado = true;
+            orcamento.id = 1;
+            orcamentos.Add(orcamento);
+
+            // Orçamento 2
+            orcamento = new Orcamento(clientes[1], clientes[1].veiculos[0]);
+
+            servico = servicos[2];
+            servico._quantidade = 5;
+            orcamento.servicos.Add(servico);
+
+            custoAdicional = servicos[1];
+            custoAdicional._quantidade = 10;
+            orcamento.custosAdicionais.Add(custoAdicional);
+
+            orcamento.id = 2;
+            orcamentos.Add(orcamento);
+
+            // Orçamento 3
+            orcamento = new Orcamento(clientes[1], clientes[1].veiculos[1]);
+
+            custoAdicional = servicos[2];
+            custoAdicional._quantidade = 3;
+            orcamento.custosAdicionais.Add(custoAdicional);
+
+            orcamento.id = 3;
+            orcamentos.Add(orcamento);            
+
+            // Orçamento 4
+            orcamento = new Orcamento(clientes[2], null);
+            orcamento.id = 4;
+            orcamentos.Add(orcamento);
+
+            return orcamentos;
         }
 
     }
