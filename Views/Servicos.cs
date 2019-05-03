@@ -393,10 +393,5 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Específico
         #endregion
-
-        private void Servicos_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
