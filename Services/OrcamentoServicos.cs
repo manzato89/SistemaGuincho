@@ -28,6 +28,7 @@ namespace SistemaGuincho.Servicos {
             }
 
             orcamento.fechado = true;
+            orcamento.dataEncerramento = DateTime.Now;
             return true;
         }
 
@@ -35,6 +36,7 @@ namespace SistemaGuincho.Servicos {
 
         public static bool reabreOrcamento(ref Orcamento orcamento, ref String mensagemRetorno) {
             orcamento.fechado = false;
+            orcamento.dataEncerramento = null;
             return true;
         }
         #endregion

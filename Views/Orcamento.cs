@@ -160,6 +160,7 @@ namespace SistemaGuincho.Views {
                     newOrcamento.id = orcamentos[index].id;
                     newOrcamento.servicos = orcamentos[index].servicos;
                     newOrcamento.custosAdicionais = orcamentos[index].custosAdicionais;
+                    newOrcamento.dataCriacao = orcamentos[index].dataCriacao;
 
                     if (OrcamentoServicos.update(newOrcamento)) {
                         getFromRepositorio();
@@ -212,8 +213,17 @@ namespace SistemaGuincho.Views {
             if (index > -1 && orcamentos.Count > 0 && index < orcamentos.Count && orcamentos[index] != null) {
                 // Preenche as informações básicas do orçamento
                 txtID.Text = orcamentos[index].id.ToString();
+                txtDtCriacao.Text = orcamentos[index].dataCriacao.ToString("dd/MM/yyyy");
+                txtDtEncerramento.Text = orcamentos[index].dataEncerramento?.ToString("dd/MM/yyyy");
+
                 preencheInformacoesCliente(orcamentos[index].cliente);
-                cboVeiculo.SelectedItem = orcamentos[index].veiculo;
+
+                if (orcamentos[index].veiculo != null) {
+                    int indexVeiculo = orcamentos[index].cliente.veiculos.FindIndex(find => find.id == orcamentos[index].veiculo.id);
+                    cboVeiculo.SelectedIndex = indexVeiculo;
+                } else {
+                    cboVeiculo.SelectedIndex = -1;
+                }
 
                 refreshDataGridView();
 
@@ -626,7 +636,7 @@ namespace SistemaGuincho.Views {
                     if (OrcamentoServicos.fechaOrcamento(ref orcamentoAtualizado, ref mensagemRetorno)) {
                         orcamentos[index] = orcamentoAtualizado;
 
-                        windowModeChanged();
+                        fillFields();
                     } else {
                         MessageBox.Show(String.Format("Não foi possível fechar o orçamento.\n\n{0}", mensagemRetorno),
                             "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
@@ -647,7 +657,7 @@ namespace SistemaGuincho.Views {
                     if (OrcamentoServicos.reabreOrcamento(ref orcamentoAtualizado, ref mensagemRetorno)) {
                         orcamentos[index] = orcamentoAtualizado;
 
-                        windowModeChanged();
+                        fillFields();
                     } else {
                         MessageBox.Show(String.Format("Não foi possível reabrir o orçamento.\n\n{0}", mensagemRetorno),
                             "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);

@@ -9,7 +9,6 @@ namespace SistemaGuincho.Model {
 
         public int id { get; set; }
         public int numOrcamento { get; set; }
-        public int numFaturamento { get; set; }
         public Cliente cliente { get; set; }
         public List<Servico> servicos { get; set; }
         public List<Servico> custosAdicionais { get; set; }
@@ -17,6 +16,8 @@ namespace SistemaGuincho.Model {
         public List<DateTime> datasPagamento { get; set; }
         public bool fechado { get; set; }
         public Veiculo veiculo { get; set; }
+        public DateTime dataCriacao { get; set; }
+        public DateTime? dataEncerramento { get; set; }
 
         public Faturamento() { }
 

@@ -13,8 +13,13 @@ namespace SistemaGuincho.Model {
         public List<Servico> custosAdicionais { get; set; }
         public bool fechado { get; set; }
         public Veiculo veiculo { get; set; }
+        public DateTime dataCriacao { get; set; }
+        public DateTime? dataEncerramento { get; set; }
 
-        public Orcamento() { }
+        public Orcamento() {
+            dataCriacao = DateTime.Now;
+            dataEncerramento = null;
+        }
 
         public Orcamento(Cliente cliente, Veiculo veiculo) {
             this.cliente = cliente;
@@ -22,6 +27,9 @@ namespace SistemaGuincho.Model {
 
             servicos = new List<Servico>();
             custosAdicionais = new List<Servico>();
+
+            dataCriacao = DateTime.Now;
+            dataEncerramento = null;
         }
 
         public float valorTotal() {

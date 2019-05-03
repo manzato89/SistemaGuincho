@@ -11,7 +11,7 @@ namespace SistemaGuincho.Utilidades {
         public static string fileNameConfig { get; set; }
         public static string folderConfig { get; set; }
 
-        public static bool debug = false;
+        public static bool debug = true;
         #endregion
 
         public static void init() {
