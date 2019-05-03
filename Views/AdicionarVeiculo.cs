@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaGuincho.Model;
 using SistemaGuincho.Utilidades;
-using SistemaGuincho.Repositorio;
+using SistemaGuincho.Servicos;
 
 namespace SistemaGuincho.Views {
     public partial class AdicionarVeiculo : Form{
@@ -31,6 +31,8 @@ namespace SistemaGuincho.Views {
 
             cboTpVeiculo.Items.Add(Veiculo.TipoVeiculo.Carro);
             cboTpVeiculo.Items.Add(Veiculo.TipoVeiculo.Moto);
+            cboTpVeiculo.Items.Add(Veiculo.TipoVeiculo.Van);
+            cboTpVeiculo.Items.Add(Veiculo.TipoVeiculo.Caminhão);
 
             // Atualiza o nome do formulário
             this.Text = String.Format("{0} - Veículos", cliente.nome);
@@ -60,7 +62,7 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            cliente.veiculos = VeiculoRepositorio.read(cliente.id);
+            cliente.veiculos = VeiculoServicos.Instance.read(cliente);
         }
 
         #endregion
@@ -142,11 +144,12 @@ namespace SistemaGuincho.Views {
             string uf = txtUF.Text;
 
             newVeiculo = new Veiculo(tpVeiculo, modelo, ano, cor, placa, cidade, uf);
+            newVeiculo._idCliente = cliente.id;
             
             // Verifica se vai inserir um novo registro ou então salvá-lo
             if (windowMode == Util.WindowMode.ModoDeInsercao) {
 
-                if (VeiculoRepositorio.create(ref newVeiculo, cliente.id)) {
+                if (VeiculoServicos.Instance.create(ref newVeiculo)) {
                     getFromRepositorio();
                     btnUltimo_Click(null, null);
                 } else {
@@ -156,7 +159,7 @@ namespace SistemaGuincho.Views {
             } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
                 newVeiculo.id = cliente.veiculos[index].id;
 
-                if (VeiculoRepositorio.update(cliente.id, newVeiculo)) {
+                if (VeiculoServicos.Instance.update(newVeiculo)) {
                     getFromRepositorio();
                 }
 
@@ -172,7 +175,7 @@ namespace SistemaGuincho.Views {
             if (MessageBox.Show("Confirma a deleção do registro ?" +
                     Environment.NewLine + Environment.NewLine +
                     cliente.veiculos[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                VeiculoRepositorio.delete(cliente.id, cliente.veiculos[index]);
+                VeiculoServicos.Instance.delete(cliente.veiculos[index]);
 
                 getFromRepositorio();
                 clearFields();

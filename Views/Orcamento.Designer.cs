@@ -33,28 +33,28 @@
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblVeiculo = new System.Windows.Forms.Label();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
+            this.btnPesquisarCliente = new System.Windows.Forms.Button();
             this.cboVeiculo = new System.Windows.Forms.ComboBox();
             this.txtCdCliente = new System.Windows.Forms.TextBox();
             this.dgvServicos = new System.Windows.Forms.DataGridView();
             this.grpServicos = new System.Windows.Forms.GroupBox();
+            this.btnAdicionarServico = new System.Windows.Forms.Button();
+            this.btnExcluirServico = new System.Windows.Forms.Button();
             this.grpCustosAdicionais = new System.Windows.Forms.GroupBox();
             this.dgvCustosAdicionais = new System.Windows.Forms.DataGridView();
+            this.btnAdicionarCustoAdicional = new System.Windows.Forms.Button();
+            this.btnExcluirCustoAdicional = new System.Windows.Forms.Button();
             this.txtValorTotal = new System.Windows.Forms.TextBox();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.txtFaturamento = new System.Windows.Forms.TextBox();
             this.lblFaturamentoGerado = new System.Windows.Forms.Label();
             this.btnFecharReabrir = new System.Windows.Forms.Button();
-            this.btnAdicionarCustoAdicional = new System.Windows.Forms.Button();
-            this.btnExcluirCustoAdicional = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
-            this.btnAdicionarServico = new System.Windows.Forms.Button();
-            this.btnExcluirServico = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnProximo = new System.Windows.Forms.Button();
             this.btnPrimeiro = new System.Windows.Forms.Button();
             this.btnAtualizar = new System.Windows.Forms.Button();
-            this.btnPesquisarCliente = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -131,6 +131,23 @@
             this.grpDadosBasicos.TabStop = false;
             this.grpDadosBasicos.Text = "Dados Básicos";
             // 
+            // btnPesquisarCliente
+            // 
+            this.btnPesquisarCliente.BackColor = System.Drawing.Color.Transparent;
+            this.btnPesquisarCliente.BackgroundImage = global::SistemaGuincho.Properties.Resources.search;
+            this.btnPesquisarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPesquisarCliente.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnPesquisarCliente.FlatAppearance.BorderSize = 0;
+            this.btnPesquisarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisarCliente.ForeColor = System.Drawing.Color.Transparent;
+            this.btnPesquisarCliente.Location = new System.Drawing.Point(481, 28);
+            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
+            this.btnPesquisarCliente.Size = new System.Drawing.Size(32, 21);
+            this.btnPesquisarCliente.TabIndex = 51;
+            this.btnPesquisarCliente.UseVisualStyleBackColor = false;
+            this.btnPesquisarCliente.Click += new System.EventHandler(this.btnPesquisarCliente_Click);
+            // 
             // cboVeiculo
             // 
             this.cboVeiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -194,6 +211,38 @@
             this.grpServicos.TabStop = false;
             this.grpServicos.Text = "Serviços";
             // 
+            // btnAdicionarServico
+            // 
+            this.btnAdicionarServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAdicionarServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAdicionarServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdicionarServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdicionarServico.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdicionarServico.Image = global::SistemaGuincho.Properties.Resources.sign_add;
+            this.btnAdicionarServico.Location = new System.Drawing.Point(6, 19);
+            this.btnAdicionarServico.Name = "btnAdicionarServico";
+            this.btnAdicionarServico.Size = new System.Drawing.Size(49, 29);
+            this.btnAdicionarServico.TabIndex = 43;
+            this.btnAdicionarServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdicionarServico.UseVisualStyleBackColor = false;
+            this.btnAdicionarServico.Click += new System.EventHandler(this.btnAdicionarServico_Click);
+            // 
+            // btnExcluirServico
+            // 
+            this.btnExcluirServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnExcluirServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnExcluirServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluirServico.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnExcluirServico.Image = global::SistemaGuincho.Properties.Resources.trashcan;
+            this.btnExcluirServico.Location = new System.Drawing.Point(54, 19);
+            this.btnExcluirServico.Name = "btnExcluirServico";
+            this.btnExcluirServico.Size = new System.Drawing.Size(49, 29);
+            this.btnExcluirServico.TabIndex = 45;
+            this.btnExcluirServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExcluirServico.UseVisualStyleBackColor = false;
+            this.btnExcluirServico.Click += new System.EventHandler(this.btnExcluirServico_Click);
+            // 
             // grpCustosAdicionais
             // 
             this.grpCustosAdicionais.Controls.Add(this.dgvCustosAdicionais);
@@ -236,6 +285,38 @@
             this.dgvCustosAdicionais.TabIndex = 36;
             this.dgvCustosAdicionais.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
             this.dgvCustosAdicionais.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView_CellValidating);
+            // 
+            // btnAdicionarCustoAdicional
+            // 
+            this.btnAdicionarCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAdicionarCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAdicionarCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdicionarCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdicionarCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdicionarCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.sign_add;
+            this.btnAdicionarCustoAdicional.Location = new System.Drawing.Point(6, 19);
+            this.btnAdicionarCustoAdicional.Name = "btnAdicionarCustoAdicional";
+            this.btnAdicionarCustoAdicional.Size = new System.Drawing.Size(49, 29);
+            this.btnAdicionarCustoAdicional.TabIndex = 43;
+            this.btnAdicionarCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdicionarCustoAdicional.UseVisualStyleBackColor = false;
+            this.btnAdicionarCustoAdicional.Click += new System.EventHandler(this.btnAdicionarServico_Click);
+            // 
+            // btnExcluirCustoAdicional
+            // 
+            this.btnExcluirCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnExcluirCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnExcluirCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluirCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnExcluirCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.trashcan;
+            this.btnExcluirCustoAdicional.Location = new System.Drawing.Point(54, 19);
+            this.btnExcluirCustoAdicional.Name = "btnExcluirCustoAdicional";
+            this.btnExcluirCustoAdicional.Size = new System.Drawing.Size(49, 29);
+            this.btnExcluirCustoAdicional.TabIndex = 45;
+            this.btnExcluirCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExcluirCustoAdicional.UseVisualStyleBackColor = false;
+            this.btnExcluirCustoAdicional.Click += new System.EventHandler(this.btnExcluirServico_Click);
             // 
             // txtValorTotal
             // 
@@ -285,44 +366,12 @@
             this.btnFecharReabrir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFecharReabrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFecharReabrir.Image = global::SistemaGuincho.Properties.Resources.cadeado_aberto;
-            this.btnFecharReabrir.Location = new System.Drawing.Point(408, 13);
+            this.btnFecharReabrir.Location = new System.Drawing.Point(343, 13);
             this.btnFecharReabrir.Name = "btnFecharReabrir";
             this.btnFecharReabrir.Size = new System.Drawing.Size(66, 36);
             this.btnFecharReabrir.TabIndex = 50;
             this.btnFecharReabrir.UseVisualStyleBackColor = false;
             this.btnFecharReabrir.Click += new System.EventHandler(this.btnFecharReabrir_Click);
-            // 
-            // btnAdicionarCustoAdicional
-            // 
-            this.btnAdicionarCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAdicionarCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAdicionarCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdicionarCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdicionarCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdicionarCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.sign_add;
-            this.btnAdicionarCustoAdicional.Location = new System.Drawing.Point(6, 19);
-            this.btnAdicionarCustoAdicional.Name = "btnAdicionarCustoAdicional";
-            this.btnAdicionarCustoAdicional.Size = new System.Drawing.Size(49, 29);
-            this.btnAdicionarCustoAdicional.TabIndex = 43;
-            this.btnAdicionarCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdicionarCustoAdicional.UseVisualStyleBackColor = false;
-            this.btnAdicionarCustoAdicional.Click += new System.EventHandler(this.btnAdicionarServico_Click);
-            // 
-            // btnExcluirCustoAdicional
-            // 
-            this.btnExcluirCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnExcluirCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnExcluirCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluirCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluirCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExcluirCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.trashcan;
-            this.btnExcluirCustoAdicional.Location = new System.Drawing.Point(54, 19);
-            this.btnExcluirCustoAdicional.Name = "btnExcluirCustoAdicional";
-            this.btnExcluirCustoAdicional.Size = new System.Drawing.Size(49, 29);
-            this.btnExcluirCustoAdicional.TabIndex = 45;
-            this.btnExcluirCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExcluirCustoAdicional.UseVisualStyleBackColor = false;
-            this.btnExcluirCustoAdicional.Click += new System.EventHandler(this.btnExcluirServico_Click);
             // 
             // btnPesquisar
             // 
@@ -331,44 +380,12 @@
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPesquisar.Image = global::SistemaGuincho.Properties.Resources.search;
-            this.btnPesquisar.Location = new System.Drawing.Point(343, 13);
+            this.btnPesquisar.Location = new System.Drawing.Point(408, 13);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(66, 36);
             this.btnPesquisar.TabIndex = 42;
             this.btnPesquisar.UseVisualStyleBackColor = false;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
-            // 
-            // btnAdicionarServico
-            // 
-            this.btnAdicionarServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAdicionarServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAdicionarServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdicionarServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdicionarServico.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdicionarServico.Image = global::SistemaGuincho.Properties.Resources.sign_add;
-            this.btnAdicionarServico.Location = new System.Drawing.Point(6, 19);
-            this.btnAdicionarServico.Name = "btnAdicionarServico";
-            this.btnAdicionarServico.Size = new System.Drawing.Size(49, 29);
-            this.btnAdicionarServico.TabIndex = 43;
-            this.btnAdicionarServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdicionarServico.UseVisualStyleBackColor = false;
-            this.btnAdicionarServico.Click += new System.EventHandler(this.btnAdicionarServico_Click);
-            // 
-            // btnExcluirServico
-            // 
-            this.btnExcluirServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnExcluirServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnExcluirServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluirServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluirServico.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExcluirServico.Image = global::SistemaGuincho.Properties.Resources.trashcan;
-            this.btnExcluirServico.Location = new System.Drawing.Point(54, 19);
-            this.btnExcluirServico.Name = "btnExcluirServico";
-            this.btnExcluirServico.Size = new System.Drawing.Size(49, 29);
-            this.btnExcluirServico.TabIndex = 45;
-            this.btnExcluirServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExcluirServico.UseVisualStyleBackColor = false;
-            this.btnExcluirServico.Click += new System.EventHandler(this.btnExcluirServico_Click);
             // 
             // btnUltimo
             // 
@@ -440,23 +457,6 @@
             this.btnAtualizar.TabIndex = 37;
             this.btnAtualizar.UseVisualStyleBackColor = false;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
-            // 
-            // btnPesquisarCliente
-            // 
-            this.btnPesquisarCliente.BackColor = System.Drawing.Color.Transparent;
-            this.btnPesquisarCliente.BackgroundImage = global::SistemaGuincho.Properties.Resources.search;
-            this.btnPesquisarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPesquisarCliente.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnPesquisarCliente.FlatAppearance.BorderSize = 0;
-            this.btnPesquisarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPesquisarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPesquisarCliente.ForeColor = System.Drawing.Color.Transparent;
-            this.btnPesquisarCliente.Location = new System.Drawing.Point(481, 28);
-            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
-            this.btnPesquisarCliente.Size = new System.Drawing.Size(32, 21);
-            this.btnPesquisarCliente.TabIndex = 51;
-            this.btnPesquisarCliente.UseVisualStyleBackColor = false;
-            this.btnPesquisarCliente.Click += new System.EventHandler(this.btnPesquisarCliente_Click);
             // 
             // btnExcluir
             // 

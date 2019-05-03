@@ -19,6 +19,8 @@ namespace SistemaGuincho.Model {
         public string fone1 { get; set; }
         public string fone2 { get; set; }
 
+        public int _idEndereco { get; set; }
+
         // Construtor básico
         public Cliente(string nome, string cpf, Endereco endereco, List<Veiculo> veiculos, string fone1) {
             this.nome = nome;
@@ -66,7 +68,9 @@ namespace SistemaGuincho.Model {
                     modeloVeiculos, veiculo.getCustomModelo());
             }
 
-            modeloVeiculos = modeloVeiculos.Substring(0, modeloVeiculos.Length - 2); // Remove a última vírgula e espaço
+            if (modeloVeiculos.Length > 0)
+                modeloVeiculos = modeloVeiculos.Substring(0, modeloVeiculos.Length - 2); // Remove a última vírgula e espaço
+
             return modeloVeiculos;
         }
 
@@ -78,7 +82,9 @@ namespace SistemaGuincho.Model {
                     placaVeiculos, veiculo.getCustomPlaca());
             }
 
-            placaVeiculos = placaVeiculos.Substring(0, placaVeiculos.Length - 2); // Remove a última vírgula e espaço
+            if (placaVeiculos.Length > 0)
+                placaVeiculos = placaVeiculos.Substring(0, placaVeiculos.Length - 2); // Remove a última vírgula e espaço
+
             return placaVeiculos;
         }
 

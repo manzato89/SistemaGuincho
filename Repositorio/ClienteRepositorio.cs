@@ -1,64 +1,222 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Repositorio {
-    public static class ClienteRepositorio {
+    public class ClienteRepositorio : Repositorio<Cliente> {
 
-        private static List<Cliente> clientes;
+        #region Implementação Singleton
+        private static ClienteRepositorio instance = null;
+        public static ClienteRepositorio Instance {
+            get {
+                if (instance == null) {
+                    instance = new ClienteRepositorio();
+                }
+                return instance;
+            }
+        }
 
-        #region Init
-        public static void init() {
-            clientes = new List<Cliente>();
+        private ClienteRepositorio() {
+
         }
         #endregion
 
-        #region Getters e Setters
-        private static List<Cliente> getClientes() {
-            return clientes;
+        #region Init
+        public void createTable(SQLiteConnection connection) {
+            StringBuilder strSQL;
+
+            // Criação da tabela auxiliar Endereço - É necessário criá-la primeiro pois a tabela Cliente a referencia
+            if (connection.GetSchema("Tables", new[] { null, null, "Endereco", null }).Rows.Count == 0) {
+                EnderecoRepositorio.Instance.createTable(connection);
+            }
+
+            //Criação da tabela principal
+            if (connection.GetSchema("Tables", new[] { null, null, "Cliente", null }).Rows.Count == 0) {
+                SQLiteCommand command = connection.CreateCommand();
+
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("CREATE TABLE Cliente (");
+                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" nome NVARCHAR(50), ");
+                strSQL.AppendLine(" cpf NVARCHAR(11), ");
+                strSQL.AppendLine(" rg NVARCHAR(15), ");
+                strSQL.AppendLine(" _idEndereco INTEGER, ");
+                strSQL.AppendLine(" dataNascimento DateTime, ");
+                strSQL.AppendLine(" email NVARCHAR(100), ");
+                strSQL.AppendLine(" fone1 NVARCHAR(20), ");
+                strSQL.AppendLine(" fone2 NVARCHAR(20), ");
+                strSQL.AppendLine(" FOREIGN KEY (_idEndereco) REFERENCES Endereco (id) )");
+
+                command.CommandText = strSQL.ToString();
+                command.ExecuteNonQuery();
+            }
         }
 
-        private static void setClientes(List<Cliente> newClientes) { clientes = newClientes; }
         #endregion
 
         #region CRUD
-        public static bool create(ref Cliente cliente) {
-            cliente.id = 123;
-            clientes.Add(cliente);
-            return true;
-        }
+        public bool create(ref Cliente cliente) {
+            StringBuilder strSQL = new StringBuilder();
 
-        public static List<Cliente> read(){
-            return getClientes();
-        }
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
 
-        public static Cliente read(int id) {
-            return clientes.Find(find => find.id == id);
-        }
+            // Cria o endereço
+            Endereco clienteEndereco = cliente.endereco;
+            EnderecoRepositorio.Instance.create(ref clienteEndereco);
+            cliente.endereco = clienteEndereco;
 
-        public static bool update(List<Cliente> clientes) {
-            setClientes(clientes);
-            return true;
-        }
+            try {
+                // Cria o cliente
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("INSERT INTO Cliente (nome, cpf, rg, _idEndereco, dataNascimento, email, fone1, fone2) ");
+                strSQL.AppendLine("VALUES (@nome, @cpf, @rg, @_idEndereco, @dataNascimento, @email, @fone1, @fone2); ");
+                strSQL.AppendLine("select last_insert_rowid();");
 
-        public static bool update(Cliente cliente) {
-            int indexCliente = clientes.FindIndex(clienteAEncontrar => clienteAEncontrar.id == cliente.id);
-            if (indexCliente > -1) {
-                clientes[indexCliente] = cliente;
-                return true;
+                int _idEndereco = cliente.endereco.id;
+
+                cliente.id = connection.Query<int>(strSQL.ToString(),
+                    new {
+                        cliente.nome,
+                        cliente.cpf,
+                        cliente.rg,
+                        _idEndereco,
+                        cliente.dataNascimento,
+                        cliente.email,
+                        cliente.fone1,
+                        cliente.fone2
+                    }).First();
+            } catch (Exception ex) {
+                return false;
             }
-            return false;
+
+            // Cria os veículos
+            for (int iCount = 0; iCount < cliente.veiculos.Count; iCount++) {
+                Veiculo veiculo = cliente.veiculos[iCount];
+                VeiculoRepositorio.Instance.create(ref veiculo);
+                cliente.veiculos[iCount] = veiculo;
+            }
+
+            return true;
+
         }
 
-        public static bool delete(Cliente cliente) {
-            clientes.RemoveAt(clientes.FindIndex(clienteADeletar => clienteADeletar.id == cliente.id));
+        public List<Cliente> read(){
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                List<Cliente> clientes = connection.Query<Cliente>("SELECT * FROM Cliente").ToList();
+                foreach(Cliente cliente in clientes) {
+                    cliente.endereco = EnderecoRepositorio.Instance.read(cliente._idEndereco);
+                    cliente.veiculos = VeiculoRepositorio.Instance.read(cliente);
+                }
+
+                connection.Close();
+
+                return clientes;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+        
+        public Cliente read(int id) {
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                Cliente cliente = connection.Query<Cliente>("SELECT * FROM Cliente WHERE id = @id", new { id }).First();
+                cliente.endereco = EnderecoRepositorio.Instance.read(cliente._idEndereco);
+                cliente.veiculos = VeiculoRepositorio.Instance.read(cliente);
+
+                connection.Close();
+
+                return cliente;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+        
+        public bool update(List<Cliente> clientes) {
+            throw new NotImplementedException();
+        }
+
+        public bool update(Cliente cliente) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("UPDATE   Cliente ");
+                strSQL.AppendLine("SET      nome = @nome, ");
+                strSQL.AppendLine("         cpf = @cpf, ");
+                strSQL.AppendLine("         rg = @rg, ");
+                strSQL.AppendLine("         _idEndereco = @_idEndereco, ");
+                strSQL.AppendLine("         dataNascimento = @dataNascimento, ");
+                strSQL.AppendLine("         email = @email, ");
+                strSQL.AppendLine("         fone1 = @fone1, ");
+                strSQL.AppendLine("         fone2 = @fone2, ");
+                strSQL.AppendLine("         email = @email ");
+                strSQL.AppendLine("WHERE    id = @id");
+
+                int _idEndereco = cliente.endereco.id;
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        cliente.nome,
+                        cliente.cpf,
+                        cliente.rg,
+                        _idEndereco,
+                        cliente.dataNascimento,
+                        cliente.email,
+                        cliente.fone1,
+                        cliente.fone2,
+                        cliente.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
+            // Atualiza o endereço
+            EnderecoRepositorio.Instance.update(cliente.endereco);
+
+            // Atualiza os veículos
+            foreach(Veiculo veiculo in cliente.veiculos) {
+                VeiculoRepositorio.Instance.update(veiculo);
+            }
+
             return true;
         }
+        
+        public bool delete(Cliente cliente) {
+            StringBuilder strSQL = new StringBuilder();
 
-        public static bool delete(int id) {
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("DELETE FROM Cliente");
+                strSQL.AppendLine("WHERE id = @id");
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        cliente.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
+            // Deleta o endereço
+            EnderecoRepositorio.Instance.delete(cliente.endereco);
+
+            // Deleta os veículos
+            VeiculoRepositorio.Instance.delete(cliente.id);
+
             return true;
         }
         #endregion

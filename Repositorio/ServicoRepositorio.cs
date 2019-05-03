@@ -1,50 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Repositorio {
-    public static class ServicoRepositorio {
+    public class ServicoRepositorio : Repositorio<Servico> {
 
-        private static List<Servico> servicos;
+        #region Implementação Singleton
+        private static ServicoRepositorio instance = null;
+        public static ServicoRepositorio Instance {
+            get {
+                if (instance == null) {
+                    instance = new ServicoRepositorio();
+                }
+                return instance;
+            }
+        }
+
+        private ServicoRepositorio() {
+
+        }
+        #endregion
+
+        private  List<Servico> servicos;
 
         #region Init
-        public static void init() {
+        public  void init() {
             servicos = new List<Servico>();
         }
+
+        public void createTable(SQLiteConnection connection) {
+
+        }
+
         #endregion
 
         #region Getters e Setters
-        private static List<Servico> getServicos() {
+        private List<Servico> getServicos() {
             return servicos;
         }
 
-        private static void setServicos(List<Servico> newServicos) { servicos = newServicos; }
+        private void setServicos(List<Servico> newServicos) { servicos = newServicos; }
         #endregion
 
         #region CRUD
-        public static bool create(ref Servico servico) {
+        public bool create(ref Servico servico) {
             servico.id = 123;
             servicos.Add(servico);
             return true;
         }
 
-        public static List<Servico> read(){
+        public List<Servico> read(){
             return getServicos();
         }
 
-        public static Servico read(int id) {
+        public Servico read(int id) {
             return new Servico();
         }
 
-        public static bool update(List<Servico> servicos) {
+        public bool update(List<Servico> servicos) {
             setServicos(servicos);
             return true;
         }
 
-        public static bool update(Servico servico) {
+        public bool update(Servico servico) {
             int indexServico = servicos.FindIndex(servicoAEncontrar => servicoAEncontrar.id == servico.id);
             if (indexServico > -1) {
                 servicos[indexServico] = servico;
@@ -53,12 +75,12 @@ namespace SistemaGuincho.Repositorio {
             return false;
         }
 
-        public static bool delete(Servico servico) {
+        public bool delete(Servico servico) {
             servicos.RemoveAt(servicos.FindIndex(servicoADeletar => servicoADeletar.id == servico.id));
             return true;
         }
 
-        public static bool delete(int id) {
+        public bool delete(int id) {
             return true;
         }
         #endregion

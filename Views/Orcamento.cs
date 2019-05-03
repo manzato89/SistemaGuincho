@@ -22,6 +22,7 @@ namespace SistemaGuincho.Views {
         private int index;
 
         private ConsultaCliente consultaClienteForm;
+        private ConsultaOrcamento consultaOrcamentoForm;
         private ConsultaServico consultaServicoForm;                  //TODO
         //private ConsultaCustoAdicional consultaCustoAdicionalForm;    //TODO
 
@@ -137,7 +138,7 @@ namespace SistemaGuincho.Views {
                         "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             } else {
 
-                Cliente cliente = ClienteServicos.read(idCliente);
+                Cliente cliente = ClienteServicos.Instance.read(idCliente);
                 Veiculo veiculo = (Veiculo)cboVeiculo.SelectedItem;
 
                 newOrcamento = new Orcamento(cliente, veiculo);
@@ -195,9 +196,9 @@ namespace SistemaGuincho.Views {
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e) {
-            consultaClienteForm = new ConsultaCliente(Util.TipoConsulta.Edicao);
-            consultaClienteForm.Load += ConsultaClienteForm_Load;
-            consultaClienteForm.Show();
+            consultaOrcamentoForm = new ConsultaOrcamento(Util.TipoConsulta.Edicao);
+            consultaOrcamentoForm.Load += ConsultaClienteForm_Load;
+            consultaOrcamentoForm.Show();
         }
 
         private void ConsultaClienteForm_Load(object sender, EventArgs e) {

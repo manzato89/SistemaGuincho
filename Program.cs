@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using SistemaGuincho.Model;
+using SistemaGuincho.Repositorio;
+
 namespace SistemaGuincho{
     public static class Program{
 
-        private static bool debug = true;
         private static Form formToDebug;
 
         /// <summary>
@@ -18,37 +20,35 @@ namespace SistemaGuincho{
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Utilidades.Util.inicializarRepositorios();
+            Utilidades.Util.inicializarSistema();
 
-            if (debug){
+            if (Utilidades.Config.debug){
                 // Cria os clientes de teste
-                List<Model.Cliente> clientesDeTeste = Testes.Debug.getClientesDeTeste();
-                Repositorio.ClienteRepositorio.update(clientesDeTeste);
+                List<Cliente> clientesDeTeste = Testes.Debug.getClientesDeTeste();
+                for (int iCount = 0; iCount < clientesDeTeste.Count; iCount++) {
+                    Cliente cliente = clientesDeTeste[iCount];
+                    ClienteRepositorio.Instance.create(ref cliente);
+                    clientesDeTeste[iCount] = cliente;
+                }
 
                 // Cria os veículos de teste
-                Dictionary<int, List<Model.Veiculo>> veiculosDeTeste = new Dictionary<int, List<Model.Veiculo>>();
-                foreach(Model.Cliente cliente in clientesDeTeste) {
+                Dictionary<int, List<Veiculo>> veiculosDeTeste = new Dictionary<int, List<Model.Veiculo>>();
+                foreach(Cliente cliente in clientesDeTeste) {
                     veiculosDeTeste.Add(cliente.id, cliente.veiculos);
                 }
-                Repositorio.VeiculoRepositorio.update(veiculosDeTeste);
+                //VeiculoRepositorio.Instance.update(veiculosDeTeste);
 
                 // Cria as unidades de teste
-                Repositorio.UnidadeRepositorio.update(Testes.Debug.getUnidadesDeTeste());
+                UnidadeRepositorio.Instance.update(Testes.Debug.getUnidadesDeTeste());
 
                 // Cria os serviços de teste
-                Repositorio.ServicoRepositorio.update(Testes.Debug.getServicosDeTeste());
+                ServicoRepositorio.Instance.update(Testes.Debug.getServicosDeTeste());
 
                 // Cria os orçamentos de teste
-                Repositorio.OrcamentoRepositorio.update(Testes.Debug.getOrcamentosDeTeste());
+                OrcamentoRepositorio.Instance.update(Testes.Debug.getOrcamentosDeTeste());
             }
 
             Application.Run(new Views.MenuPrincipal());
         }
-
-        public static void setDebug(Form form) {
-            debug = true;
-            formToDebug = form;
-        }
-
     }
 }

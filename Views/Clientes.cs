@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaGuincho.Model;
 using SistemaGuincho.Utilidades;
-using SistemaGuincho.Repositorio;
+using SistemaGuincho.Servicos;
 
 namespace SistemaGuincho.Views {
     public partial class Clientes : Form{
@@ -17,7 +17,7 @@ namespace SistemaGuincho.Views {
         #region Atributos da classe
         private Util.WindowMode windowMode;
 
-        private List<Model.Cliente> clientes;
+        private List<Cliente> clientes;
 
         private int index;
 
@@ -51,7 +51,7 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            clientes = ClienteRepositorio.read();
+            clientes = ClienteServicos.Instance.read();
         }
         #endregion
 
@@ -147,7 +147,7 @@ namespace SistemaGuincho.Views {
             // Verifica se vai inserir um novo registro ou então salvá-lo
             if (windowMode == Util.WindowMode.ModoDeInsercao) {
 
-                if (ClienteRepositorio.create(ref newCliente)) {
+                if (ClienteServicos.Instance.create(ref newCliente)) {
                     getFromRepositorio();
                     btnUltimo_Click(null, null);
                 } else {
@@ -158,7 +158,7 @@ namespace SistemaGuincho.Views {
                 newCliente.veiculos = clientes[index].veiculos;
                 newCliente.id = clientes[index].id;
 
-                if (ClienteRepositorio.update(newCliente)) {
+                if (ClienteServicos.Instance.update(newCliente)) {
                     getFromRepositorio();
                 }
 
@@ -174,7 +174,7 @@ namespace SistemaGuincho.Views {
             if (MessageBox.Show("Confirma a deleção do registro ?" +
                     Environment.NewLine + Environment.NewLine +
                     clientes[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                ClienteRepositorio.delete(clientes[index]);
+                ClienteServicos.Instance.delete(clientes[index]);
 
                 getFromRepositorio();
                 clearFields();
@@ -264,6 +264,7 @@ namespace SistemaGuincho.Views {
                         case nameof(Veiculo.placa):
                         case nameof(Veiculo.cidadePlaca):
                         case nameof(Veiculo.ufPlaca):
+                        case nameof(Veiculo._idCliente):
                             dgvVeiculos.Columns[iCount].Visible = false;
                             break;
 
@@ -424,7 +425,7 @@ namespace SistemaGuincho.Views {
         }
 
         private void adicionarVeiculoForm_FormClosing(object sender, FormClosingEventArgs e) {
-            clientes[index].veiculos = VeiculoRepositorio.read(clientes[index].id);
+            clientes[index].veiculos = VeiculoServicos.Instance.read(clientes[index]);
             refreshDataGridView();
         }
         #endregion

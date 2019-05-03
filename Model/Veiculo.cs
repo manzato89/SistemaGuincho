@@ -27,6 +27,7 @@ namespace SistemaGuincho.Model {
         public String modelo_2 { get { return getCustomModelo(); } }
         public String placa_2 { get { return getCustomPlaca(); } }
 
+        public int _idCliente { get; set; }
 
         public Veiculo() { }
 

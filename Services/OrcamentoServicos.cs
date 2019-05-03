@@ -10,38 +10,7 @@ namespace SistemaGuincho.Servicos {
     public static class OrcamentoServicos {
 
         #region Funcionalidades específicas
-        #endregion
-
-        #region CRUD
-        public static bool create(ref Orcamento orcamento) {
-            return OrcamentoRepositorio.create(ref orcamento);
-        }
-
-        public static List<Orcamento> read(){
-            return OrcamentoRepositorio.read();
-        }
-
-        public static Orcamento read(int id) {
-            return OrcamentoRepositorio.read(id);
-        }
-
-        public static bool update(List<Orcamento> orcamentos) {
-            return OrcamentoRepositorio.update(orcamentos);
-        }
-
-        public static bool update(Orcamento orcamento) {
-            return OrcamentoRepositorio.update(orcamento);
-        }
-
-        public static bool delete(Orcamento orcamento) {
-            return OrcamentoRepositorio.delete(orcamento);
-        }
-
-        public static bool delete(int id) {
-            return true;
-        }
-
-        public static bool fechaOrcamento(ref Orcamento orcamento) {    String mensagemVazia = "";  return fechaOrcamento(ref orcamento, ref mensagemVazia);    }
+        public static bool fechaOrcamento(ref Orcamento orcamento) { String mensagemVazia = ""; return fechaOrcamento(ref orcamento, ref mensagemVazia); }
 
         public static bool fechaOrcamento(ref Orcamento orcamento, ref String mensagemRetorno) {
             // Verifica se foi selecionado um veículo
@@ -68,7 +37,36 @@ namespace SistemaGuincho.Servicos {
             orcamento.fechado = false;
             return true;
         }
+        #endregion
 
+        #region CRUD
+        public static bool create(ref Orcamento orcamento) {
+            return OrcamentoRepositorio.Instance.create(ref orcamento);
+        }
+
+        public static List<Orcamento> read(){
+            return OrcamentoRepositorio.Instance.read();
+        }
+
+        public static Orcamento read(int id) {
+            return OrcamentoRepositorio.Instance.read(id);
+        }
+
+        public static bool update(List<Orcamento> orcamentos) {
+            return OrcamentoRepositorio.Instance.update(orcamentos);
+        }
+
+        public static bool update(Orcamento orcamento) {
+            return OrcamentoRepositorio.Instance.update(orcamento);
+        }
+
+        public static bool delete(Orcamento orcamento) {
+            return OrcamentoRepositorio.Instance.delete(orcamento);
+        }
+
+        public static bool delete(int id) {
+            return true;
+        }
         #endregion
 
     }

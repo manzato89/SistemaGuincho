@@ -44,6 +44,7 @@ namespace SistemaGuincho.Testes {
             veiculo.cor = "Preto";
             veiculo.modelo = "Volkswagen Gol";
             veiculo.ano = 2013;
+            veiculo._idCliente = cliente.id;
             cliente.veiculos.Add(veiculo);
 
             clientes.Add(cliente);
@@ -79,6 +80,7 @@ namespace SistemaGuincho.Testes {
             veiculo.cor = "Vermelho";
             veiculo.modelo = "Honda Civic";
             veiculo.ano = 2018;
+            veiculo._idCliente = cliente.id;
             cliente.veiculos.Add(veiculo);
 
             veiculo = new Veiculo();
@@ -90,6 +92,7 @@ namespace SistemaGuincho.Testes {
             veiculo.cor = "Amarela";
             veiculo.modelo = "Honda CB 300";
             veiculo.ano = 2018;
+            veiculo._idCliente = cliente.id;
             cliente.veiculos.Add(veiculo);
 
             clientes.Add(cliente);
@@ -116,7 +119,7 @@ namespace SistemaGuincho.Testes {
             cliente.endereco = endereco;
 
             veiculo = new Veiculo();
-            veiculo.id = 3;
+            veiculo.id = 4;
             veiculo.tpVeiculo = Veiculo.TipoVeiculo.Van;
             veiculo.placa = "CCC1298";
             veiculo.cidadePlaca = endereco.cidade;
@@ -124,6 +127,7 @@ namespace SistemaGuincho.Testes {
             veiculo.cor = "Cinza";
             veiculo.modelo = "Renault Master 2.3 Standard L2h2 16l 5p";
             veiculo.ano = 2014;
+            veiculo._idCliente = cliente.id;
             cliente.veiculos.Add(veiculo);
 
             clientes.Add(cliente);

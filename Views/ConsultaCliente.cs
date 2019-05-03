@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using SistemaGuincho.Model;
-using SistemaGuincho.Repositorio;
+using SistemaGuincho.Servicos;
 using SistemaGuincho.Utilidades;
 
 namespace SistemaGuincho.Views {
@@ -32,7 +32,7 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            clientes = ClienteRepositorio.read();
+            clientes = ClienteServicos.Instance.read();
 
             clientes_view = new List<Model.Cliente>(clientes);
         }
@@ -71,25 +71,26 @@ namespace SistemaGuincho.Views {
             // Preenche os nomes das colunas
             for (var iCount = 0; iCount < dgvClientes.Columns.Count; iCount++) {
                 switch (dgvClientes.Columns[iCount].DataPropertyName) {
-                    case nameof(Model.Cliente.cpf):
-                    case nameof(Model.Cliente.rg):
-                    case nameof(Model.Cliente.endereco):
-                    case nameof(Model.Cliente.veiculos):
-                    case nameof(Model.Cliente.dataNascimento):
-                    case nameof(Model.Cliente.email):
-                    case nameof(Model.Cliente.fone1):
-                    case nameof(Model.Cliente.fone2):
+                    case nameof(Cliente.cpf):
+                    case nameof(Cliente.rg):
+                    case nameof(Cliente.endereco):
+                    case nameof(Cliente.veiculos):
+                    case nameof(Cliente.dataNascimento):
+                    case nameof(Cliente.email):
+                    case nameof(Cliente.fone1):
+                    case nameof(Cliente.fone2):
+                    case nameof(Cliente._idEndereco):
                         dgvClientes.Columns[iCount].Visible = false;
                         break;
 
-                    case nameof(Model.Cliente.id):
+                    case nameof(Cliente.id):
                         dgvClientes.Columns[iCount].DisplayIndex = 0;
                         dgvClientes.Columns[iCount].HeaderText = "Código";
                         dgvClientes.Columns[iCount].Width = 75;
                         dgvClientes.Columns[iCount].ReadOnly = true;
                         break;
 
-                    case nameof(Model.Cliente.nome):
+                    case nameof(Cliente.nome):
                         dgvClientes.Columns[iCount].DisplayIndex = 1;
                         dgvClientes.Columns[iCount].HeaderText = "Nome";
                         dgvClientes.Columns[iCount].Width = 275;

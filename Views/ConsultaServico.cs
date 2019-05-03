@@ -41,7 +41,7 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            servicos = ServicoRepositorio.read();
+            servicos = ServicoRepositorio.Instance.read();
 
             servicos_view = new List<Model.Servico>(servicos);
         }

@@ -1,97 +1,210 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Repositorio {
-    public static class VeiculoRepositorio {
+    public class VeiculoRepositorio : Repositorio<Veiculo> {
 
-        private static Dictionary<int, List<Veiculo>> veiculos;
+        #region Implementação Singleton
+        private static VeiculoRepositorio instance = null;
+        public static VeiculoRepositorio Instance {
+            get {
+                if (instance == null) {
+                    instance = new VeiculoRepositorio();
+                }
+                return instance;
+            }
+        }
 
-        #region Init
-        public static void init() {
-            veiculos = new Dictionary<int, List<Veiculo>>();
+        private VeiculoRepositorio() {
+
         }
         #endregion
 
-        #region Getters e Setters
-        private static List<Veiculo> getVeiculos(int idCliente) {
-            if (veiculos.ContainsKey(idCliente))
-                return veiculos[idCliente];
+        #region Init
+        public void createTable(SQLiteConnection connection) {
+            StringBuilder strSQL;
 
-            return null;
-        }
+            // Criação da tabela auxiliar Veiculos
+            if (connection.GetSchema("Tables", new[] { null, null, "Veiculo", null }).Rows.Count == 0) {
+                SQLiteCommand command = connection.CreateCommand();
 
-        private static void setVeiculos(Dictionary<int, List<Veiculo>> newVeiculos) {
-            veiculos = newVeiculos;
-        }
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("CREATE TABLE Veiculo (");
+                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" idCliente INTEGER, ");
+                strSQL.AppendLine(" tpVeiculo INTEGER, ");
+                strSQL.AppendLine(" modelo NVARCHAR(30), ");
+                strSQL.AppendLine(" cor NVARCHAR(20), ");
+                strSQL.AppendLine(" ano INTEGER, ");
+                strSQL.AppendLine(" placa NVARCHAR(10), ");
+                strSQL.AppendLine(" cidadePlaca NVARCHAR(30), ");
+                strSQL.AppendLine(" ufPlaca NVARCHAR(30), ");
+                strSQL.AppendLine(" FOREIGN KEY (idCliente) REFERENCES Cliente(id) )");
 
-        private static void setVeiculos(List<Veiculo> newVeiculos, int idCliente) {
-            if (veiculos.ContainsKey(idCliente))
-                veiculos[idCliente] = newVeiculos;
-            else
-                veiculos.Add(idCliente, newVeiculos);
+                command.CommandText = strSQL.ToString();
+                command.ExecuteNonQuery();
+            }
         }
         #endregion
 
         #region CRUD
-        public static bool create(ref Veiculo veiculo, int idCliente) {
-            veiculo.id = 123;
+        public bool create(ref Veiculo newVeiculo) {
+            StringBuilder strSQL = new StringBuilder();
 
-            List<Veiculo> veiculosDoCliente = getVeiculos(idCliente);
-            if (veiculosDoCliente == null) {
-                veiculosDoCliente = new List<Veiculo>();
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("INSERT INTO Veiculo (idCliente, tpVeiculo, modelo, cor, ano, placa, cidadePlaca, ufPlaca) ");
+                strSQL.AppendLine("VALUES (@_idCliente, @tpVeiculo, @modelo, @cor, @ano, @placa, @cidadePlaca, @ufPlaca); ");
+                strSQL.AppendLine("select last_insert_rowid();");
+
+                newVeiculo.id = connection.Query<int>(strSQL.ToString(),
+                    new {
+                        newVeiculo._idCliente,
+                        newVeiculo.tpVeiculo,
+                        newVeiculo.modelo,
+                        newVeiculo.ano,
+                        newVeiculo.cor,
+                        newVeiculo.placa,
+                        newVeiculo.cidadePlaca,
+                        newVeiculo.ufPlaca
+                    }).First();
+
+                return true;
+            } catch (Exception ex) {
+                return false;
+            }
+        }
+
+        public List<Veiculo> read(Cliente cliente) {
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                List<Veiculo> veiculos = connection.Query<Veiculo>("SELECT * FROM Veiculo WHERE idCliente = @id", new { cliente.id }).ToList();
+
+                connection.Close();
+
+                return veiculos;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+
+        public List<Veiculo> read() {
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                List<Veiculo> veiculos = connection.Query<Veiculo>("SELECT * FROM Veiculo").ToList();
+
+                connection.Close();
+
+                return veiculos;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+
+        public Veiculo read(int idVeiculo) {
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                Veiculo veiculo = connection.Query<Veiculo>("SELECT * FROM Veiculo WHERE id = @idVeiculo",
+                    new {
+                        idVeiculo
+                    }).First();
+
+                connection.Close();
+
+                return veiculo;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+
+        public bool update(Veiculo newVeiculo) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("UPDATE   Veiculo ");
+                strSQL.AppendLine("SET      tpVeiculo = @tpVeiculo, ");
+                strSQL.AppendLine("         modelo = @modelo, ");
+                strSQL.AppendLine("         cor = @cor, ");
+                strSQL.AppendLine("         ano = @ano, ");
+                strSQL.AppendLine("         placa = @placa, ");
+                strSQL.AppendLine("         cidadePlaca = @cidadePlaca, ");
+                strSQL.AppendLine("         ufPlaca = @ufPlaca ");
+                strSQL.AppendLine("WHERE    id = @id AND idCliente = @_idCliente");
+
+                connection.Query(strSQL.ToString(), new {
+                    newVeiculo.tpVeiculo,
+                    newVeiculo.modelo,
+                    newVeiculo.cor,
+                    newVeiculo.ano,
+                    newVeiculo.placa,
+                    newVeiculo.cidadePlaca,
+                    newVeiculo.ufPlaca,
+                    newVeiculo.id,
+                    newVeiculo._idCliente
+                });
+            } catch (Exception ex) {
+                return false;
             }
 
-            veiculosDoCliente.Add(veiculo);
-
-            setVeiculos(veiculosDoCliente, idCliente);
             return true;
         }
 
-        public static List<Veiculo> read(int idCliente){
-            return getVeiculos(idCliente);
-        }
+        public bool delete(Veiculo veiculo) {
+            StringBuilder strSQL = new StringBuilder();
 
-        public static Veiculo read(int idCliente, int idVeiculo) {
-            return read(idCliente).Find(veiculoAEncontrar => veiculoAEncontrar.id == idVeiculo);
-        }
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
 
-        public static void update(Dictionary<int, List<Veiculo>> newVeiculos) {
-            setVeiculos(newVeiculos);
-        }
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("DELETE FROM Veiculo");
+                strSQL.AppendLine("WHERE id = @id");
 
-        public static bool update(int idCliente, Veiculo newVeiculo) {
-            Veiculo veiculo = read(idCliente, newVeiculo.id);
-            veiculo = newVeiculo;
-
-            int indexVeiculo = veiculos[idCliente].FindIndex(veiculoAEncontrar => veiculoAEncontrar.id == newVeiculo.id);
-            veiculos[idCliente][indexVeiculo] = newVeiculo;
+                connection.Query(strSQL.ToString(),
+                    new {
+                        veiculo.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
 
             return true;
         }
 
-        public static bool delete(int idCliente) {
-            if (!veiculos.ContainsKey(idCliente))
+        public bool delete(int idCliente) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("DELETE FROM Veiculo");
+                strSQL.AppendLine("WHERE idCliente = @idCliente");
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        idCliente
+                    }).First();
+            } catch (Exception ex) {
                 return false;
+            }
 
-            veiculos.Remove(idCliente);
-            return true;
-        }
-
-        public static bool delete(int idCliente, Veiculo veiculo) {
-            if (!veiculos.ContainsKey(idCliente))
-                return false;
-
-            if (veiculos[idCliente].FindIndex(veiculoAEncontrar => veiculoAEncontrar.id == veiculo.id) == -1)
-                return false;
-
-            List<Veiculo> veiculosDoCliente = getVeiculos(idCliente);
-            veiculosDoCliente.Remove(veiculo);
-
-            setVeiculos(veiculosDoCliente, idCliente);
             return true;
         }
         #endregion

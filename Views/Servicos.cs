@@ -56,10 +56,10 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            servicos = ServicoRepositorio.read();
+            servicos = ServicoRepositorio.Instance.read();
             servicos_view = new List<Servico>(servicos);
 
-            unidades = UnidadeRepositorio.read();
+            unidades = UnidadeRepositorio.Instance.read();
             carregaComboBox();
         }
         #endregion
@@ -139,7 +139,7 @@ namespace SistemaGuincho.Views {
             // Verifica se vai inserir um novo registro ou então salvá-lo
             if (windowMode == Util.WindowMode.ModoDeInsercao) {
 
-                if (ServicoRepositorio.create(ref newServico)) {
+                if (ServicoRepositorio.Instance.create(ref newServico)) {
                     getFromRepositorio();
                     btnUltimo_Click(null, null);
                     refreshDataGridView();
@@ -150,7 +150,7 @@ namespace SistemaGuincho.Views {
             } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
                 newServico.id = servicos_view[index].id;
 
-                if (ServicoRepositorio.update(newServico)) {
+                if (ServicoRepositorio.Instance.update(newServico)) {
                     getFromRepositorio();
                     refreshDataGridView();
                 }
@@ -167,7 +167,7 @@ namespace SistemaGuincho.Views {
             if (MessageBox.Show("Confirma a deleção do registro ?" +
                     Environment.NewLine + Environment.NewLine +
                     servicos_view[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                ServicoRepositorio.delete(servicos_view[index]);
+                ServicoRepositorio.Instance.delete(servicos_view[index]);
 
                 getFromRepositorio();
                 refreshDataGridView();

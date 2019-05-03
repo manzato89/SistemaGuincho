@@ -7,37 +7,53 @@ using SistemaGuincho.Model;
 using SistemaGuincho.Repositorio;
 
 namespace SistemaGuincho.Servicos {
-    public static class ClienteServicos {
+    public class ClienteServicos {
+
+        #region Implementação Singleton
+        private static ClienteServicos instance = null;
+        public static ClienteServicos Instance {
+            get {
+                if (instance == null) {
+                    instance = new ClienteServicos();
+                }
+                return instance;
+            }
+        }
+
+        private ClienteServicos() {
+
+        }
+        #endregion
 
         #region Funcionalidades específicas
         #endregion
 
         #region CRUD
-        public static bool create(ref Cliente Cliente) {
-            return ClienteRepositorio.create(ref Cliente);
+        public bool create(ref Cliente cliente) {
+            return ClienteRepositorio.Instance.create(ref cliente);
         }
 
-        public static List<Cliente> read() {
-            return ClienteRepositorio.read();
+        public List<Cliente> read() {
+            return ClienteRepositorio.Instance.read();
         }
 
-        public static Cliente read(int id) {
-            return ClienteRepositorio.read(id);
+        public Cliente read(int id) {
+            return ClienteRepositorio.Instance.read(id);
         }
 
-        public static bool update(List<Cliente> Clientes) {
-            return ClienteRepositorio.update(Clientes);
+        public bool update(List<Cliente> Clientes) {
+            return ClienteRepositorio.Instance.update(Clientes);
         }
 
-        public static bool update(Cliente Cliente) {
-            return ClienteRepositorio.update(Cliente);
+        public bool update(Cliente Cliente) {
+            return ClienteRepositorio.Instance.update(Cliente);
         }
 
-        public static bool delete(Cliente Cliente) {
-            return ClienteRepositorio.delete(Cliente);
+        public bool delete(Cliente Cliente) {
+            return ClienteRepositorio.Instance.delete(Cliente);
         }
 
-        public static bool delete(int id) {
+        public bool delete(int id) {
             return true;
         }
         #endregion

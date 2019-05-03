@@ -8,7 +8,6 @@ namespace SistemaGuincho.Model {
     public class Orcamento {
 
         public int id { get; set; }
-        public int numOrcamento { get; set; }
         public Cliente cliente { get; set; }
         public List<Servico> servicos { get; set; }
         public List<Servico> custosAdicionais { get; set; }
