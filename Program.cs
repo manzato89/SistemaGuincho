@@ -23,29 +23,36 @@ namespace SistemaGuincho{
             Utilidades.Util.inicializarSistema();
 
             if (Utilidades.Config.debug){
-                // Cria os clientes de teste
-                List<Cliente> clientesDeTeste = Testes.Debug.getClientesDeTeste();
-                for (int iCount = 0; iCount < clientesDeTeste.Count; iCount++) {
-                    Cliente cliente = clientesDeTeste[iCount];
-                    ClienteRepositorio.Instance.create(ref cliente);
-                    clientesDeTeste[iCount] = cliente;
+
+                if (!Utilidades.Config.registrosCriados) {
+
+                    // Cria os clientes de teste
+                    List<Cliente> clientesDeTeste = Testes.Debug.getClientesDeTeste();
+                    for (int iCount = 0; iCount < clientesDeTeste.Count; iCount++) {
+                        Cliente cliente = clientesDeTeste[iCount];
+                        ClienteRepositorio.Instance.create(ref cliente);
+                        clientesDeTeste[iCount] = cliente;
+                    }
+
+                    // Cria as unidades de teste
+                    List<Unidade> unidadesDeTeste = Testes.Debug.getUnidadesDeTeste();
+                    for (int iCount = 0; iCount < unidadesDeTeste.Count; iCount++) {
+                        Unidade unidadeTeste = unidadesDeTeste[iCount];
+                        UnidadeRepositorio.Instance.create(ref unidadeTeste);
+                        unidadesDeTeste[iCount] = unidadeTeste;
+                    }
+
+                    // Cria os serviços de teste
+                    List<Servico> servicosDeTeste = Testes.Debug.getServicosDeTeste();
+                    for (int iCount = 0; iCount < servicosDeTeste.Count; iCount++) {
+                        Servico servicoDeTeste = servicosDeTeste[iCount];
+                        ServicoRepositorio.Instance.create(ref servicoDeTeste);
+                        servicosDeTeste[iCount] = servicoDeTeste;
+                    }
+
+                    // Cria os orçamentos de teste
+                    OrcamentoRepositorio.Instance.update(Testes.Debug.getOrcamentosDeTeste());
                 }
-
-                // Cria os veículos de teste
-                Dictionary<int, List<Veiculo>> veiculosDeTeste = new Dictionary<int, List<Model.Veiculo>>();
-                foreach(Cliente cliente in clientesDeTeste) {
-                    veiculosDeTeste.Add(cliente.id, cliente.veiculos);
-                }
-                //VeiculoRepositorio.Instance.update(veiculosDeTeste);
-
-                // Cria as unidades de teste
-                UnidadeRepositorio.Instance.update(Testes.Debug.getUnidadesDeTeste());
-
-                // Cria os serviços de teste
-                ServicoRepositorio.Instance.update(Testes.Debug.getServicosDeTeste());
-
-                // Cria os orçamentos de teste
-                OrcamentoRepositorio.Instance.update(Testes.Debug.getOrcamentosDeTeste());
             }
 
             Application.Run(new Views.MenuPrincipal());

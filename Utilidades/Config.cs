@@ -12,6 +12,7 @@ namespace SistemaGuincho.Utilidades {
         public static string folderConfig { get; set; }
 
         public static bool debug = true;
+        public static bool registrosCriados = false;
         #endregion
 
         public static void init() {
