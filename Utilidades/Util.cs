@@ -30,8 +30,6 @@ namespace SistemaGuincho.Utilidades {
         private static void inicializarRepositorios() {
             SQLiteDatabase.loadDatabase();
 
-            ServicoRepositorio.Instance.init();
-            UnidadeRepositorio.Instance.init();
             OrcamentoRepositorio.Instance.init();
         }
 

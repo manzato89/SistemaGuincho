@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Repositorio {
@@ -25,62 +26,137 @@ namespace SistemaGuincho.Repositorio {
         }
         #endregion
 
-        private  List<Servico> servicos;
-
         #region Init
-        public  void init() {
-            servicos = new List<Servico>();
-        }
-
         public void createTable(SQLiteConnection connection) {
+            StringBuilder strSQL;
 
+            //Criação da tabela principal
+            if (connection.GetSchema("Tables", new[] { null, null, "Servico", null }).Rows.Count == 0) {
+                SQLiteCommand command = connection.CreateCommand();
+
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("CREATE TABLE Servico (");
+                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" descricao TEXT, ");
+                strSQL.AppendLine(" _idUnidade INTEGER, ");
+                strSQL.AppendLine(" valor REAL) ");
+
+                command.CommandText = strSQL.ToString();
+                command.ExecuteNonQuery();
+            }
         }
 
-        #endregion
-
-        #region Getters e Setters
-        private List<Servico> getServicos() {
-            return servicos;
-        }
-
-        private void setServicos(List<Servico> newServicos) { servicos = newServicos; }
         #endregion
 
         #region CRUD
         public bool create(ref Servico servico) {
-            servico.id = 123;
-            servicos.Add(servico);
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                // Cria o cliente
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("INSERT INTO Servico (descricao, _idUnidade, valor) ");
+                strSQL.AppendLine("VALUES (@descricao, @_idUnidade, @valor); ");
+                strSQL.AppendLine("select last_insert_rowid();");
+
+                int _idUnidade = servico.unidade.id;
+
+                servico.id = connection.Query<int>(strSQL.ToString(),
+                    new {
+                        servico.descricao,
+                        _idUnidade,
+                        servico.valor
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
             return true;
         }
 
         public List<Servico> read(){
-            return getServicos();
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                List<Servico> servicos = connection.Query<Servico>("SELECT * FROM Servico").ToList();
+                foreach(Servico servico in servicos) {
+                    servico.unidade = UnidadeRepositorio.Instance.read(servico._idUnidade);
+                }
+
+                connection.Close();
+
+                return servicos;
+            } catch (Exception ex) {
+                return null;
+            }
         }
 
         public Servico read(int id) {
-            return new Servico();
-        }
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
 
-        public bool update(List<Servico> servicos) {
-            setServicos(servicos);
-            return true;
+                Servico servico = connection.Query<Servico>("SELECT * FROM Servico WHERE id = @id", new { id }).First();
+                servico.unidade = UnidadeRepositorio.Instance.read(servico._idUnidade);
+
+                connection.Close();
+
+                return servico;
+            } catch (Exception ex) {
+                return null;
+            }
         }
 
         public bool update(Servico servico) {
-            int indexServico = servicos.FindIndex(servicoAEncontrar => servicoAEncontrar.id == servico.id);
-            if (indexServico > -1) {
-                servicos[indexServico] = servico;
-                return true;
-            }
-            return false;
-        }
+            StringBuilder strSQL = new StringBuilder();
 
-        public bool delete(Servico servico) {
-            servicos.RemoveAt(servicos.FindIndex(servicoADeletar => servicoADeletar.id == servico.id));
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("UPDATE   Servico ");
+                strSQL.AppendLine("SET      descricao = @descricao, ");
+                strSQL.AppendLine("         _idUnidade = @_idUnidade, ");
+                strSQL.AppendLine("         valor = @valor ");
+                strSQL.AppendLine("WHERE    id = @id");
+
+                int _idUnidade = servico.unidade.id;
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        servico.descricao,
+                        _idUnidade,
+                        servico.valor,
+                        servico.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
             return true;
         }
 
-        public bool delete(int id) {
+        public bool delete(Servico servico) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("DELETE FROM Servico");
+                strSQL.AppendLine("WHERE id = @id");
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        servico.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
             return true;
         }
         #endregion

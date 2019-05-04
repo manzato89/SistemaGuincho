@@ -91,6 +91,8 @@
     <Compile Include="Repositorio\VeiculoRepositorio.cs" />
     <Compile Include="Repositorio\ClienteRepositorio.cs" />
     <Compile Include="Services\ClienteServicos.cs" />
+    <Compile Include="Services\UnidadeServicos.cs" />
+    <Compile Include="Services\ServicoServicos.cs" />
     <Compile Include="Services\VeiculoServicos.cs" />
     <Compile Include="Services\OrcamentoServicos.cs" />
     <Compile Include="Testes\Debug.cs" />

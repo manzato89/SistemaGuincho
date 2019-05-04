@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Repositorio {
@@ -25,61 +26,125 @@ namespace SistemaGuincho.Repositorio {
         }
         #endregion
 
-        private List<Unidade> Unidades;
-
         #region Init
-        public void init() {
-            Unidades = new List<Unidade>();
-        }
-
         public void createTable(SQLiteConnection connection) {
+            StringBuilder strSQL;
 
+            //Criação da tabela principal
+            if (connection.GetSchema("Tables", new[] { null, null, "Unidade", null }).Rows.Count == 0) {
+                SQLiteCommand command = connection.CreateCommand();
+
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("CREATE TABLE Unidade (");
+                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" codigo TEXT, ");
+                strSQL.AppendLine(" descricao TEXT) ");
+
+                command.CommandText = strSQL.ToString();
+                command.ExecuteNonQuery();
+            }
         }
-        #endregion
 
-        #region Getters e Setters
-        private List<Unidade> getUnidades() {
-            return Unidades;
-        }
-
-        private void setUnidades(List<Unidade> newUnidades) { Unidades = newUnidades; }
         #endregion
 
         #region CRUD
-        public bool create(ref Unidade Unidade) {
-            Unidade.id = 123;
-            Unidades.Add(Unidade);
+        public bool create(ref Unidade unidade) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                // Cria o cliente
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("INSERT INTO Unidade (codigo, descricao) ");
+                strSQL.AppendLine("VALUES (@codigo, @descricao); ");
+                strSQL.AppendLine("select last_insert_rowid();");
+
+                unidade.id = connection.Query<int>(strSQL.ToString(),
+                    new {
+                        unidade.codigo,
+                        unidade.descricao
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
             return true;
         }
 
-        public List<Unidade> read(){
-            return getUnidades();
+        public List<Unidade> read() {
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                List<Unidade> unidades = connection.Query<Unidade>("SELECT * FROM Unidade").ToList();
+
+                connection.Close();
+
+                return unidades;
+            } catch (Exception ex) {
+                return null;
+            }
         }
 
         public Unidade read(int id) {
-            return new Unidade();
-        }
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
 
-        public bool update(List<Unidade> Unidades) {
-            setUnidades(Unidades);
-            return true;
-        }
+                Unidade unidade = connection.Query<Unidade>("SELECT * FROM Unidade WHERE id = @id", new { id }).First();
 
-        public bool update(Unidade Unidade) {
-            int indexUnidade = Unidades.FindIndex(UnidadeAEncontrar => UnidadeAEncontrar.id == Unidade.id);
-            if (indexUnidade > -1) {
-                Unidades[indexUnidade] = Unidade;
-                return true;
+                connection.Close();
+
+                return unidade;
+            } catch (Exception ex) {
+                return null;
             }
-            return false;
         }
 
-        public bool delete(Unidade Unidade) {
-            Unidades.RemoveAt(Unidades.FindIndex(UnidadeADeletar => UnidadeADeletar.id == Unidade.id));
+        public bool update(Unidade unidade) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("UPDATE   Unidade ");
+                strSQL.AppendLine("SET      codigo = @codigo, ");
+                strSQL.AppendLine("         descricao = @descricao ");
+                strSQL.AppendLine("WHERE    id = @id");
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        unidade.codigo,
+                        unidade.descricao,
+                        unidade.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
             return true;
         }
 
-        public bool delete(int id) {
+        public bool delete(Unidade unidade) {
+            StringBuilder strSQL = new StringBuilder();
+
+            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+
+            try {
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("DELETE FROM Unidade");
+                strSQL.AppendLine("WHERE id = @id");
+
+                connection.Query(strSQL.ToString(),
+                    new {
+                        unidade.id
+                    }).First();
+            } catch (Exception ex) {
+                return false;
+            }
+
             return true;
         }
         #endregion

@@ -14,6 +14,7 @@ namespace SistemaGuincho.Model {
 
         public int _quantidade { get; set; }
         public string _total { get; set; }
+        public int _idUnidade { get; set; }
 
         public Servico() { }
 
@@ -23,6 +24,7 @@ namespace SistemaGuincho.Model {
             this.unidade = unidade;
 
             this._quantidade = 1;
+            this._idUnidade = unidade.id;
         }
 
         public override string ToString() {

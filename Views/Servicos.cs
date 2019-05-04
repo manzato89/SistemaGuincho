@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaGuincho.Model;
 using SistemaGuincho.Utilidades;
-using SistemaGuincho.Repositorio;
+using SistemaGuincho.Servicos;
 
 namespace SistemaGuincho.Views {
     public partial class Servicos : Form{
@@ -56,10 +56,10 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            servicos = ServicoRepositorio.Instance.read();
+            servicos = ServicoServicos.Instance.read();
             servicos_view = new List<Servico>(servicos);
 
-            unidades = UnidadeRepositorio.Instance.read();
+            unidades = UnidadeServicos.Instance.read();
             carregaComboBox();
         }
         #endregion
@@ -139,7 +139,7 @@ namespace SistemaGuincho.Views {
             // Verifica se vai inserir um novo registro ou então salvá-lo
             if (windowMode == Util.WindowMode.ModoDeInsercao) {
 
-                if (ServicoRepositorio.Instance.create(ref newServico)) {
+                if (ServicoServicos.Instance.create(ref newServico)) {
                     getFromRepositorio();
                     btnUltimo_Click(null, null);
                     refreshDataGridView();
@@ -150,7 +150,7 @@ namespace SistemaGuincho.Views {
             } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
                 newServico.id = servicos_view[index].id;
 
-                if (ServicoRepositorio.Instance.update(newServico)) {
+                if (ServicoServicos.Instance.update(newServico)) {
                     getFromRepositorio();
                     refreshDataGridView();
                 }
@@ -167,7 +167,7 @@ namespace SistemaGuincho.Views {
             if (MessageBox.Show("Confirma a deleção do registro ?" +
                     Environment.NewLine + Environment.NewLine +
                     servicos_view[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                ServicoRepositorio.Instance.delete(servicos_view[index]);
+                ServicoServicos.Instance.delete(servicos_view[index]);
 
                 getFromRepositorio();
                 refreshDataGridView();
@@ -226,6 +226,11 @@ namespace SistemaGuincho.Views {
             // Preenche os nomes das colunas
             for (var iCount = 0; iCount < dgvServicos.Columns.Count; iCount++) {
                 switch (dgvServicos.Columns[iCount].DataPropertyName) {
+                    case nameof(Servico._total):
+                    case nameof(Servico._quantidade):
+                    case nameof(Servico._idUnidade):
+                        dgvServicos.Columns[iCount].Visible = false;
+                        break;
                     case nameof(Servico.id):
                         dgvServicos.Columns[iCount].DisplayIndex = 0;
                         dgvServicos.Columns[iCount].HeaderText = "ID";

@@ -17,17 +17,20 @@ namespace SistemaGuincho.Repositorio {
             return new SQLiteConnection("Data Source=" + SQLiteDatabaseFile);
         }
 
+        public static void loadDatabase() {
+            createSQLiteDatabase();
+            createTables();
+        }
+
         private static void createSQLiteDatabase() {
             string pathDatabase = GerenciadorArquivos.currentPath + "\\" + Config.folderConfig + "\\" + Config.fileNameDB;
 
             if (!GerenciadorArquivos.fileExists(pathDatabase)) {
                 SQLiteConnection.CreateFile(pathDatabase);
+            } else {
+                if (Config.debug && !Config.registrosCriados)
+                    Config.registrosCriados = true;
             }
-        }
-
-        public static void loadDatabase() {
-            createSQLiteDatabase();
-            createTables();
         }
 
         public static void createTables() {
