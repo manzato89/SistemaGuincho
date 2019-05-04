@@ -40,6 +40,7 @@
             this.btn_Orcamento = new System.Windows.Forms.Button();
             this.btn_Cliente = new System.Windows.Forms.Button();
             this.btn_CadServico = new System.Windows.Forms.Button();
+            this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             this.vendasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(75, 374);
+            this.menuStrip1.Size = new System.Drawing.Size(123, 374);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,23 +63,24 @@
             // 
             this.castrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.serviçosToolStripMenuItem,
-            this.categoriasToolStripMenuItem});
+            this.categoriasToolStripMenuItem,
+            this.unidadesToolStripMenuItem});
             this.castrosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.castrosToolStripMenuItem.Name = "castrosToolStripMenuItem";
-            this.castrosToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
+            this.castrosToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.castrosToolStripMenuItem.Text = "Cadastros";
             // 
             // serviçosToolStripMenuItem
             // 
             this.serviçosToolStripMenuItem.Name = "serviçosToolStripMenuItem";
-            this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.serviçosToolStripMenuItem.Text = "Serviços";
             this.serviçosToolStripMenuItem.Click += new System.EventHandler(this.serviçosToolStripMenuItem_Click);
             // 
             // categoriasToolStripMenuItem
             // 
             this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
-            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.categoriasToolStripMenuItem.Text = "Categorias";
             this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
             // 
@@ -88,7 +90,7 @@
             this.serviçosCategoriasToolStripMenuItem});
             this.consultasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.consultasToolStripMenuItem.Text = "Consultas";
             // 
             // serviçosCategoriasToolStripMenuItem
@@ -104,7 +106,7 @@
             this.ordemDeServiçoToolStripMenuItem});
             this.vendasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
-            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(68, 19);
+            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
             this.vendasToolStripMenuItem.Text = "Pedidos";
             // 
             // ordemDeServiçoToolStripMenuItem
@@ -190,6 +192,13 @@
             this.btn_CadServico.UseVisualStyleBackColor = false;
             this.btn_CadServico.Click += new System.EventHandler(this.btn_CadServico_Click);
             // 
+            // unidadesToolStripMenuItem
+            // 
+            this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
+            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.unidadesToolStripMenuItem.Text = "Unidades";
+            this.unidadesToolStripMenuItem.Click += new System.EventHandler(this.unidadesToolStripMenuItem_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +235,7 @@
         private System.Windows.Forms.Button btn_Cliente;
         private System.Windows.Forms.Button btn_Orcamento;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem unidadesToolStripMenuItem;
     }
 }
 

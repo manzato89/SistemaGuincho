@@ -119,7 +119,7 @@ namespace SistemaGuincho.Repositorio {
                         unidade.codigo,
                         unidade.descricao,
                         unidade.id
-                    }).First();
+                    });
             } catch (Exception ex) {
                 return false;
             }

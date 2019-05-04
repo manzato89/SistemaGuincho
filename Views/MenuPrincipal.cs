@@ -30,6 +30,10 @@ namespace SistemaGuincho.Views{
             new Views.Servicos().ShowDialog();
         }
 
+        private void unidadesToolStripMenuItem_Click(object sender, EventArgs e) {
+            new Views.Unidades().ShowDialog();
+        }
+
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e){
             Frm_Categoria frm = new Frm_Categoria();
             frm.Show();

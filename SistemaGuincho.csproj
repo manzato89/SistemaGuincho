@@ -123,6 +123,12 @@
     <Compile Include="Views\Orcamento.Designer.cs">
       <DependentUpon>Orcamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Unidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Unidades.Designer.cs">
+      <DependentUpon>Unidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Servicos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Orcamento.resx">
       <DependentUpon>Orcamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Unidades.resx">
+      <DependentUpon>Unidades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Servicos.resx">
       <DependentUpon>Servicos.cs</DependentUpon>
