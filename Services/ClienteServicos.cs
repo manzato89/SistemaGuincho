@@ -41,10 +41,6 @@ namespace SistemaGuincho.Servicos {
             return ClienteRepositorio.Instance.read(id);
         }
 
-        public bool update(List<Cliente> Clientes) {
-            return ClienteRepositorio.Instance.update(Clientes);
-        }
-
         public bool update(Cliente Cliente) {
             return ClienteRepositorio.Instance.update(Cliente);
         }

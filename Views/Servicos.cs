@@ -229,6 +229,7 @@ namespace SistemaGuincho.Views {
                     case nameof(Servico._total):
                     case nameof(Servico._quantidade):
                     case nameof(Servico._idUnidade):
+                    case nameof(Servico._idServicoOrcamento):
                         dgvServicos.Columns[iCount].Visible = false;
                         break;
                     case nameof(Servico.id):

@@ -16,6 +16,9 @@ namespace SistemaGuincho.Model {
         public DateTime dataCriacao { get; set; }
         public DateTime? dataEncerramento { get; set; }
 
+        public int _idCliente { get; set; }
+        public int _idVeiculo { get; set; }
+
         public Orcamento() {
             dataCriacao = DateTime.Now;
             dataEncerramento = null;
@@ -30,6 +33,13 @@ namespace SistemaGuincho.Model {
 
             dataCriacao = DateTime.Now;
             dataEncerramento = null;
+
+            if (cliente != null)
+                _idCliente = cliente.id;
+
+            if (veiculo != null)
+                _idVeiculo = veiculo.id;
+
         }
 
         public float valorTotal() {

@@ -46,6 +46,10 @@ namespace SistemaGuincho.Servicos {
             return OrcamentoRepositorio.Instance.create(ref orcamento);
         }
 
+        public static bool createServicosInOrcamento(Orcamento orcamento, ref Servico servico, Servico.TipoServico tpServico) {
+            return OrcamentoServicoRepositorio.Instance.criaServicosNoOrcamento(orcamento, ref servico, tpServico);
+        }
+
         public static List<Orcamento> read(){
             return OrcamentoRepositorio.Instance.read();
         }
@@ -54,12 +58,12 @@ namespace SistemaGuincho.Servicos {
             return OrcamentoRepositorio.Instance.read(id);
         }
 
-        public static bool update(List<Orcamento> orcamentos) {
-            return OrcamentoRepositorio.Instance.update(orcamentos);
-        }
-
         public static bool update(Orcamento orcamento) {
             return OrcamentoRepositorio.Instance.update(orcamento);
+        }
+
+        public static bool updateServicosInOrcamento(Servico servico, Servico.TipoServico tpServico) {
+            return OrcamentoServicoRepositorio.Instance.update(servico, tpServico);
         }
 
         public static bool delete(Orcamento orcamento) {

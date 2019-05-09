@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Repositorio\EnderecoRepositorio.cs" />
     <Compile Include="Repositorio\OrcamentoRepositorio.cs" />
+    <Compile Include="Repositorio\OrcamentoServicoRepositorio.cs" />
     <Compile Include="Repositorio\SQLiteDatabase.cs" />
     <Compile Include="Repositorio\UnidadeRepositorio.cs" />
     <Compile Include="Repositorio\ServicoRepositorio.cs" />

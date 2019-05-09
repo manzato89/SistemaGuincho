@@ -67,12 +67,18 @@ namespace SistemaGuincho.Views {
             dgvOrcamentos.DataSource = orcamentos_view;
 
             dgvOrcamentos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "Valor_custom" });
+            dgvOrcamentos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "DataCriacao_custom" });
+            dgvOrcamentos.Columns.Add(new DataGridViewColumn(new DataGridViewTextBoxCell()) { DataPropertyName = "DataEncerramento_custom" });
 
             // Preenche os nomes das colunas
             for (var iCount = 0; iCount < dgvOrcamentos.Columns.Count; iCount++) {
                 switch (dgvOrcamentos.Columns[iCount].DataPropertyName) {
                     case nameof(Orcamento.custosAdicionais):
                     case nameof(Orcamento.servicos):
+                    case nameof(Orcamento.dataCriacao):
+                    case nameof(Orcamento.dataEncerramento):
+                    case nameof(Orcamento._idCliente):
+                    case nameof(Orcamento._idVeiculo):
                         dgvOrcamentos.Columns[iCount].Visible = false;
                         break;
 
@@ -101,13 +107,29 @@ namespace SistemaGuincho.Views {
                         dgvOrcamentos.Columns[iCount].Name = dgvOrcamentos.Columns[iCount].DataPropertyName;
                         dgvOrcamentos.Columns[iCount].DisplayIndex = 3;
                         dgvOrcamentos.Columns[iCount].HeaderText = "Valor";
-                        dgvOrcamentos.Columns[iCount].Width = 175;
+                        dgvOrcamentos.Columns[iCount].Width = 100;
                         dgvOrcamentos.Columns[iCount].ReadOnly = true;
                         break;
 
                     case nameof(Orcamento.fechado):
                         dgvOrcamentos.Columns[iCount].DisplayIndex = 4;
                         dgvOrcamentos.Columns[iCount].HeaderText = "Fechado";
+                        dgvOrcamentos.Columns[iCount].Width = 75;
+                        dgvOrcamentos.Columns[iCount].ReadOnly = true;
+                        break;
+
+                    case "DataCriacao_custom":
+                        dgvOrcamentos.Columns[iCount].Name = dgvOrcamentos.Columns[iCount].DataPropertyName;
+                        dgvOrcamentos.Columns[iCount].DisplayIndex = 5;
+                        dgvOrcamentos.Columns[iCount].HeaderText = "Criação";
+                        dgvOrcamentos.Columns[iCount].Width = 100;
+                        dgvOrcamentos.Columns[iCount].ReadOnly = true;
+                        break;
+
+                    case "DataEncerramento_custom":
+                        dgvOrcamentos.Columns[iCount].Name = dgvOrcamentos.Columns[iCount].DataPropertyName;
+                        dgvOrcamentos.Columns[iCount].DisplayIndex = 6;
+                        dgvOrcamentos.Columns[iCount].HeaderText = "Encerramento";
                         dgvOrcamentos.Columns[iCount].Width = 100;
                         dgvOrcamentos.Columns[iCount].ReadOnly = true;
                         break;
@@ -116,8 +138,9 @@ namespace SistemaGuincho.Views {
 
             //Preenche os campos que vieram sem preenchimento do data set
             for (var iCount = 0; iCount < dgvOrcamentos.Rows.Count; iCount++) {
-                //Placa (Cidade - Estado)
                 dgvOrcamentos.Rows[iCount].Cells["Valor_custom"].Value = Util.formatValor(orcamentos_view[iCount].valorTotal());
+                dgvOrcamentos.Rows[iCount].Cells["DataCriacao_custom"].Value = orcamentos_view[iCount].dataCriacao.ToString("dd/MM/yyyy");
+                dgvOrcamentos.Rows[iCount].Cells["DataEncerramento_custom"].Value = orcamentos_view[iCount].dataEncerramento?.ToString("dd/MM/yyyy");
             }
 
             dgvOrcamentos.Refresh();

@@ -29,8 +29,6 @@ namespace SistemaGuincho.Utilidades {
 
         private static void inicializarRepositorios() {
             SQLiteDatabase.loadDatabase();
-
-            OrcamentoRepositorio.Instance.init();
         }
 
         public static String formatValor(float valor) {

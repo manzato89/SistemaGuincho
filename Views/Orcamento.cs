@@ -162,6 +162,12 @@ namespace SistemaGuincho.Views {
                     newOrcamento.custosAdicionais = orcamentos[index].custosAdicionais;
                     newOrcamento.dataCriacao = orcamentos[index].dataCriacao;
 
+                    if (cliente != null)
+                        newOrcamento._idCliente = orcamentos[index].cliente.id;
+
+                    if (veiculo != null)
+                        newOrcamento._idVeiculo = orcamentos[index].veiculo.id;
+
                     if (OrcamentoServicos.update(newOrcamento)) {
                         getFromRepositorio();
                     }
@@ -286,37 +292,39 @@ namespace SistemaGuincho.Views {
                 for (var iCount = 0; iCount < dataGridView.Columns.Count; iCount++) {
                     switch (dataGridView.Columns[iCount].DataPropertyName) {
                         case nameof(Servico.id):
+                        case nameof(Servico._idServicoOrcamento):
+                        case nameof(Servico._idUnidade):
                             dataGridView.Columns[iCount].Visible = false;
                             break;
 
                         case nameof(Servico.descricao):
-                            dataGridView.Columns[iCount].DisplayIndex = 0;
+                            dataGridView.Columns[iCount].DisplayIndex = iCount;
                             dataGridView.Columns[iCount].HeaderText = "Descrição";
                             dataGridView.Columns[iCount].Width = 240;
                             dataGridView.Columns[iCount].ReadOnly = true;
                             break;
 
                         case nameof(Servico.unidade):
-                            dataGridView.Columns[iCount].DisplayIndex = 1;
+                            dataGridView.Columns[iCount].DisplayIndex = iCount;
                             dataGridView.Columns[iCount].HeaderText = "Unidade";
                             dataGridView.Columns[iCount].Width = 100;
                             dataGridView.Columns[iCount].ReadOnly = true;
                             break;
 
                         case nameof(Servico._quantidade):
-                            dataGridView.Columns[iCount].DisplayIndex = 2;
+                            dataGridView.Columns[iCount].DisplayIndex = iCount;
                             dataGridView.Columns[iCount].HeaderText = "Quantidade";
                             dataGridView.Columns[iCount].Width = 100;
                             break;
 
                         case nameof(Servico.valor):
-                            dataGridView.Columns[iCount].DisplayIndex = 3;
-                            dataGridView.Columns[iCount].HeaderText = "Valor un.";
+                            dataGridView.Columns[iCount].DisplayIndex = iCount;
+                            dataGridView.Columns[iCount].HeaderText = "Valor unitário";
                             dataGridView.Columns[iCount].Width = 100;
                             break;
 
                         case nameof(Servico._total):
-                            dataGridView.Columns[iCount].DisplayIndex = 4;
+                            dataGridView.Columns[iCount].DisplayIndex = iCount;
                             dataGridView.Columns[iCount].HeaderText = "Total";
                             dataGridView.Columns[iCount].Width = 115;
                             dataGridView.Columns[iCount].ReadOnly = true;
@@ -486,7 +494,17 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Específico
         private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-            calculaEAtualizaInformacoesServicos();
+            DataGridView dgv = (DataGridView)sender;
+            Servico servico = null;
+
+            if (e.RowIndex > -1) {
+                if (dgv.Name.Equals(nameof(dgvServicos)))
+                    servico = orcamentos[index].servicos[e.RowIndex];
+                else if (dgv.Name.Equals(nameof(dgvCustosAdicionais)))
+                    servico = orcamentos[index].custosAdicionais[e.RowIndex];
+            }
+
+            calculaEAtualizaInformacoesServicos(dgv, servico);
 
             clearDataGridView(dgvServicos);
             clearDataGridView(dgvCustosAdicionais);
@@ -497,6 +515,34 @@ namespace SistemaGuincho.Views {
 
         private void calculaEAtualizaInformacoesServicos() {
             txtValorTotal.Text = Util.formatValor(orcamentos[index].valorTotal());
+        }
+
+        private void calculaEAtualizaInformacoesServicos(DataGridView dgv, Servico servico) {
+            txtValorTotal.Text = Util.formatValor(orcamentos[index].valorTotal());
+
+            if (dgv.Name.Equals(nameof(dgvServicos)))
+                gravarServico_Custo(servico, Servico.TipoServico.Servico);
+            else if (dgv.Name.Equals(nameof(dgvCustosAdicionais)))
+                gravarServico_Custo(servico, Servico.TipoServico.CustoAdicional);
+
+        }
+
+        private void criarServico_Custo(Servico servico, Servico.TipoServico tpServico) {
+            if (tpServico == Servico.TipoServico.Servico) {
+                OrcamentoServicos.createServicosInOrcamento(orcamentos[index], ref servico, Servico.TipoServico.Servico);
+                orcamentos[index].servicos[orcamentos[index].servicos.Count - 1] = servico;
+            } else if (tpServico == Servico.TipoServico.CustoAdicional) {
+                OrcamentoServicos.createServicosInOrcamento(orcamentos[index], ref servico, Servico.TipoServico.CustoAdicional);
+                orcamentos[index].custosAdicionais[orcamentos[index].custosAdicionais.Count - 1] = servico;
+            }
+        }
+
+        private void gravarServico_Custo(Servico servico, Servico.TipoServico tpServico) {
+            if (tpServico == Servico.TipoServico.Servico) {
+                OrcamentoServicos.updateServicosInOrcamento(servico, Servico.TipoServico.Servico);
+            } else if (tpServico == Servico.TipoServico.CustoAdicional) {
+                OrcamentoServicos.updateServicosInOrcamento(servico, Servico.TipoServico.CustoAdicional);
+            }
         }
 
         private void btnPesquisarCliente_Click(object sender, EventArgs e) {
@@ -541,13 +587,18 @@ namespace SistemaGuincho.Views {
             ConsultaServico formChamador = (ConsultaServico)sender;
 
             Servico servicoSelecionado = consultaServicoForm.servicoSelecionado;
+            Servico.TipoServico tpServico = 0;
 
             if (servicoSelecionado != null) {
-                if (formChamador.Tag.Equals(nameof(Orcamento.servicos)))
+                if (formChamador.Tag.Equals(nameof(Orcamento.servicos))) {
                     orcamentos[index].servicos.Add(servicoSelecionado);
-                else if (formChamador.Tag.Equals(nameof(Orcamento.custosAdicionais)))
+                    tpServico = Servico.TipoServico.Servico;
+                } else if (formChamador.Tag.Equals(nameof(Orcamento.custosAdicionais))) {
                     orcamentos[index].custosAdicionais.Add(servicoSelecionado);
+                    tpServico = Servico.TipoServico.CustoAdicional;
+                }
 
+                criarServico_Custo(servicoSelecionado, tpServico);
                 btnGravar_Click(null, null);
             } else {
                 btnCancelar_Click(null, null);

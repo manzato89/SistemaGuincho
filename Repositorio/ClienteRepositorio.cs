@@ -102,7 +102,6 @@ namespace SistemaGuincho.Repositorio {
             }
 
             return true;
-
         }
 
         public List<Cliente> read(){
@@ -141,10 +140,6 @@ namespace SistemaGuincho.Repositorio {
             }
         }
         
-        public bool update(List<Cliente> clientes) {
-            throw new NotImplementedException();
-        }
-
         public bool update(Cliente cliente) {
             StringBuilder strSQL = new StringBuilder();
 

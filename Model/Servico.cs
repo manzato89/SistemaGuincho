@@ -7,16 +7,22 @@ using System.Threading.Tasks;
 namespace SistemaGuincho.Model {
     public class Servico {
 
+        public enum TipoServico {
+            Servico,
+            CustoAdicional
+        };
+
         public int id { get; set; }
         public string descricao { get; set; }
         public Unidade unidade { get; set; }
         public float valor { get; set; }
 
-        public int _quantidade { get; set; }
+        public int _quantidade { get; set; } = 1;
         public string _total { get; set; }
         public int _idUnidade { get; set; }
+        public int _idServicoOrcamento { get; set; } = -1;
 
-        public Servico() { }
+        public Servico() { this._quantidade = 1; }
 
         public Servico(string descricao, float valor, Unidade unidade) {
             this.descricao = descricao;

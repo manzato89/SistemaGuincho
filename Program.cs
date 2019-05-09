@@ -51,7 +51,12 @@ namespace SistemaGuincho{
                     }
 
                     // Cria os orçamentos de teste
-                    OrcamentoRepositorio.Instance.update(Testes.Debug.getOrcamentosDeTeste());
+                    List<Orcamento> orcamentosDeTeste = Testes.Debug.getOrcamentosDeTeste();
+                    for(int iCount = 0; iCount < orcamentosDeTeste.Count; iCount++) {
+                        Orcamento orcamentoDeTeste = orcamentosDeTeste[iCount];
+                        OrcamentoRepositorio.Instance.create(ref orcamentoDeTeste);
+                        orcamentosDeTeste[iCount] = orcamentoDeTeste;
+                    }
                 }
             }
 
