@@ -187,4 +187,13 @@
   <data name="filtro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\filtro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="rotas_maps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rotas_maps.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rotas_qualp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rotas_qualp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rotas_rotasbrasil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rotas_rotasbrasil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

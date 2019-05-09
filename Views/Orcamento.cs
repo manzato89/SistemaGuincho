@@ -629,8 +629,6 @@ namespace SistemaGuincho.Views {
 
         }
 
-        #endregion
-
         private void btnExcluirServico_Click(object sender, EventArgs e) {
             Button btnExclurPressionado = (Button)sender;
 
@@ -652,7 +650,7 @@ namespace SistemaGuincho.Views {
             if (dgv.SelectedCells.Count > 0) {
                 Servico servicoADeletar = listaServicos[dgv.SelectedCells[0].RowIndex];
 
-                if (MessageBox.Show( String.Format("Confirma a deleção do {0}?", nome) +
+                if (MessageBox.Show(String.Format("Confirma a deleção do {0}?", nome) +
                     Environment.NewLine + Environment.NewLine +
                     servicoADeletar.ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 
@@ -716,5 +714,40 @@ namespace SistemaGuincho.Views {
                 }
             }
         }
+
+        private void btnConsultarValorServico_Click(object sender, EventArgs e) {
+            // Cria o menu de contexto
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            ToolStripMenuItem toolStripMenuItem;
+
+            toolStripMenuItem = new ToolStripMenuItem("QualP");
+            toolStripMenuItem.Click += abreLink;
+            toolStripMenuItem.Image = Properties.Resources.rotas_qualp;
+            toolStripMenuItem.Tag = "https://qualp.com.br/";
+            contextMenuStrip.Items.Add(toolStripMenuItem);
+
+            toolStripMenuItem = new ToolStripMenuItem("Rotas Brasil");
+            toolStripMenuItem.Click += abreLink;
+            toolStripMenuItem.Image = Properties.Resources.rotas_rotasbrasil;
+            toolStripMenuItem.Tag = "http://rotasbrasil.com.br/";
+            contextMenuStrip.Items.Add(toolStripMenuItem);
+
+            toolStripMenuItem = new ToolStripMenuItem("Google Maps");
+            toolStripMenuItem.Click += abreLink;
+            toolStripMenuItem.Image = Properties.Resources.rotas_maps;
+            toolStripMenuItem.Tag = "https://www.google.com.br/maps/";
+            contextMenuStrip.Items.Add(toolStripMenuItem);
+
+            // Exibe o menu de contexto
+            contextMenuStrip.Show(this, this.PointToClient(MousePosition));
+        }
+
+        private void abreLink(object _sender, EventArgs e) {
+            ToolStripMenuItem sender = (ToolStripMenuItem)_sender;
+            String url = sender.Tag.ToString();
+            System.Diagnostics.Process.Start(url);
+        }
+        
+        #endregion
     }
 }

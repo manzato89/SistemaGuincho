@@ -23,46 +23,47 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblNumOrcamento = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblVeiculo = new System.Windows.Forms.Label();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
-            this.btnPesquisarCliente = new System.Windows.Forms.Button();
             this.cboVeiculo = new System.Windows.Forms.ComboBox();
             this.txtCdCliente = new System.Windows.Forms.TextBox();
             this.dgvServicos = new System.Windows.Forms.DataGridView();
             this.grpServicos = new System.Windows.Forms.GroupBox();
-            this.btnAdicionarServico = new System.Windows.Forms.Button();
-            this.btnExcluirServico = new System.Windows.Forms.Button();
             this.grpCustosAdicionais = new System.Windows.Forms.GroupBox();
             this.dgvCustosAdicionais = new System.Windows.Forms.DataGridView();
-            this.btnAdicionarCustoAdicional = new System.Windows.Forms.Button();
-            this.btnExcluirCustoAdicional = new System.Windows.Forms.Button();
             this.txtValorTotal = new System.Windows.Forms.TextBox();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.txtFaturamento = new System.Windows.Forms.TextBox();
             this.lblFaturamentoGerado = new System.Windows.Forms.Label();
+            this.txtDtCriacao = new System.Windows.Forms.TextBox();
+            this.lblDtGeracao = new System.Windows.Forms.Label();
+            this.txtDtEncerramento = new System.Windows.Forms.TextBox();
+            this.lblDtEncerramento = new System.Windows.Forms.Label();
+            this.btnConsultarValorServico = new System.Windows.Forms.Button();
             this.btnFecharReabrir = new System.Windows.Forms.Button();
+            this.btnAdicionarCustoAdicional = new System.Windows.Forms.Button();
+            this.btnExcluirCustoAdicional = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
+            this.btnAdicionarServico = new System.Windows.Forms.Button();
+            this.btnExcluirServico = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnProximo = new System.Windows.Forms.Button();
             this.btnPrimeiro = new System.Windows.Forms.Button();
             this.btnAtualizar = new System.Windows.Forms.Button();
+            this.btnPesquisarCliente = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
-            this.txtDtCriacao = new System.Windows.Forms.TextBox();
-            this.lblDtGeracao = new System.Windows.Forms.Label();
-            this.txtDtEncerramento = new System.Windows.Forms.TextBox();
-            this.lblDtEncerramento = new System.Windows.Forms.Label();
             this.grpDadosBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).BeginInit();
             this.grpServicos.SuspendLayout();
@@ -135,23 +136,6 @@
             this.grpDadosBasicos.TabStop = false;
             this.grpDadosBasicos.Text = "Dados Básicos";
             // 
-            // btnPesquisarCliente
-            // 
-            this.btnPesquisarCliente.BackColor = System.Drawing.Color.Transparent;
-            this.btnPesquisarCliente.BackgroundImage = global::SistemaGuincho.Properties.Resources.search;
-            this.btnPesquisarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPesquisarCliente.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnPesquisarCliente.FlatAppearance.BorderSize = 0;
-            this.btnPesquisarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPesquisarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPesquisarCliente.ForeColor = System.Drawing.Color.Transparent;
-            this.btnPesquisarCliente.Location = new System.Drawing.Point(481, 28);
-            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
-            this.btnPesquisarCliente.Size = new System.Drawing.Size(32, 21);
-            this.btnPesquisarCliente.TabIndex = 51;
-            this.btnPesquisarCliente.UseVisualStyleBackColor = false;
-            this.btnPesquisarCliente.Click += new System.EventHandler(this.btnPesquisarCliente_Click);
-            // 
             // cboVeiculo
             // 
             this.cboVeiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -178,23 +162,23 @@
             this.dgvServicos.AllowUserToDeleteRows = false;
             this.dgvServicos.AllowUserToOrderColumns = true;
             this.dgvServicos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle41.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvServicos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvServicos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvServicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvServicos.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvServicos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvServicos.Location = new System.Drawing.Point(6, 54);
             this.dgvServicos.MultiSelect = false;
             this.dgvServicos.Name = "dgvServicos";
@@ -215,38 +199,6 @@
             this.grpServicos.TabStop = false;
             this.grpServicos.Text = "Serviços";
             // 
-            // btnAdicionarServico
-            // 
-            this.btnAdicionarServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAdicionarServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAdicionarServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdicionarServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdicionarServico.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdicionarServico.Image = global::SistemaGuincho.Properties.Resources.sign_add;
-            this.btnAdicionarServico.Location = new System.Drawing.Point(6, 19);
-            this.btnAdicionarServico.Name = "btnAdicionarServico";
-            this.btnAdicionarServico.Size = new System.Drawing.Size(49, 29);
-            this.btnAdicionarServico.TabIndex = 43;
-            this.btnAdicionarServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdicionarServico.UseVisualStyleBackColor = false;
-            this.btnAdicionarServico.Click += new System.EventHandler(this.btnAdicionarServico_Click);
-            // 
-            // btnExcluirServico
-            // 
-            this.btnExcluirServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnExcluirServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnExcluirServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluirServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluirServico.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExcluirServico.Image = global::SistemaGuincho.Properties.Resources.trashcan;
-            this.btnExcluirServico.Location = new System.Drawing.Point(54, 19);
-            this.btnExcluirServico.Name = "btnExcluirServico";
-            this.btnExcluirServico.Size = new System.Drawing.Size(49, 29);
-            this.btnExcluirServico.TabIndex = 45;
-            this.btnExcluirServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExcluirServico.UseVisualStyleBackColor = false;
-            this.btnExcluirServico.Click += new System.EventHandler(this.btnExcluirServico_Click);
-            // 
             // grpCustosAdicionais
             // 
             this.grpCustosAdicionais.Controls.Add(this.dgvCustosAdicionais);
@@ -265,23 +217,23 @@
             this.dgvCustosAdicionais.AllowUserToDeleteRows = false;
             this.dgvCustosAdicionais.AllowUserToOrderColumns = true;
             this.dgvCustosAdicionais.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle43.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCustosAdicionais.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCustosAdicionais.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCustosAdicionais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle44.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            dataGridViewCellStyle44.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle44.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle44.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCustosAdicionais.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCustosAdicionais.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCustosAdicionais.Location = new System.Drawing.Point(6, 54);
             this.dgvCustosAdicionais.MultiSelect = false;
             this.dgvCustosAdicionais.Name = "dgvCustosAdicionais";
@@ -289,38 +241,6 @@
             this.dgvCustosAdicionais.TabIndex = 36;
             this.dgvCustosAdicionais.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
             this.dgvCustosAdicionais.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView_CellValidating);
-            // 
-            // btnAdicionarCustoAdicional
-            // 
-            this.btnAdicionarCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAdicionarCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAdicionarCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdicionarCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdicionarCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdicionarCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.sign_add;
-            this.btnAdicionarCustoAdicional.Location = new System.Drawing.Point(6, 19);
-            this.btnAdicionarCustoAdicional.Name = "btnAdicionarCustoAdicional";
-            this.btnAdicionarCustoAdicional.Size = new System.Drawing.Size(49, 29);
-            this.btnAdicionarCustoAdicional.TabIndex = 43;
-            this.btnAdicionarCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdicionarCustoAdicional.UseVisualStyleBackColor = false;
-            this.btnAdicionarCustoAdicional.Click += new System.EventHandler(this.btnAdicionarServico_Click);
-            // 
-            // btnExcluirCustoAdicional
-            // 
-            this.btnExcluirCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnExcluirCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnExcluirCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluirCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcluirCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExcluirCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.trashcan;
-            this.btnExcluirCustoAdicional.Location = new System.Drawing.Point(54, 19);
-            this.btnExcluirCustoAdicional.Name = "btnExcluirCustoAdicional";
-            this.btnExcluirCustoAdicional.Size = new System.Drawing.Size(49, 29);
-            this.btnExcluirCustoAdicional.TabIndex = 45;
-            this.btnExcluirCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExcluirCustoAdicional.UseVisualStyleBackColor = false;
-            this.btnExcluirCustoAdicional.Click += new System.EventHandler(this.btnExcluirServico_Click);
             // 
             // txtValorTotal
             // 
@@ -363,6 +283,60 @@
             this.lblFaturamentoGerado.TabIndex = 30;
             this.lblFaturamentoGerado.Text = "Nº Faturamento";
             // 
+            // txtDtCriacao
+            // 
+            this.txtDtCriacao.BackColor = System.Drawing.SystemColors.Control;
+            this.txtDtCriacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDtCriacao.Location = new System.Drawing.Point(338, 452);
+            this.txtDtCriacao.Name = "txtDtCriacao";
+            this.txtDtCriacao.ReadOnly = true;
+            this.txtDtCriacao.Size = new System.Drawing.Size(74, 23);
+            this.txtDtCriacao.TabIndex = 52;
+            // 
+            // lblDtGeracao
+            // 
+            this.lblDtGeracao.AutoSize = true;
+            this.lblDtGeracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDtGeracao.Location = new System.Drawing.Point(238, 455);
+            this.lblDtGeracao.Name = "lblDtGeracao";
+            this.lblDtGeracao.Size = new System.Drawing.Size(89, 17);
+            this.lblDtGeracao.TabIndex = 51;
+            this.lblDtGeracao.Text = "Dt. Criação";
+            // 
+            // txtDtEncerramento
+            // 
+            this.txtDtEncerramento.BackColor = System.Drawing.SystemColors.Control;
+            this.txtDtEncerramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDtEncerramento.Location = new System.Drawing.Point(560, 452);
+            this.txtDtEncerramento.Name = "txtDtEncerramento";
+            this.txtDtEncerramento.ReadOnly = true;
+            this.txtDtEncerramento.Size = new System.Drawing.Size(74, 23);
+            this.txtDtEncerramento.TabIndex = 54;
+            // 
+            // lblDtEncerramento
+            // 
+            this.lblDtEncerramento.AutoSize = true;
+            this.lblDtEncerramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDtEncerramento.Location = new System.Drawing.Point(422, 455);
+            this.lblDtEncerramento.Name = "lblDtEncerramento";
+            this.lblDtEncerramento.Size = new System.Drawing.Size(135, 17);
+            this.lblDtEncerramento.TabIndex = 53;
+            this.lblDtEncerramento.Text = "Dt. Encerramento";
+            // 
+            // btnConsultarValorServico
+            // 
+            this.btnConsultarValorServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnConsultarValorServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnConsultarValorServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultarValorServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultarValorServico.Location = new System.Drawing.Point(480, 13);
+            this.btnConsultarValorServico.Name = "btnConsultarValorServico";
+            this.btnConsultarValorServico.Size = new System.Drawing.Size(193, 32);
+            this.btnConsultarValorServico.TabIndex = 55;
+            this.btnConsultarValorServico.Text = "Consultar valores dos serviços";
+            this.btnConsultarValorServico.UseVisualStyleBackColor = false;
+            this.btnConsultarValorServico.Click += new System.EventHandler(this.btnConsultarValorServico_Click);
+            // 
             // btnFecharReabrir
             // 
             this.btnFecharReabrir.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -377,6 +351,38 @@
             this.btnFecharReabrir.UseVisualStyleBackColor = false;
             this.btnFecharReabrir.Click += new System.EventHandler(this.btnFecharReabrir_Click);
             // 
+            // btnAdicionarCustoAdicional
+            // 
+            this.btnAdicionarCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAdicionarCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAdicionarCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdicionarCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdicionarCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdicionarCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.sign_add;
+            this.btnAdicionarCustoAdicional.Location = new System.Drawing.Point(6, 19);
+            this.btnAdicionarCustoAdicional.Name = "btnAdicionarCustoAdicional";
+            this.btnAdicionarCustoAdicional.Size = new System.Drawing.Size(49, 29);
+            this.btnAdicionarCustoAdicional.TabIndex = 43;
+            this.btnAdicionarCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdicionarCustoAdicional.UseVisualStyleBackColor = false;
+            this.btnAdicionarCustoAdicional.Click += new System.EventHandler(this.btnAdicionarServico_Click);
+            // 
+            // btnExcluirCustoAdicional
+            // 
+            this.btnExcluirCustoAdicional.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnExcluirCustoAdicional.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnExcluirCustoAdicional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirCustoAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluirCustoAdicional.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnExcluirCustoAdicional.Image = global::SistemaGuincho.Properties.Resources.trashcan;
+            this.btnExcluirCustoAdicional.Location = new System.Drawing.Point(54, 19);
+            this.btnExcluirCustoAdicional.Name = "btnExcluirCustoAdicional";
+            this.btnExcluirCustoAdicional.Size = new System.Drawing.Size(49, 29);
+            this.btnExcluirCustoAdicional.TabIndex = 45;
+            this.btnExcluirCustoAdicional.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExcluirCustoAdicional.UseVisualStyleBackColor = false;
+            this.btnExcluirCustoAdicional.Click += new System.EventHandler(this.btnExcluirServico_Click);
+            // 
             // btnPesquisar
             // 
             this.btnPesquisar.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -390,6 +396,38 @@
             this.btnPesquisar.TabIndex = 42;
             this.btnPesquisar.UseVisualStyleBackColor = false;
             this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
+            // 
+            // btnAdicionarServico
+            // 
+            this.btnAdicionarServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAdicionarServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnAdicionarServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdicionarServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdicionarServico.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdicionarServico.Image = global::SistemaGuincho.Properties.Resources.sign_add;
+            this.btnAdicionarServico.Location = new System.Drawing.Point(6, 19);
+            this.btnAdicionarServico.Name = "btnAdicionarServico";
+            this.btnAdicionarServico.Size = new System.Drawing.Size(49, 29);
+            this.btnAdicionarServico.TabIndex = 43;
+            this.btnAdicionarServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdicionarServico.UseVisualStyleBackColor = false;
+            this.btnAdicionarServico.Click += new System.EventHandler(this.btnAdicionarServico_Click);
+            // 
+            // btnExcluirServico
+            // 
+            this.btnExcluirServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnExcluirServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnExcluirServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluirServico.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnExcluirServico.Image = global::SistemaGuincho.Properties.Resources.trashcan;
+            this.btnExcluirServico.Location = new System.Drawing.Point(54, 19);
+            this.btnExcluirServico.Name = "btnExcluirServico";
+            this.btnExcluirServico.Size = new System.Drawing.Size(49, 29);
+            this.btnExcluirServico.TabIndex = 45;
+            this.btnExcluirServico.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExcluirServico.UseVisualStyleBackColor = false;
+            this.btnExcluirServico.Click += new System.EventHandler(this.btnExcluirServico_Click);
             // 
             // btnUltimo
             // 
@@ -462,6 +500,23 @@
             this.btnAtualizar.UseVisualStyleBackColor = false;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
+            // btnPesquisarCliente
+            // 
+            this.btnPesquisarCliente.BackColor = System.Drawing.Color.Transparent;
+            this.btnPesquisarCliente.BackgroundImage = global::SistemaGuincho.Properties.Resources.search;
+            this.btnPesquisarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPesquisarCliente.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnPesquisarCliente.FlatAppearance.BorderSize = 0;
+            this.btnPesquisarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisarCliente.ForeColor = System.Drawing.Color.Transparent;
+            this.btnPesquisarCliente.Location = new System.Drawing.Point(481, 28);
+            this.btnPesquisarCliente.Name = "btnPesquisarCliente";
+            this.btnPesquisarCliente.Size = new System.Drawing.Size(32, 21);
+            this.btnPesquisarCliente.TabIndex = 51;
+            this.btnPesquisarCliente.UseVisualStyleBackColor = false;
+            this.btnPesquisarCliente.Click += new System.EventHandler(this.btnPesquisarCliente_Click);
+            // 
             // btnExcluir
             // 
             this.btnExcluir.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -524,52 +579,13 @@
             this.btnAdicionar.UseVisualStyleBackColor = false;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
-            // txtDtCriacao
-            // 
-            this.txtDtCriacao.BackColor = System.Drawing.SystemColors.Control;
-            this.txtDtCriacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDtCriacao.Location = new System.Drawing.Point(338, 452);
-            this.txtDtCriacao.Name = "txtDtCriacao";
-            this.txtDtCriacao.ReadOnly = true;
-            this.txtDtCriacao.Size = new System.Drawing.Size(74, 23);
-            this.txtDtCriacao.TabIndex = 52;
-            // 
-            // lblDtGeracao
-            // 
-            this.lblDtGeracao.AutoSize = true;
-            this.lblDtGeracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDtGeracao.Location = new System.Drawing.Point(238, 455);
-            this.lblDtGeracao.Name = "lblDtGeracao";
-            this.lblDtGeracao.Size = new System.Drawing.Size(89, 17);
-            this.lblDtGeracao.TabIndex = 51;
-            this.lblDtGeracao.Text = "Dt. Criação";
-            // 
-            // txtDtEncerramento
-            // 
-            this.txtDtEncerramento.BackColor = System.Drawing.SystemColors.Control;
-            this.txtDtEncerramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDtEncerramento.Location = new System.Drawing.Point(560, 452);
-            this.txtDtEncerramento.Name = "txtDtEncerramento";
-            this.txtDtEncerramento.ReadOnly = true;
-            this.txtDtEncerramento.Size = new System.Drawing.Size(74, 23);
-            this.txtDtEncerramento.TabIndex = 54;
-            // 
-            // lblDtEncerramento
-            // 
-            this.lblDtEncerramento.AutoSize = true;
-            this.lblDtEncerramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDtEncerramento.Location = new System.Drawing.Point(422, 455);
-            this.lblDtEncerramento.Name = "lblDtEncerramento";
-            this.lblDtEncerramento.Size = new System.Drawing.Size(135, 17);
-            this.lblDtEncerramento.TabIndex = 53;
-            this.lblDtEncerramento.Text = "Dt. Encerramento";
-            // 
             // Orcamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(885, 481);
+            this.Controls.Add(this.btnConsultarValorServico);
             this.Controls.Add(this.txtDtEncerramento);
             this.Controls.Add(this.lblDtEncerramento);
             this.Controls.Add(this.txtDtCriacao);
@@ -644,5 +660,6 @@
         private System.Windows.Forms.Label lblDtGeracao;
         private System.Windows.Forms.TextBox txtDtEncerramento;
         private System.Windows.Forms.Label lblDtEncerramento;
+        private System.Windows.Forms.Button btnConsultarValorServico;
     }
 }
