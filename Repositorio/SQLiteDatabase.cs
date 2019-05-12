@@ -37,12 +37,14 @@ namespace SistemaGuincho.Repositorio {
             SQLiteConnection connection = SQLiteDatabaseConnection();
             connection.OpenAndReturn();
 
+            UnidadeRepositorio.Instance.createTable(connection);
             EnderecoRepositorio.Instance.createTable(connection);
+            FormaPagamentoRepositorio.Instance.createTable(connection);
+            FaturamentoRepositorio.Instance.createTable(connection);
             ClienteRepositorio.Instance.createTable(connection);
             VeiculoRepositorio.Instance.createTable(connection);
             OrcamentoRepositorio.Instance.createTable(connection);
             ServicoRepositorio.Instance.createTable(connection);
-            UnidadeRepositorio.Instance.createTable(connection);
 
             connection.Close();
 

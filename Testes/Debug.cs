@@ -187,12 +187,12 @@ namespace SistemaGuincho.Testes {
 
             servico = servicos[0];
             servico._quantidade = 3;
-            servico._idServicoOrcamento = 1;
+            servico._idServicoOrcFat = 1;
             orcamento.servicos.Add(servico);
 
             servico = servicos[3];
             servico._quantidade = 1;
-            servico._idServicoOrcamento = 2;
+            servico._idServicoOrcFat = 2;
             orcamento.servicos.Add(servico);
 
             orcamento.fechado = true;
@@ -204,12 +204,12 @@ namespace SistemaGuincho.Testes {
 
             servico = servicos[2];
             servico._quantidade = 5;
-            servico._idServicoOrcamento = 3;
+            servico._idServicoOrcFat = 3;
             orcamento.servicos.Add(servico);
 
             custoAdicional = servicos[1];
             custoAdicional._quantidade = 10;
-            custoAdicional._idServicoOrcamento = 1;
+            custoAdicional._idServicoOrcFat = 1;
             orcamento.custosAdicionais.Add(custoAdicional);
 
             orcamento.id = 2;
@@ -220,7 +220,7 @@ namespace SistemaGuincho.Testes {
 
             custoAdicional = servicos[2];
             custoAdicional._quantidade = 3;
-            custoAdicional._idServicoOrcamento = 2;
+            custoAdicional._idServicoOrcFat = 2;
             orcamento.custosAdicionais.Add(custoAdicional);
 
             orcamento.id = 3;

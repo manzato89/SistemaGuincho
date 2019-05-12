@@ -88,7 +88,7 @@ namespace SistemaGuincho.Repositorio {
                 int idServico = servico.id;
                 int quantidade = servico._quantidade;
 
-                servico._idServicoOrcamento = connection.Query<int>(strSQL.ToString(),
+                servico._idServicoOrcFat = connection.Query<int>(strSQL.ToString(),
                     new {
                         idOrcamento,
                         idServico,
@@ -138,7 +138,7 @@ namespace SistemaGuincho.Repositorio {
                     // Busca id do serviço/custoadicional nos orçamentos
                     int _idServicoOrcamento = -1;
                     int.TryParse(drServicos["id"].ToString(), out _idServicoOrcamento);
-                    servico._idServicoOrcamento = _idServicoOrcamento;
+                    servico._idServicoOrcFat = _idServicoOrcamento;
                     
                     servicos.Add(servico);
                 }
@@ -162,7 +162,7 @@ namespace SistemaGuincho.Repositorio {
 
             SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
 
-            int idServicoOrcamento = servico._idServicoOrcamento;
+            int idServicoOrcamento = servico._idServicoOrcFat;
 
             try {
                 strSQL = new StringBuilder();

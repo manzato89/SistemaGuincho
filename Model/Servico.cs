@@ -20,7 +20,7 @@ namespace SistemaGuincho.Model {
         public int _quantidade { get; set; } = 1;
         public string _total { get; set; }
         public int _idUnidade { get; set; }
-        public int _idServicoOrcamento { get; set; } = -1;
+        public int _idServicoOrcFat { get; set; } = -1;
 
         public Servico() { this._quantidade = 1; }
 

@@ -15,5 +15,10 @@ namespace SistemaGuincho.Model {
 
         public FormaPagamento() { }
 
+        public FormaPagamento(string descricao, int numParcelas, bool entrada) {
+            this.descricao = descricao;
+            this.numParcelas = numParcelas;
+            this.entrada = entrada;
+        }
     }
 }

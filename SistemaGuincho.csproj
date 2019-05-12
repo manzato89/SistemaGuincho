@@ -84,14 +84,19 @@
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\EnderecoRepositorio.cs" />
+    <Compile Include="Repositorio\FaturamentoRepositorio.cs" />
     <Compile Include="Repositorio\OrcamentoRepositorio.cs" />
+    <Compile Include="Repositorio\FaturamentoServicoRepositorio.cs" />
     <Compile Include="Repositorio\OrcamentoServicoRepositorio.cs" />
     <Compile Include="Repositorio\SQLiteDatabase.cs" />
+    <Compile Include="Repositorio\FormaPagamentoRepositorio.cs" />
     <Compile Include="Repositorio\UnidadeRepositorio.cs" />
     <Compile Include="Repositorio\ServicoRepositorio.cs" />
     <Compile Include="Repositorio\VeiculoRepositorio.cs" />
     <Compile Include="Repositorio\ClienteRepositorio.cs" />
     <Compile Include="Services\ClienteServicos.cs" />
+    <Compile Include="Services\FaturamentoServicos.cs" />
+    <Compile Include="Services\FormaPagamentoServicos.cs" />
     <Compile Include="Services\UnidadeServicos.cs" />
     <Compile Include="Services\ServicoServicos.cs" />
     <Compile Include="Services\VeiculoServicos.cs" />
@@ -118,11 +123,23 @@
     <Compile Include="Views\ConsultaServico.Designer.cs">
       <DependentUpon>ConsultaServico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Faturamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Faturamento.Designer.cs">
+      <DependentUpon>Faturamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Orcamento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Orcamento.Designer.cs">
       <DependentUpon>Orcamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormasPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormasPagamento.Designer.cs">
+      <DependentUpon>FormasPagamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Unidades.cs">
       <SubType>Form</SubType>
@@ -196,8 +213,14 @@
     <EmbeddedResource Include="Views\ConsultaServico.resx">
       <DependentUpon>ConsultaServico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Faturamento.resx">
+      <DependentUpon>Faturamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Orcamento.resx">
       <DependentUpon>Orcamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormasPagamento.resx">
+      <DependentUpon>FormasPagamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Unidades.resx">
       <DependentUpon>Unidades.cs</DependentUpon>

@@ -292,7 +292,7 @@ namespace SistemaGuincho.Views {
                 for (var iCount = 0; iCount < dataGridView.Columns.Count; iCount++) {
                     switch (dataGridView.Columns[iCount].DataPropertyName) {
                         case nameof(Servico.id):
-                        case nameof(Servico._idServicoOrcamento):
+                        case nameof(Servico._idServicoOrcFat):
                         case nameof(Servico._idUnidade):
                             dataGridView.Columns[iCount].Visible = false;
                             break;

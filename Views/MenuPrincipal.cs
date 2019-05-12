@@ -65,5 +65,9 @@ namespace SistemaGuincho.Views{
         private void btn_Orcamento_Click(object sender, EventArgs e) {
             new Orcamentos().ShowDialog();
         }
+
+        private void formasDePagamentoToolStripMenuItem_Click(object sender, EventArgs e) {
+            new FormasPagamento().ShowDialog();
+        }
     }
 }

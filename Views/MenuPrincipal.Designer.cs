@@ -32,6 +32,7 @@
             this.castrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviçosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviçosCategoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +41,7 @@
             this.btn_Orcamento = new System.Windows.Forms.Button();
             this.btn_Cliente = new System.Windows.Forms.Button();
             this.btn_CadServico = new System.Windows.Forms.Button();
-            this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formasDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,8 @@
             this.castrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.serviçosToolStripMenuItem,
             this.categoriasToolStripMenuItem,
-            this.unidadesToolStripMenuItem});
+            this.unidadesToolStripMenuItem,
+            this.formasDePagamentoToolStripMenuItem});
             this.castrosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.castrosToolStripMenuItem.Name = "castrosToolStripMenuItem";
             this.castrosToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
@@ -73,16 +75,23 @@
             // serviçosToolStripMenuItem
             // 
             this.serviçosToolStripMenuItem.Name = "serviçosToolStripMenuItem";
-            this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.serviçosToolStripMenuItem.Text = "Serviços";
             this.serviçosToolStripMenuItem.Click += new System.EventHandler(this.serviçosToolStripMenuItem_Click);
             // 
             // categoriasToolStripMenuItem
             // 
             this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
-            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.categoriasToolStripMenuItem.Text = "Categorias";
             this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
+            // 
+            // unidadesToolStripMenuItem
+            // 
+            this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
+            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.unidadesToolStripMenuItem.Text = "Unidades";
+            this.unidadesToolStripMenuItem.Click += new System.EventHandler(this.unidadesToolStripMenuItem_Click);
             // 
             // consultasToolStripMenuItem
             // 
@@ -192,12 +201,12 @@
             this.btn_CadServico.UseVisualStyleBackColor = false;
             this.btn_CadServico.Click += new System.EventHandler(this.btn_CadServico_Click);
             // 
-            // unidadesToolStripMenuItem
+            // formasDePagamentoToolStripMenuItem
             // 
-            this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
-            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.unidadesToolStripMenuItem.Text = "Unidades";
-            this.unidadesToolStripMenuItem.Click += new System.EventHandler(this.unidadesToolStripMenuItem_Click);
+            this.formasDePagamentoToolStripMenuItem.Name = "formasDePagamentoToolStripMenuItem";
+            this.formasDePagamentoToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.formasDePagamentoToolStripMenuItem.Text = "Formas de pagamento";
+            this.formasDePagamentoToolStripMenuItem.Click += new System.EventHandler(this.formasDePagamentoToolStripMenuItem_Click);
             // 
             // MenuPrincipal
             // 
@@ -236,6 +245,7 @@
         private System.Windows.Forms.Button btn_Orcamento;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem unidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formasDePagamentoToolStripMenuItem;
     }
 }
 

@@ -12,16 +12,13 @@ using SistemaGuincho.Utilidades;
 using SistemaGuincho.Servicos;
 
 namespace SistemaGuincho.Views {
-    public partial class Servicos : Form{
+    public partial class FormasPagamento : Form{
 
         #region Atributos da classe
         private Util.WindowMode windowMode;
 
-        private List<Servico> servicos;
-        private List<Servico> servicos_view;
-
-
-        private List<Unidade> unidades;
+        private List<FormaPagamento> formasPagamento;
+        private List<FormaPagamento> formasPagamento_view;
 
         private int index;
         #endregion
@@ -33,22 +30,20 @@ namespace SistemaGuincho.Views {
 
             index = -1;
 
-            servicos = new List<Servico>();
-            unidades = new List<Unidade>();
+            formasPagamento = new List<FormaPagamento>();
 
             //Preenche o ComboBox da busca
             cboCamposBusca.Items.Clear();
             cboCamposBusca.Items.Add("Descrição");
-            cboCamposBusca.Items.Add("Unidade");
-            cboCamposBusca.Items.Add("Valor");
-            cboCamposBusca.Items.Add("ID");
+            cboCamposBusca.Items.Add("Número de Parcelas");
+            cboCamposBusca.Items.Add("Entrada? (S/N)");
             cboCamposBusca.SelectedIndex = 0;
 
             windowMode = Util.WindowMode.ModoCriacaoForm;
             windowModeChanged();
         }
 
-        public Servicos(){
+        public FormasPagamento(){
             init();
 
             getFromRepositorio();
@@ -56,17 +51,14 @@ namespace SistemaGuincho.Views {
         }
 
         private void getFromRepositorio() {
-            servicos = ServicoServicos.Instance.read();
-            servicos_view = new List<Servico>(servicos);
-
-            unidades = UnidadeServicos.Instance.read();
-            carregaComboBox();
+            formasPagamento = FormaPagamentoServicos.Instance.read();
+            formasPagamento_view = new List<FormaPagamento>(formasPagamento);
         }
         #endregion
 
         #region Botões de navegação
         private void btnPrimeiro_Click(object sender, EventArgs e) {
-            if (servicos_view.Count > 0) {
+            if (formasPagamento_view.Count > 0) {
                 if (index != 0) {
                     index = 0;
                     selecionaServico();
@@ -82,16 +74,16 @@ namespace SistemaGuincho.Views {
         }
 
         private void btnProximo_Click(object sender, EventArgs e) {
-            if (index + 1 < servicos_view.Count) {
+            if (index + 1 < formasPagamento_view.Count) {
                 index++;
                 selecionaServico();
             }
         }
 
         private void btnUltimo_Click(object sender, EventArgs e) {
-            if (servicos_view.Count > 0) {
-                if (index != servicos_view.Count - 1) {
-                    index = servicos_view.Count - 1;
+            if (formasPagamento_view.Count > 0) {
+                if (index != formasPagamento_view.Count - 1) {
+                    index = formasPagamento_view.Count - 1;
                     selecionaServico();
                 }
             }
@@ -127,19 +119,19 @@ namespace SistemaGuincho.Views {
         // Salva as alterações do cliente
         private void btnGravar_Click(object sender, EventArgs e) {
             // Cria um novo cliente
-            Servico newServico;
+            FormaPagamento newFormaPagamento;
 
             // Cria os dados básicos do cliente
             string descricao = txtDescricao.Text;
-            float valor = -1; float.TryParse(txtValor.Text, out valor);
-            Unidade unidade = (Unidade)cboUnidade.SelectedItem;
+            int numParcelas = -1; int.TryParse(txtNumParcelas.Text, out numParcelas);
+            bool entrada = chkEntrada.Checked;
 
-            newServico = new Servico(descricao, valor, unidade);
+            newFormaPagamento = new FormaPagamento(descricao, numParcelas, entrada);
             
             // Verifica se vai inserir um novo registro ou então salvá-lo
             if (windowMode == Util.WindowMode.ModoDeInsercao) {
 
-                if (ServicoServicos.Instance.create(ref newServico)) {
+                if (FormaPagamentoServicos.Instance.create(ref newFormaPagamento)) {
                     getFromRepositorio();
                     btnUltimo_Click(null, null);
                     refreshDataGridView();
@@ -148,9 +140,9 @@ namespace SistemaGuincho.Views {
                 }
 
             } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
-                newServico.id = servicos_view[index].id;
+                newFormaPagamento.id = formasPagamento_view[index].id;
 
-                if (ServicoServicos.Instance.update(newServico)) {
+                if (FormaPagamentoServicos.Instance.update(newFormaPagamento)) {
                     getFromRepositorio();
                     refreshDataGridView();
                 }
@@ -166,8 +158,8 @@ namespace SistemaGuincho.Views {
         private void btnExcluir_Click(object sender, EventArgs e) {
             if (MessageBox.Show("Confirma a deleção do registro ?" +
                     Environment.NewLine + Environment.NewLine +
-                    servicos_view[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                ServicoServicos.Instance.delete(servicos_view[index]);
+                    formasPagamento_view[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                FormaPagamentoServicos.Instance.delete(formasPagamento_view[index]);
 
                 getFromRepositorio();
                 refreshDataGridView();
@@ -180,7 +172,7 @@ namespace SistemaGuincho.Views {
             getFromRepositorio();
 
             if (index > -1)
-                index = servicos_view.FindIndex(clienteAEncontrar => clienteAEncontrar.id == servicos_view[index].id);
+                index = formasPagamento_view.FindIndex(clienteAEncontrar => clienteAEncontrar.id == formasPagamento_view[index].id);
 
             selecionaServico();
             refreshDataGridView();
@@ -194,14 +186,12 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Comum
         private void fillFields() {
-            if (index > -1 && servicos_view.Count > 0 && index < servicos_view.Count && servicos_view[index] != null) {
+            if (index > -1 && formasPagamento_view.Count > 0 && index < formasPagamento_view.Count && formasPagamento_view[index] != null) {
                 // Preenche as informações básicas do cliente
-                txtID.Text = servicos_view[index].id.ToString();
-                txtDescricao.Text = servicos_view[index].descricao;
-                txtValor.Text = servicos_view[index].valor.ToString();
-
-                int indexUnidade = unidades.FindIndex(find => find.id == servicos_view[index].unidade.id);
-                cboUnidade.SelectedIndex = indexUnidade;
+                txtID.Text = formasPagamento_view[index].id.ToString();
+                txtDescricao.Text = formasPagamento_view[index].descricao.ToString();
+                txtNumParcelas.Text = formasPagamento_view[index].numParcelas.ToString();
+                chkEntrada.Checked = formasPagamento_view[index].entrada;
 
                 windowMode = Util.WindowMode.ModoNormal;
                 windowModeChanged();
@@ -212,57 +202,51 @@ namespace SistemaGuincho.Views {
 
         private void clearDataGridView() {
             // Seta o datagrid view como nulo
-            dgvServicos.DataSource = null;
-            dgvServicos.Refresh();
+            dgvFormasPagamento.DataSource = null;
+            dgvFormasPagamento.Refresh();
         }
 
         private void refreshDataGridView() {
             clearDataGridView();
 
-            dgvServicos.Columns.Clear();
+            dgvFormasPagamento.Columns.Clear();
 
-            dgvServicos.DataSource = servicos_view;
+            dgvFormasPagamento.DataSource = formasPagamento_view;
 
             // Preenche os nomes das colunas
-            for (var iCount = 0; iCount < dgvServicos.Columns.Count; iCount++) {
-                switch (dgvServicos.Columns[iCount].DataPropertyName) {
-                    case nameof(Servico._total):
-                    case nameof(Servico._quantidade):
-                    case nameof(Servico._idUnidade):
-                    case nameof(Servico._idServicoOrcFat):
-                        dgvServicos.Columns[iCount].Visible = false;
-                        break;
-                    case nameof(Servico.id):
-                        dgvServicos.Columns[iCount].DisplayIndex = 0;
-                        dgvServicos.Columns[iCount].HeaderText = "ID";
-                        dgvServicos.Columns[iCount].Width = 25;
-                        dgvServicos.Columns[iCount].ReadOnly = true;
+            for (var iCount = 0; iCount < dgvFormasPagamento.Columns.Count; iCount++) {
+                switch (dgvFormasPagamento.Columns[iCount].DataPropertyName) {
+                    case nameof(FormaPagamento.id):
+                        dgvFormasPagamento.Columns[iCount].DisplayIndex = 0;
+                        dgvFormasPagamento.Columns[iCount].HeaderText = "ID";
+                        dgvFormasPagamento.Columns[iCount].Width = 25;
+                        dgvFormasPagamento.Columns[iCount].ReadOnly = true;
                         break;
 
-                    case nameof(Servico.descricao):
-                        dgvServicos.Columns[iCount].DisplayIndex = 1;
-                        dgvServicos.Columns[iCount].HeaderText = "Descrição";
-                        dgvServicos.Columns[iCount].Width = 250;
-                        dgvServicos.Columns[iCount].ReadOnly = true;
+                    case nameof(FormaPagamento.descricao):
+                        dgvFormasPagamento.Columns[iCount].DisplayIndex = 1;
+                        dgvFormasPagamento.Columns[iCount].HeaderText = "Descrição";
+                        dgvFormasPagamento.Columns[iCount].Width = 250;
+                        dgvFormasPagamento.Columns[iCount].ReadOnly = true;
                         break;
 
-                    case nameof(Servico.unidade):
-                        dgvServicos.Columns[iCount].DisplayIndex = 2;
-                        dgvServicos.Columns[iCount].HeaderText = "Unidade";
-                        dgvServicos.Columns[iCount].Width = 100;
-                        dgvServicos.Columns[iCount].ReadOnly = true;
+                    case nameof(FormaPagamento.numParcelas):
+                        dgvFormasPagamento.Columns[iCount].DisplayIndex = 2;
+                        dgvFormasPagamento.Columns[iCount].HeaderText = "Parcelas";
+                        dgvFormasPagamento.Columns[iCount].Width = 100;
+                        dgvFormasPagamento.Columns[iCount].ReadOnly = true;
                         break;
 
-                    case nameof(Servico.valor):
-                        dgvServicos.Columns[iCount].DisplayIndex = 3;
-                        dgvServicos.Columns[iCount].HeaderText = "Valor";
-                        dgvServicos.Columns[iCount].Width = 100;
-                        dgvServicos.Columns[iCount].ReadOnly = true;
+                    case nameof(FormaPagamento.entrada):
+                        dgvFormasPagamento.Columns[iCount].DisplayIndex = 3;
+                        dgvFormasPagamento.Columns[iCount].HeaderText = "Entrada?";
+                        dgvFormasPagamento.Columns[iCount].Width = 100;
+                        dgvFormasPagamento.Columns[iCount].ReadOnly = true;
                         break;
                 }
             }
 
-            dgvServicos.Refresh();
+            dgvFormasPagamento.Refresh();
         }
 
         private void windowModeChanged() {
@@ -277,7 +261,7 @@ namespace SistemaGuincho.Views {
                     btnCancelar.Enabled = false;
                     btnGravar.Enabled = false;
 
-                    dgvServicos.Enabled = true;
+                    dgvFormasPagamento.Enabled = true;
 
                     btnAtualizar.Enabled = true;
 
@@ -297,7 +281,7 @@ namespace SistemaGuincho.Views {
                     btnCancelar.Enabled = true;
                     btnGravar.Enabled = true;
 
-                    dgvServicos.Enabled = false;
+                    dgvFormasPagamento.Enabled = false;
 
                     btnAtualizar.Enabled = false;
 
@@ -311,8 +295,8 @@ namespace SistemaGuincho.Views {
 
         private void enableFields(bool enable) {
             txtDescricao.Enabled = enable;
-            txtValor.Enabled = enable;
-            cboUnidade.Enabled = enable;
+            txtNumParcelas.Enabled = enable;
+            chkEntrada.Enabled = enable;
         }
 
         private void fields_keyDown(object sender, KeyEventArgs e) {
@@ -331,19 +315,11 @@ namespace SistemaGuincho.Views {
             
             txtID.Text = "";
             txtDescricao.Text = "";
-            txtValor.Text = "";
-            cboUnidade.SelectedIndex = -1;
+            txtNumParcelas.Text = "";
+            chkEntrada.Checked = false;
 
             windowMode = Util.WindowMode.ModoCriacaoForm;
             windowModeChanged();
-        }
-
-        private void carregaComboBox() {
-            // Carrega o combobox da unidade
-            cboUnidade.Items.Clear();
-            foreach (Unidade unidade in unidades) {
-                cboUnidade.Items.Add(unidade);
-            }
         }
 
         private void txtBusca_KeyDown(object sender, KeyEventArgs e) {
@@ -356,39 +332,39 @@ namespace SistemaGuincho.Views {
             string textoBusca = txtBusca.Text.ToUpper();
 
             if (textoBusca.Length == 0) {
-                servicos_view = new List<Servico>(servicos);
+                formasPagamento_view = new List<FormaPagamento>(formasPagamento);
             } else {
                 switch (cboCamposBusca.SelectedIndex) {
                     case 0: // Descrição
-                        servicos_view = servicos.FindAll(find => find.descricao.ToUpper().Contains(textoBusca));
+                        formasPagamento_view = formasPagamento.FindAll(find => find.descricao.ToUpper().Contains(textoBusca));
                         break;
-                    case 1: // Unidade
-                        servicos_view = servicos.FindAll(find => find.unidade.codigo.ToUpper().Contains(textoBusca) || find.unidade.descricao.ToUpper().Contains(textoBusca));
+                    case 1: // Número de parcelas
+                        int numParcelasDesejado;
+
+                        if (Int32.TryParse(textoBusca, out numParcelasDesejado)) {
+                            formasPagamento_view = formasPagamento.FindAll(find => find.numParcelas == numParcelasDesejado);
+                        }
                         break;
-                    case 2: // Valor
-                        float valorDesejado = -1;
 
-                        // Procura apenas pela parte inteira do valor
-                        if (float.TryParse(textoBusca, out valorDesejado))
-                            servicos_view = servicos.FindAll(find => (find.valor - find.valor % 1) == valorDesejado);
-                        break;
-                    case 3: // ID
-                        int idDesejado = -1;
+                    case 2: // Entrada
+                        bool entrada = textoBusca.ToUpper().Equals("S");
 
-                        if (int.TryParse(textoBusca, out idDesejado))
-                            servicos_view = servicos.FindAll(find => find.id == idDesejado);
-
+                        formasPagamento_view = formasPagamento.FindAll(find => find.entrada == entrada);
                         break;
                 }
             }
-
+            /*
+             * cboCamposBusca.Items.Add("Descrição");
+            cboCamposBusca.Items.Add("Número de Parcelas");
+            cboCamposBusca.Items.Add("Entrada? (S/N)");
+             */
             index = -1;
             selecionaServico();
 
             refreshDataGridView();
         }
 
-        private void dgvServicos_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private void dgvFormasPagamento_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.RowIndex > -1) {
                 index = e.RowIndex;
                 selecionaServico();
