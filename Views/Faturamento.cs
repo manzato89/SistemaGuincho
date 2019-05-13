@@ -12,25 +12,27 @@ using SistemaGuincho.Utilidades;
 using SistemaGuincho.Servicos;
 
 namespace SistemaGuincho.Views {
-    public partial class Orcamentos : Form {
+    public partial class Faturamentos : Form {
 
         #region Atributos da classe
         private Util.WindowMode windowMode;
 
-        private List<Orcamento> orcamentos;
+        private List<Faturamento> faturamentos;
 
         private int index;
 
         private ConsultaCliente consultaClienteForm;
+        private ConsultaFaturamento consultaFaturamentoForm;
+        private ConsultaServico consultaServicoForm;
         private ConsultaOrcamento consultaOrcamentoForm;
-        private ConsultaServico consultaServicoForm;                  //TODO
-        //private ConsultaCustoAdicional consultaCustoAdicionalForm;    //TODO
 
         public enum Edicao {
-            DadosDoOrcamento,
+            DadosDoFaturamento,
             DadosDosServicos,
             DadosDosCustosAdicionais
         };
+
+        private List<FormaPagamento> formasPagamento;
         #endregion
 
         #region Inicialização da classe
@@ -40,35 +42,43 @@ namespace SistemaGuincho.Views {
 
             index = -1;
 
-            orcamentos = new List<Orcamento>();
+            faturamentos = new List<Faturamento>();
 
             windowMode = Util.WindowMode.ModoCriacaoForm;
             windowModeChanged();
         }
 
-        public Orcamentos(){
+        public Faturamentos(){
             init();
 
             getFromRepositorio();
         }
 
-        public Orcamentos(Orcamento orcamento) : this() {
-            index = orcamentos.FindIndex(find => find.id == orcamento.id);
+        public Faturamentos(Faturamento faturamento) : this() {
+            index = faturamentos.FindIndex(find => find.id == faturamento.id);
 
-            selecionaOrcamento();
+            selecionaFaturamento();
         }
 
         private void getFromRepositorio() {
-            orcamentos = OrcamentoServicos.read();
+            faturamentos = FaturamentoServicos.read();
+
+            formasPagamento = FormaPagamentoServicos.Instance.read();
+            cboFormasPagamento.Items.Clear();
+            cboFormasPagamento.Items.AddRange(formasPagamento.ToArray());
+            if (index > -1 && faturamentos[index].formaPagamento != null)
+                cboFormasPagamento.SelectedIndex = formasPagamento.FindIndex(find => find.id == faturamentos[index].formaPagamento.id);
+            else
+                cboFormasPagamento.SelectedIndex = -1;
         }
         #endregion
 
         #region Botões de navegação
         private void btnPrimeiro_Click(object sender, EventArgs e) {
-            if (orcamentos.Count > 0) {
+            if (faturamentos.Count > 0) {
                 if (index != 0) {
                     index = 0;
-                    selecionaOrcamento();
+                    selecionaFaturamento();
                 }
             }
         }
@@ -76,27 +86,27 @@ namespace SistemaGuincho.Views {
         private void btnAnterior_Click(object sender, EventArgs e) {
             if (index - 1 >= 0) {
                 index--;
-                selecionaOrcamento();
+                selecionaFaturamento();
             }
         }
 
         private void btnProximo_Click(object sender, EventArgs e) {
-            if (index + 1 < orcamentos.Count) {
+            if (index + 1 < faturamentos.Count) {
                 index++;
-                selecionaOrcamento();
+                selecionaFaturamento();
             }
         }
 
         private void btnUltimo_Click(object sender, EventArgs e) {
-            if (orcamentos.Count > 0) {
-                if (index != orcamentos.Count - 1) {
-                    index = orcamentos.Count - 1;
-                    selecionaOrcamento();
+            if (faturamentos.Count > 0) {
+                if (index != faturamentos.Count - 1) {
+                    index = faturamentos.Count - 1;
+                    selecionaFaturamento();
                 }
             }
         }
 
-        private void selecionaOrcamento() {
+        private void selecionaFaturamento() {
             fillFields();
         }
         #endregion
@@ -104,6 +114,23 @@ namespace SistemaGuincho.Views {
         #region CRUD
         // Aciona a criação de um novo cliente
         private void btnAdicionar_Click(object sender, EventArgs e) {
+            // Cria o menu de contexto
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            ToolStripMenuItem toolStripMenuItem;
+
+            toolStripMenuItem = new ToolStripMenuItem("Criar faturamento com base em orçamento");
+            toolStripMenuItem.Click += criaFaturamentoBaseOrcamento;
+            contextMenuStrip.Items.Add(toolStripMenuItem);
+
+            toolStripMenuItem = new ToolStripMenuItem("Criar faturamento");
+            toolStripMenuItem.Click += criaFaturamento;
+            contextMenuStrip.Items.Add(toolStripMenuItem);
+
+            // Exibe o menu de contexto
+            contextMenuStrip.Show(this, this.PointToClient(MousePosition));
+        }
+
+        private void criaFaturamento(object _sender, EventArgs e) {
             index = 0;
             txtNomeCliente.Focus();
             clearFields();
@@ -114,6 +141,32 @@ namespace SistemaGuincho.Views {
             btnPesquisarCliente_Click(null, null);
         }
 
+        private void criaFaturamentoBaseOrcamento(object _sender, EventArgs e) {
+            consultaOrcamentoForm = new ConsultaOrcamento(Util.TipoConsulta.Selecao, true);
+            consultaOrcamentoForm.FormClosing += ConsultaOrcamentoForm_FormClosing;
+            consultaOrcamentoForm.Show();
+        }
+
+        private void ConsultaOrcamentoForm_FormClosing(object sender, FormClosingEventArgs e) {
+            Orcamento orcamentoSelecionado = consultaOrcamentoForm.orcamentoSelecionado;
+
+            if (orcamentoSelecionado != null) {
+                Faturamento newFaturamento = new Faturamento(orcamentoSelecionado.cliente, orcamentoSelecionado.veiculo);
+
+                foreach (Servico servico in orcamentoSelecionado.servicos)
+                    newFaturamento.servicos.Add(servico);
+
+                foreach (Servico custoAdicional in orcamentoSelecionado.custosAdicionais)
+                    newFaturamento.custosAdicionais.Add(custoAdicional);
+
+                newFaturamento.numOrcamento = orcamentoSelecionado.id;
+
+                FaturamentoServicos.create(ref newFaturamento);
+
+                getFromRepositorio();
+                btnUltimo_Click(null, null);
+            }
+        }
 
         // Cancela a edição
         private void btnCancelar_Click(object sender, EventArgs e) {
@@ -128,26 +181,34 @@ namespace SistemaGuincho.Views {
         // Salva as alterações do orçamento
         private void btnGravar_Click(object sender, EventArgs e) {
             // Cria um novo orçamento
-            Orcamento newOrcamento;
+            Faturamento newFaturamento;
 
             // Cria os dados básicos do orçamento
             int idCliente = -1; int.TryParse(txtCdCliente.Text, out idCliente);
 
             if (txtCdCliente.Text.Trim().Length == 0) {
-                MessageBox.Show("Não foi possível salvar o orçamento.\n\nDeve ser selecionado um cliente",
+                MessageBox.Show("Não foi possível salvar o faturamento.\n\nDeve ser selecionado um cliente",
                         "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             } else {
 
                 Cliente cliente = ClienteServicos.Instance.read(idCliente);
                 Veiculo veiculo = (Veiculo)cboVeiculo.SelectedItem;
 
-                newOrcamento = new Orcamento(cliente, veiculo);
+                newFaturamento = new Faturamento(cliente, veiculo);
+                FormaPagamento formaPagamento = null;
+
+                if (cboFormasPagamento.SelectedIndex > -1)
+                    formaPagamento = (FormaPagamento)cboFormasPagamento.SelectedItem;
+
+                newFaturamento.formaPagamento = formaPagamento;
+                newFaturamento._idFormaPagamento = formaPagamento != null ? formaPagamento.id : 0;
+
 
                 // Verifica se vai inserir um novo registro ou então salvá-lo
                 if (windowMode == Util.WindowMode.ModoDeInsercao) {
                     // Cria novo orçameto
 
-                    if (OrcamentoServicos.create(ref newOrcamento)) {
+                    if (FaturamentoServicos.create(ref newFaturamento)) {
                         getFromRepositorio();
                         btnUltimo_Click(null, null);
                     } else {
@@ -157,18 +218,18 @@ namespace SistemaGuincho.Views {
                 } else if (windowMode == Util.WindowMode.ModoDeEdicao) {
                     // Grava orçamento já existente
 
-                    newOrcamento.id = orcamentos[index].id;
-                    newOrcamento.servicos = orcamentos[index].servicos;
-                    newOrcamento.custosAdicionais = orcamentos[index].custosAdicionais;
-                    newOrcamento.dataCriacao = orcamentos[index].dataCriacao;
+                    newFaturamento.id = faturamentos[index].id;
+                    newFaturamento.servicos = faturamentos[index].servicos;
+                    newFaturamento.custosAdicionais = faturamentos[index].custosAdicionais;
+                    newFaturamento.dataCriacao = faturamentos[index].dataCriacao;
 
                     if (cliente != null)
-                        newOrcamento._idCliente = orcamentos[index].cliente.id;
+                        newFaturamento._idCliente = cliente.id;
 
                     if (veiculo != null)
-                        newOrcamento._idVeiculo = orcamentos[index].veiculo.id;
+                        newFaturamento._idVeiculo = veiculo.id;
 
-                    if (OrcamentoServicos.update(newOrcamento)) {
+                    if (FaturamentoServicos.update(newFaturamento)) {
                         getFromRepositorio();
                     }
 
@@ -184,28 +245,29 @@ namespace SistemaGuincho.Views {
         private void btnExcluir_Click(object sender, EventArgs e) {
             if (MessageBox.Show("Confirma a deleção do registro ?" +
                     Environment.NewLine + Environment.NewLine +
-                    orcamentos[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                OrcamentoServicos.delete(orcamentos[index]);
+                    faturamentos[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                FaturamentoServicos.delete(faturamentos[index]);
 
                 getFromRepositorio();
                 clearFields();
             }
         }
 
-        // Atualiza as informações dos Orcamento
+        // Atualiza as informações dos Faturamento
         private void btnAtualizar_Click(object sender, EventArgs e) {
             getFromRepositorio();
 
             if (index > -1)
-                index = orcamentos.FindIndex(clienteAEncontrar => clienteAEncontrar.id == orcamentos[index].id);
+                index = faturamentos.FindIndex(clienteAEncontrar => clienteAEncontrar.id == faturamentos[index].id);
 
+            fillFields();
             refreshDataGridView();
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e) {
-            consultaOrcamentoForm = new ConsultaOrcamento(Util.TipoConsulta.Edicao);
-            consultaOrcamentoForm.Load += ConsultaClienteForm_Load;
-            consultaOrcamentoForm.Show();
+            consultaFaturamentoForm = new ConsultaFaturamento(Util.TipoConsulta.Edicao);
+            consultaFaturamentoForm.Load += ConsultaClienteForm_Load;
+            consultaFaturamentoForm.Show();
         }
 
         private void ConsultaClienteForm_Load(object sender, EventArgs e) {
@@ -216,20 +278,29 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Comum
         private void fillFields() {
-            if (index > -1 && orcamentos.Count > 0 && index < orcamentos.Count && orcamentos[index] != null) {
+            if (index > -1 && faturamentos.Count > 0 && index < faturamentos.Count && faturamentos[index] != null) {
                 // Preenche as informações básicas do orçamento
-                txtID.Text = orcamentos[index].id.ToString();
-                txtDtCriacao.Text = orcamentos[index].dataCriacao.ToString("dd/MM/yyyy");
-                txtDtEncerramento.Text = orcamentos[index].dataEncerramento?.ToString("dd/MM/yyyy");
+                txtID.Text = faturamentos[index].id.ToString();
+                txtDtCriacao.Text = faturamentos[index].dataCriacao.ToString("dd/MM/yyyy");
+                txtDtEncerramento.Text = faturamentos[index].dataEncerramento?.ToString("dd/MM/yyyy");
+                if (faturamentos[index].numOrcamento > 0)
+                    txtOrcamento.Text = faturamentos[index].numOrcamento.ToString();
+                else
+                    txtOrcamento.Text = "";
 
-                preencheInformacoesCliente(orcamentos[index].cliente);
+                preencheInformacoesCliente(faturamentos[index].cliente);
 
-                if (orcamentos[index].veiculo != null) {
-                    int indexVeiculo = orcamentos[index].cliente.veiculos.FindIndex(find => find.id == orcamentos[index].veiculo.id);
+                if (faturamentos[index].veiculo != null) {
+                    int indexVeiculo = faturamentos[index].cliente.veiculos.FindIndex(find => find.id == faturamentos[index].veiculo.id);
                     cboVeiculo.SelectedIndex = indexVeiculo;
-                } else {
+                } else
                     cboVeiculo.SelectedIndex = -1;
-                }
+
+                if (faturamentos[index].formaPagamento != null) {
+                    int indexFormaPgto = formasPagamento.FindIndex(find => find.id == faturamentos[index].formaPagamento.id);
+                    cboFormasPagamento.SelectedIndex = indexFormaPgto;
+                } else
+                    cboVeiculo.SelectedIndex = -1;
 
                 refreshDataGridView();
 
@@ -239,7 +310,7 @@ namespace SistemaGuincho.Views {
                 windowModeChanged();
 
                 // Atualiza o nome do formulário
-                this.Text = String.Format("Orçamento: {0} - {1}", orcamentos[index].id, orcamentos[index].cliente.nome);
+                this.Text = String.Format("Faturamento: {0} - {1}", faturamentos[index].id, faturamentos[index].cliente.nome);
 
             }
         }
@@ -252,7 +323,6 @@ namespace SistemaGuincho.Views {
 
         private void fillCombobox(Cliente cliente) {
             cboVeiculo.Items.Clear();
-
             cboVeiculo.Items.AddRange(cliente.veiculos.ToArray());
         }
 
@@ -272,17 +342,17 @@ namespace SistemaGuincho.Views {
 
         private void refreshDataGridView(DataGridView dataGridView) {
             // Verifica se o cliente existe
-            if (index > -1 && orcamentos.Count > 0 && index < orcamentos.Count && orcamentos[index] != null) {
+            if (index > -1 && faturamentos.Count > 0 && index < faturamentos.Count && faturamentos[index] != null) {
 
                 List<Servico> valores = null;
 
                 if (dataGridView.Name.Equals(nameof(dgvServicos))) {
-                    valores = orcamentos[index].servicos;
+                    valores = faturamentos[index].servicos;
 
                     dataGridView.Columns.Clear();
                     dataGridView.DataSource = valores;
                 } else if (dataGridView.Name.Equals(nameof(dgvCustosAdicionais))) {
-                    valores = orcamentos[index].custosAdicionais;
+                    valores = faturamentos[index].custosAdicionais;
 
                     dataGridView.Columns.Clear();
                     dataGridView.DataSource = valores;
@@ -343,10 +413,9 @@ namespace SistemaGuincho.Views {
 
         private void windowModeChanged() {
 
-            if (index == -1 || (index > -1 && !orcamentos[index].fechado)) {
-                // Orçamento aberto
+            if (index == -1 || (index > -1 && !faturamentos[index].fechado)) {
+                // Faturamento aberto
                 btnFecharReabrir.Image = Properties.Resources.cadeado_fechado;
-
 
                 switch (windowMode) {
                     case Util.WindowMode.ModoNormal:
@@ -429,6 +498,7 @@ namespace SistemaGuincho.Views {
 
                         break;
                 }
+
             } else {
                 // Orçamento fechado
                 btnFecharReabrir.Image = Properties.Resources.cadeado_aberto;
@@ -469,7 +539,7 @@ namespace SistemaGuincho.Views {
             }
         }
 
-        private void cboVeiculo_SelectedIndexChanged(object sender, EventArgs e) {
+        private void cboSelectedIndexChanged(object sender, EventArgs e) {
             fields_keyDown(null, null);
         }
 
@@ -480,6 +550,8 @@ namespace SistemaGuincho.Views {
             txtCdCliente.Text = "";
             txtNomeCliente.Text = "";
             cboVeiculo.Items.Clear();
+            cboFormasPagamento.Items.Clear();
+            txtOrcamento.Text = "";
             txtValorTotal.Text = "";
             txtDtCriacao.Text = "";
             txtDtEncerramento.Text = "";
@@ -487,7 +559,7 @@ namespace SistemaGuincho.Views {
             clearDataGridView(dgvServicos);
             clearDataGridView(dgvCustosAdicionais);
 
-            this.Text = "Orcamento";
+            this.Text = "Faturamento";
 
             windowMode = Util.WindowMode.ModoCriacaoForm;
             windowModeChanged();
@@ -502,9 +574,9 @@ namespace SistemaGuincho.Views {
 
             if (e.RowIndex > -1) {
                 if (dgv.Name.Equals(nameof(dgvServicos)))
-                    servico = orcamentos[index].servicos[e.RowIndex];
+                    servico = faturamentos[index].servicos[e.RowIndex];
                 else if (dgv.Name.Equals(nameof(dgvCustosAdicionais)))
-                    servico = orcamentos[index].custosAdicionais[e.RowIndex];
+                    servico = faturamentos[index].custosAdicionais[e.RowIndex];
             }
 
             calculaEAtualizaInformacoesServicos(dgv, servico);
@@ -517,11 +589,11 @@ namespace SistemaGuincho.Views {
         }
 
         private void calculaEAtualizaInformacoesServicos() {
-            txtValorTotal.Text = Util.formatValor(orcamentos[index].valorTotal());
+            txtValorTotal.Text = Util.formatValor(faturamentos[index].valorTotal());
         }
 
         private void calculaEAtualizaInformacoesServicos(DataGridView dgv, Servico servico) {
-            txtValorTotal.Text = Util.formatValor(orcamentos[index].valorTotal());
+            txtValorTotal.Text = Util.formatValor(faturamentos[index].valorTotal());
 
             if (dgv.Name.Equals(nameof(dgvServicos)))
                 gravarServico_Custo(servico, Servico.TipoServico.Servico);
@@ -532,23 +604,30 @@ namespace SistemaGuincho.Views {
 
         private void criarServico_Custo(Servico servico, Servico.TipoServico tpServico) {
             if (tpServico == Servico.TipoServico.Servico) {
-                OrcamentoServicos.createServicosInOrcamento(orcamentos[index], ref servico, Servico.TipoServico.Servico);
-                orcamentos[index].servicos[orcamentos[index].servicos.Count - 1] = servico;
+                FaturamentoServicos.createServicosInFaturamento(faturamentos[index], ref servico, Servico.TipoServico.Servico);
+                faturamentos[index].servicos[faturamentos[index].servicos.Count - 1] = servico;
             } else if (tpServico == Servico.TipoServico.CustoAdicional) {
-                OrcamentoServicos.createServicosInOrcamento(orcamentos[index], ref servico, Servico.TipoServico.CustoAdicional);
-                orcamentos[index].custosAdicionais[orcamentos[index].custosAdicionais.Count - 1] = servico;
+                FaturamentoServicos.createServicosInFaturamento(faturamentos[index], ref servico, Servico.TipoServico.CustoAdicional);
+                faturamentos[index].custosAdicionais[faturamentos[index].custosAdicionais.Count - 1] = servico;
             }
         }
 
         private void gravarServico_Custo(Servico servico, Servico.TipoServico tpServico) {
             if (tpServico == Servico.TipoServico.Servico) {
-                OrcamentoServicos.updateServicosInOrcamento(servico, Servico.TipoServico.Servico);
+                FaturamentoServicos.updateServicosInFaturamento(servico, Servico.TipoServico.Servico);
             } else if (tpServico == Servico.TipoServico.CustoAdicional) {
-                OrcamentoServicos.updateServicosInOrcamento(servico, Servico.TipoServico.CustoAdicional);
+                FaturamentoServicos.updateServicosInFaturamento(servico, Servico.TipoServico.CustoAdicional);
             }
         }
 
         private void btnPesquisarCliente_Click(object sender, EventArgs e) {
+            if (index > -1 && faturamentos[index].numOrcamento > 0) {
+                MessageBox.Show("Não é possível alterar o cliente quando o faturamento foi gerado com base no orçamento",
+                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+
+                return;
+            }
+
             fields_keyDown(null, null);
 
             consultaClienteForm = new ConsultaCliente(Util.TipoConsulta.Selecao);
@@ -562,7 +641,7 @@ namespace SistemaGuincho.Views {
             if (clienteSelecionado != null) {
 
                 if (windowMode != Util.WindowMode.ModoDeInsercao) {
-                    orcamentos[index].cliente = clienteSelecionado;
+                    faturamentos[index].cliente = clienteSelecionado;
                 }
 
                 preencheInformacoesCliente(clienteSelecionado);
@@ -577,9 +656,9 @@ namespace SistemaGuincho.Views {
 
             Button botaoChamador = (Button)sender;
             if (botaoChamador.Name.Equals(nameof(btnAdicionarServico)))
-                formChamador = nameof(Orcamento.servicos);
+                formChamador = nameof(Faturamento.servicos);
             else if (botaoChamador.Name.Equals(nameof(btnAdicionarCustoAdicional)))
-                formChamador = nameof(Orcamento.custosAdicionais);
+                formChamador = nameof(Faturamento.custosAdicionais);
 
             consultaServicoForm = new ConsultaServico(Util.TipoConsulta.Selecao, formChamador);
             consultaServicoForm.FormClosing += ConsultaServicoForm_FormClosing;
@@ -593,11 +672,11 @@ namespace SistemaGuincho.Views {
             Servico.TipoServico tpServico = 0;
 
             if (servicoSelecionado != null) {
-                if (formChamador.Tag.Equals(nameof(Orcamento.servicos))) {
-                    orcamentos[index].servicos.Add(servicoSelecionado);
+                if (formChamador.Tag.Equals(nameof(Faturamento.servicos))) {
+                    faturamentos[index].servicos.Add(servicoSelecionado);
                     tpServico = Servico.TipoServico.Servico;
-                } else if (formChamador.Tag.Equals(nameof(Orcamento.custosAdicionais))) {
-                    orcamentos[index].custosAdicionais.Add(servicoSelecionado);
+                } else if (formChamador.Tag.Equals(nameof(Faturamento.custosAdicionais))) {
+                    faturamentos[index].custosAdicionais.Add(servicoSelecionado);
                     tpServico = Servico.TipoServico.CustoAdicional;
                 }
 
@@ -642,11 +721,11 @@ namespace SistemaGuincho.Views {
             // Verifica se é pra excluir serviço ou custo adicional
             if (btnExclurPressionado.Name.Equals(nameof(btnExcluirServico))) {
                 dgv = dgvServicos;
-                listaServicos = orcamentos[index].servicos;
+                listaServicos = faturamentos[index].servicos;
                 nome = "serviço";
             } else if (btnExclurPressionado.Name.Equals(nameof(btnExcluirCustoAdicional))) {
                 dgv = dgvCustosAdicionais;
-                listaServicos = orcamentos[index].custosAdicionais;
+                listaServicos = faturamentos[index].custosAdicionais;
                 nome = "custo adicional";
             }
 
@@ -659,9 +738,9 @@ namespace SistemaGuincho.Views {
 
                     // Verifica se é pra excluir serviço ou custo adicional
                     if (btnExclurPressionado.Name.Equals(nameof(btnExcluirServico))) {
-                        orcamentos[index].servicos.Remove(servicoADeletar);
+                        faturamentos[index].servicos.Remove(servicoADeletar);
                     } else if (btnExclurPressionado.Name.Equals(nameof(btnExcluirCustoAdicional))) {
-                        orcamentos[index].custosAdicionais.Remove(servicoADeletar);
+                        faturamentos[index].custosAdicionais.Remove(servicoADeletar);
                     }
 
                     dataGridView_CellEndEdit(null, null);
@@ -674,23 +753,23 @@ namespace SistemaGuincho.Views {
 
         private void btnFecharReabrir_Click(object sender, EventArgs e) {
             // Verifica se vai fechar
-            if (!orcamentos[index].fechado) {
+            if (!faturamentos[index].fechado) {
                 // Vai fechar
 
-                if (MessageBox.Show("Tem certeza que quer fechar o orçamento?",
+                if (MessageBox.Show("Tem certeza que quer fechar o faturamento?",
                         "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 
-                    Orcamento orcamentoAtualizado = orcamentos[index];
+                    Faturamento faturamentoAtualizado = faturamentos[index];
 
                     String mensagemRetorno = "";
 
                     // Verifica se fechou com sucesso
-                    if (OrcamentoServicos.fechaOrcamento(ref orcamentoAtualizado, ref mensagemRetorno)) {
-                        orcamentos[index] = orcamentoAtualizado;
+                    if (FaturamentoServicos.fechaFaturamento(ref faturamentoAtualizado, ref mensagemRetorno)) {
+                        faturamentos[index] = faturamentoAtualizado;
 
                         fillFields();
                     } else {
-                        MessageBox.Show(String.Format("Não foi possível fechar o orçamento.\n\n{0}", mensagemRetorno),
+                        MessageBox.Show(String.Format("Não foi possível fechar o faturamento.\n\n{0}", mensagemRetorno),
                             "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     }
                 }
@@ -698,20 +777,20 @@ namespace SistemaGuincho.Views {
             } else {
                 // Vai reabrir
 
-                if (MessageBox.Show("Tem certeza que quer reabrir o orçamento?",
+                if (MessageBox.Show("Tem certeza que quer reabrir o faturamento?",
                         "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 
-                    Orcamento orcamentoAtualizado = orcamentos[index];
+                    Faturamento faturamentoAtualizado = faturamentos[index];
 
                     String mensagemRetorno = "";
 
                     // Verifica se reabriu com sucesso
-                    if (OrcamentoServicos.reabreOrcamento(ref orcamentoAtualizado, ref mensagemRetorno)) {
-                        orcamentos[index] = orcamentoAtualizado;
+                    if (FaturamentoServicos.reabreFaturamento(ref faturamentoAtualizado, ref mensagemRetorno)) {
+                        faturamentos[index] = faturamentoAtualizado;
 
                         fillFields();
                     } else {
-                        MessageBox.Show(String.Format("Não foi possível reabrir o orçamento.\n\n{0}", mensagemRetorno),
+                        MessageBox.Show(String.Format("Não foi possível reabrir o faturamento.\n\n{0}", mensagemRetorno),
                             "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     }
                 }
@@ -750,7 +829,58 @@ namespace SistemaGuincho.Views {
             String url = sender.Tag.ToString();
             System.Diagnostics.Process.Start(url);
         }
-        
+
+        private void txtOrcamento_MouseDoubleClick(object sender, MouseEventArgs e) {
+            if (index > -1) {
+                int numOrcamento = faturamentos[index].numOrcamento;
+                int numFaturamento = faturamentos[index].id;
+                String cliente = faturamentos[index].cliente.nome;
+
+                if (numOrcamento > 0) {
+                    // Cria o menu de contexto
+                    ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+                    ToolStripMenuItem toolStripMenuItem;
+
+                    toolStripMenuItem = new ToolStripMenuItem(String.Format("Desvicular orçamento {0} do faturamento {1}", numOrcamento, numFaturamento));
+                    toolStripMenuItem.Click += (_sender, _e) => {
+                        // desviculaOrcamentoDoFaturamento
+                        faturamentos[index].numOrcamento = 0;
+                        FaturamentoServicos.update(faturamentos[index]);
+
+                        btnAtualizar_Click(null, null);
+                    };
+                    contextMenuStrip.Items.Add(toolStripMenuItem);
+
+                    // Exibe o menu de contexto
+                    contextMenuStrip.Show(this, this.PointToClient(MousePosition));
+                } else {
+                    // Cria o menu de contexto
+                    ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+                    ToolStripMenuItem toolStripMenuItem;
+
+                    toolStripMenuItem = new ToolStripMenuItem(String.Format("Vincular faturamento {0} com orçamento do cliente {1}", numFaturamento, cliente));
+                    toolStripMenuItem.Click += (_sender, _e) => {
+                        // vincularOrcamentoAoFaturamento
+                        consultaOrcamentoForm = new ConsultaOrcamento(Util.TipoConsulta.Selecao, true, faturamentos[index].cliente.id);
+                        consultaOrcamentoForm.FormClosing += (__sender, __e) => {
+                            Orcamento orcamentoSelecionado = consultaOrcamentoForm.orcamentoSelecionado;
+
+                            if (orcamentoSelecionado != null) {
+                                faturamentos[index].numOrcamento = orcamentoSelecionado.id;
+                                FaturamentoServicos.update(faturamentos[index]);
+
+                                btnAtualizar_Click(null, null);
+                            }
+                        };
+                        consultaOrcamentoForm.Show();
+                    };
+                    contextMenuStrip.Items.Add(toolStripMenuItem);
+
+                    // Exibe o menu de contexto
+                    contextMenuStrip.Show(this, this.PointToClient(MousePosition));
+                }
+            }
+        }
         #endregion
     }
 }

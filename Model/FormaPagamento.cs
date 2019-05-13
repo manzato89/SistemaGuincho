@@ -20,5 +20,9 @@ namespace SistemaGuincho.Model {
             this.numParcelas = numParcelas;
             this.entrada = entrada;
         }
+
+        public override string ToString() {
+            return String.Format("{0} - {1}x - {2}", descricao, numParcelas, (entrada? "Com entrada" : "Sem entrada"));
+        }
     }
 }

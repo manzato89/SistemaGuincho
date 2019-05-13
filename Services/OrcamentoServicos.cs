@@ -29,14 +29,27 @@ namespace SistemaGuincho.Servicos {
 
             orcamento.fechado = true;
             orcamento.dataEncerramento = DateTime.Now;
+            OrcamentoRepositorio.Instance.update(orcamento);
             return true;
         }
 
         public static bool reabreOrcamento(ref Orcamento orcamento) { String mensagemVazia = ""; return reabreOrcamento(ref orcamento, ref mensagemVazia); }
 
         public static bool reabreOrcamento(ref Orcamento orcamento, ref String mensagemRetorno) {
+            List<Faturamento> faturamentosGerados = FaturamentoRepositorio.Instance.read(String.Format("numOrcamento = {0}", orcamento.id));
+            if (faturamentosGerados.Count > 0) {
+                mensagemRetorno = "Existem faturamentos gerados a partir desse orçamento.\n" +
+                    "Para reabrir esse orçamento:\n" +
+                    " - Exclua os faturamentos gerados a partir desse orçamento ou\n" +
+                    " - Desvicule os faturamentos gerados desse orçamento\n\n" +
+                    "E repita o processo";
+
+                return false;
+            }
+
             orcamento.fechado = false;
             orcamento.dataEncerramento = null;
+            OrcamentoRepositorio.Instance.update(orcamento);
             return true;
         }
         #endregion

@@ -16,7 +16,10 @@ namespace SistemaGuincho.Views {
 
         public Orcamento orcamentoSelecionado;
 
-        private Views.Orcamentos formOrcamento;
+        private Orcamentos formOrcamento;
+
+        private bool apenasFechado;
+        private int idCliente;
         #endregion
 
         #region Inicialização da classe
@@ -25,14 +28,23 @@ namespace SistemaGuincho.Views {
             CenterToScreen();
         }
 
-        public ConsultaOrcamento(Util.TipoConsulta tpConsulta) {
+        public ConsultaOrcamento(Util.TipoConsulta tpConsulta, bool apenasFechado = false, int idCliente = -1) {
             init();
 
             this.tpConsulta = tpConsulta;
+            this.apenasFechado = apenasFechado;
+            this.idCliente = idCliente;
         }
 
         private void getFromRepositorio() {
-            orcamentos = OrcamentoRepositorio.Instance.read();
+            if (apenasFechado && idCliente > -1)
+                orcamentos = OrcamentoRepositorio.Instance.read(String.Format("fechado = 1 AND _idCliente = {0}", idCliente));
+            else if (apenasFechado)
+                orcamentos = OrcamentoRepositorio.Instance.read("fechado = 1");
+            else if (idCliente > -1)
+                orcamentos = OrcamentoRepositorio.Instance.read(String.Format("_idCliente = {0}", idCliente));
+            else
+                orcamentos = OrcamentoRepositorio.Instance.read();
 
             orcamentos_view = new List<Model.Orcamento>(orcamentos);
         }

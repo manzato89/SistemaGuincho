@@ -1,5 +1,5 @@
 ﻿namespace SistemaGuincho.Views {
-    partial class Orcamentos {
+    partial class Faturamentos {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -23,12 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.lblNumOrcamento = new System.Windows.Forms.Label();
+            this.lblNumFaturamento = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblVeiculo = new System.Windows.Forms.Label();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
+            this.cboFormasPagamento = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnPesquisarCliente = new System.Windows.Forms.Button();
             this.txtDtEncerramento = new System.Windows.Forms.TextBox();
             this.cboVeiculo = new System.Windows.Forms.ComboBox();
@@ -36,6 +38,8 @@
             this.txtCdCliente = new System.Windows.Forms.TextBox();
             this.txtDtCriacao = new System.Windows.Forms.TextBox();
             this.lblDtGeracao = new System.Windows.Forms.Label();
+            this.txtOrcamento = new System.Windows.Forms.TextBox();
+            this.lblFaturamentoGerado = new System.Windows.Forms.Label();
             this.txtValorTotal = new System.Windows.Forms.TextBox();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.dgvServicos = new System.Windows.Forms.DataGridView();
@@ -65,15 +69,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustosAdicionais)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblNumOrcamento
+            // lblNumFaturamento
             // 
-            this.lblNumOrcamento.AutoSize = true;
-            this.lblNumOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumOrcamento.Location = new System.Drawing.Point(16, 26);
-            this.lblNumOrcamento.Name = "lblNumOrcamento";
-            this.lblNumOrcamento.Size = new System.Drawing.Size(58, 16);
-            this.lblNumOrcamento.TabIndex = 0;
-            this.lblNumOrcamento.Text = "Código";
+            this.lblNumFaturamento.AutoSize = true;
+            this.lblNumFaturamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumFaturamento.Location = new System.Drawing.Point(16, 26);
+            this.lblNumFaturamento.Name = "lblNumFaturamento";
+            this.lblNumFaturamento.Size = new System.Drawing.Size(58, 16);
+            this.lblNumFaturamento.TabIndex = 0;
+            this.lblNumFaturamento.Text = "Código";
             // 
             // txtID
             // 
@@ -117,6 +121,8 @@
             // 
             // grpDadosBasicos
             // 
+            this.grpDadosBasicos.Controls.Add(this.cboFormasPagamento);
+            this.grpDadosBasicos.Controls.Add(this.label1);
             this.grpDadosBasicos.Controls.Add(this.btnPesquisarCliente);
             this.grpDadosBasicos.Controls.Add(this.txtDtEncerramento);
             this.grpDadosBasicos.Controls.Add(this.cboVeiculo);
@@ -126,18 +132,41 @@
             this.grpDadosBasicos.Controls.Add(this.lblVeiculo);
             this.grpDadosBasicos.Controls.Add(this.lblDtGeracao);
             this.grpDadosBasicos.Controls.Add(this.txtNomeCliente);
+            this.grpDadosBasicos.Controls.Add(this.txtOrcamento);
             this.grpDadosBasicos.Controls.Add(this.lblCliente);
             this.grpDadosBasicos.Controls.Add(this.txtID);
-            this.grpDadosBasicos.Controls.Add(this.lblNumOrcamento);
+            this.grpDadosBasicos.Controls.Add(this.lblFaturamentoGerado);
+            this.grpDadosBasicos.Controls.Add(this.lblNumFaturamento);
             this.grpDadosBasicos.Controls.Add(this.txtValorTotal);
             this.grpDadosBasicos.Controls.Add(this.lblValorTotal);
             this.grpDadosBasicos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpDadosBasicos.Location = new System.Drawing.Point(20, 56);
+            this.grpDadosBasicos.Location = new System.Drawing.Point(20, 50);
             this.grpDadosBasicos.Name = "grpDadosBasicos";
-            this.grpDadosBasicos.Size = new System.Drawing.Size(912, 87);
+            this.grpDadosBasicos.Size = new System.Drawing.Size(912, 121);
             this.grpDadosBasicos.TabIndex = 33;
             this.grpDadosBasicos.TabStop = false;
             this.grpDadosBasicos.Text = "Dados Básicos";
+            // 
+            // cboFormasPagamento
+            // 
+            this.cboFormasPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFormasPagamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboFormasPagamento.FormattingEnabled = true;
+            this.cboFormasPagamento.Location = new System.Drawing.Point(178, 58);
+            this.cboFormasPagamento.Name = "cboFormasPagamento";
+            this.cboFormasPagamento.Size = new System.Drawing.Size(241, 24);
+            this.cboFormasPagamento.TabIndex = 56;
+            this.cboFormasPagamento.SelectedIndexChanged += new System.EventHandler(this.cboSelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(157, 16);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "Forma de Pagamento";
             // 
             // btnPesquisarCliente
             // 
@@ -160,7 +189,7 @@
             // 
             this.txtDtEncerramento.BackColor = System.Drawing.SystemColors.Control;
             this.txtDtEncerramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDtEncerramento.Location = new System.Drawing.Point(317, 58);
+            this.txtDtEncerramento.Location = new System.Drawing.Point(507, 92);
             this.txtDtEncerramento.Name = "txtDtEncerramento";
             this.txtDtEncerramento.ReadOnly = true;
             this.txtDtEncerramento.Size = new System.Drawing.Size(74, 22);
@@ -175,13 +204,13 @@
             this.cboVeiculo.Name = "cboVeiculo";
             this.cboVeiculo.Size = new System.Drawing.Size(241, 24);
             this.cboVeiculo.TabIndex = 29;
-            this.cboVeiculo.SelectedIndexChanged += new System.EventHandler(this.cboVeiculo_SelectedIndexChanged);
+            this.cboVeiculo.SelectedIndexChanged += new System.EventHandler(this.cboSelectedIndexChanged);
             // 
             // lblDtEncerramento
             // 
             this.lblDtEncerramento.AutoSize = true;
             this.lblDtEncerramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDtEncerramento.Location = new System.Drawing.Point(187, 60);
+            this.lblDtEncerramento.Location = new System.Drawing.Point(377, 94);
             this.lblDtEncerramento.Name = "lblDtEncerramento";
             this.lblDtEncerramento.Size = new System.Drawing.Size(127, 16);
             this.lblDtEncerramento.TabIndex = 53;
@@ -202,7 +231,7 @@
             // 
             this.txtDtCriacao.BackColor = System.Drawing.SystemColors.Control;
             this.txtDtCriacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDtCriacao.Location = new System.Drawing.Point(105, 58);
+            this.txtDtCriacao.Location = new System.Drawing.Point(295, 92);
             this.txtDtCriacao.Name = "txtDtCriacao";
             this.txtDtCriacao.ReadOnly = true;
             this.txtDtCriacao.Size = new System.Drawing.Size(74, 22);
@@ -212,17 +241,38 @@
             // 
             this.lblDtGeracao.AutoSize = true;
             this.lblDtGeracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDtGeracao.Location = new System.Drawing.Point(17, 60);
+            this.lblDtGeracao.Location = new System.Drawing.Point(207, 94);
             this.lblDtGeracao.Name = "lblDtGeracao";
             this.lblDtGeracao.Size = new System.Drawing.Size(85, 16);
             this.lblDtGeracao.TabIndex = 51;
             this.lblDtGeracao.Text = "Dt. Criação";
             // 
+            // txtOrcamento
+            // 
+            this.txtOrcamento.BackColor = System.Drawing.SystemColors.Control;
+            this.txtOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrcamento.Location = new System.Drawing.Point(125, 92);
+            this.txtOrcamento.Name = "txtOrcamento";
+            this.txtOrcamento.ReadOnly = true;
+            this.txtOrcamento.Size = new System.Drawing.Size(74, 22);
+            this.txtOrcamento.TabIndex = 31;
+            this.txtOrcamento.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtOrcamento_MouseDoubleClick);
+            // 
+            // lblFaturamentoGerado
+            // 
+            this.lblFaturamentoGerado.AutoSize = true;
+            this.lblFaturamentoGerado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFaturamentoGerado.Location = new System.Drawing.Point(18, 94);
+            this.lblFaturamentoGerado.Name = "lblFaturamentoGerado";
+            this.lblFaturamentoGerado.Size = new System.Drawing.Size(104, 16);
+            this.lblFaturamentoGerado.TabIndex = 30;
+            this.lblFaturamentoGerado.Text = "Nº Orçamento";
+            // 
             // txtValorTotal
             // 
             this.txtValorTotal.BackColor = System.Drawing.SystemColors.Control;
             this.txtValorTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValorTotal.Location = new System.Drawing.Point(790, 58);
+            this.txtValorTotal.Location = new System.Drawing.Point(790, 92);
             this.txtValorTotal.Name = "txtValorTotal";
             this.txtValorTotal.ReadOnly = true;
             this.txtValorTotal.Size = new System.Drawing.Size(116, 26);
@@ -233,7 +283,7 @@
             // 
             this.lblValorTotal.AutoSize = true;
             this.lblValorTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValorTotal.Location = new System.Drawing.Point(691, 60);
+            this.lblValorTotal.Location = new System.Drawing.Point(691, 94);
             this.lblValorTotal.Name = "lblValorTotal";
             this.lblValorTotal.Size = new System.Drawing.Size(96, 20);
             this.lblValorTotal.TabIndex = 30;
@@ -260,7 +310,7 @@
             this.grpServicos.Controls.Add(this.btnAdicionarServico);
             this.grpServicos.Controls.Add(this.btnExcluirServico);
             this.grpServicos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpServicos.Location = new System.Drawing.Point(22, 147);
+            this.grpServicos.Location = new System.Drawing.Point(20, 173);
             this.grpServicos.Name = "grpServicos";
             this.grpServicos.Size = new System.Drawing.Size(913, 216);
             this.grpServicos.TabIndex = 36;
@@ -305,9 +355,9 @@
             this.grpCustosAdicionais.Controls.Add(this.btnAdicionarCustoAdicional);
             this.grpCustosAdicionais.Controls.Add(this.btnExcluirCustoAdicional);
             this.grpCustosAdicionais.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpCustosAdicionais.Location = new System.Drawing.Point(22, 375);
+            this.grpCustosAdicionais.Location = new System.Drawing.Point(20, 387);
             this.grpCustosAdicionais.Name = "grpCustosAdicionais";
-            this.grpCustosAdicionais.Size = new System.Drawing.Size(913, 183);
+            this.grpCustosAdicionais.Size = new System.Drawing.Size(913, 172);
             this.grpCustosAdicionais.TabIndex = 49;
             this.grpCustosAdicionais.TabStop = false;
             this.grpCustosAdicionais.Text = "Custos Adicionais";
@@ -322,7 +372,7 @@
             this.dgvCustosAdicionais.Location = new System.Drawing.Point(6, 54);
             this.dgvCustosAdicionais.MultiSelect = false;
             this.dgvCustosAdicionais.Name = "dgvCustosAdicionais";
-            this.dgvCustosAdicionais.Size = new System.Drawing.Size(898, 120);
+            this.dgvCustosAdicionais.Size = new System.Drawing.Size(898, 112);
             this.dgvCustosAdicionais.TabIndex = 36;
             this.dgvCustosAdicionais.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
             this.dgvCustosAdicionais.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView_CellValidating);
@@ -365,7 +415,7 @@
             this.btnConsultarValorServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnConsultarValorServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarValorServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultarValorServico.Location = new System.Drawing.Point(492, 13);
+            this.btnConsultarValorServico.Location = new System.Drawing.Point(492, 7);
             this.btnConsultarValorServico.Name = "btnConsultarValorServico";
             this.btnConsultarValorServico.Size = new System.Drawing.Size(227, 32);
             this.btnConsultarValorServico.TabIndex = 55;
@@ -380,7 +430,7 @@
             this.btnFecharReabrir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFecharReabrir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFecharReabrir.Image = global::SistemaGuincho.Properties.Resources.cadeado_aberto;
-            this.btnFecharReabrir.Location = new System.Drawing.Point(343, 13);
+            this.btnFecharReabrir.Location = new System.Drawing.Point(343, 7);
             this.btnFecharReabrir.Name = "btnFecharReabrir";
             this.btnFecharReabrir.Size = new System.Drawing.Size(66, 36);
             this.btnFecharReabrir.TabIndex = 50;
@@ -394,7 +444,7 @@
             this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPesquisar.Image = global::SistemaGuincho.Properties.Resources.search;
-            this.btnPesquisar.Location = new System.Drawing.Point(408, 13);
+            this.btnPesquisar.Location = new System.Drawing.Point(408, 7);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(66, 36);
             this.btnPesquisar.TabIndex = 42;
@@ -465,7 +515,7 @@
             this.btnAtualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtualizar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAtualizar.Image = global::SistemaGuincho.Properties.Resources.sign_sync;
-            this.btnAtualizar.Location = new System.Drawing.Point(278, 13);
+            this.btnAtualizar.Location = new System.Drawing.Point(278, 7);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(66, 36);
             this.btnAtualizar.TabIndex = 37;
@@ -480,7 +530,7 @@
             this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcluir.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnExcluir.Image = global::SistemaGuincho.Properties.Resources.trashcan;
-            this.btnExcluir.Location = new System.Drawing.Point(213, 13);
+            this.btnExcluir.Location = new System.Drawing.Point(213, 7);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(66, 36);
             this.btnExcluir.TabIndex = 14;
@@ -495,7 +545,7 @@
             this.btnGravar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGravar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGravar.Image = global::SistemaGuincho.Properties.Resources.sign_check;
-            this.btnGravar.Location = new System.Drawing.Point(83, 13);
+            this.btnGravar.Location = new System.Drawing.Point(83, 7);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(66, 36);
             this.btnGravar.TabIndex = 13;
@@ -511,7 +561,7 @@
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCancelar.Image = global::SistemaGuincho.Properties.Resources.sign_ban;
-            this.btnCancelar.Location = new System.Drawing.Point(148, 13);
+            this.btnCancelar.Location = new System.Drawing.Point(148, 7);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(66, 36);
             this.btnCancelar.TabIndex = 15;
@@ -526,7 +576,7 @@
             this.btnAdicionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdicionar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnAdicionar.Image = global::SistemaGuincho.Properties.Resources.sign_add;
-            this.btnAdicionar.Location = new System.Drawing.Point(22, 13);
+            this.btnAdicionar.Location = new System.Drawing.Point(22, 7);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(65, 36);
             this.btnAdicionar.TabIndex = 12;
@@ -534,7 +584,7 @@
             this.btnAdicionar.UseVisualStyleBackColor = false;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
-            // Orcamentos
+            // Faturamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -556,8 +606,8 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAdicionar);
             this.MaximizeBox = false;
-            this.Name = "Orcamentos";
-            this.Text = "Orçamento";
+            this.Name = "Faturamentos";
+            this.Text = "Faturamento";
             this.grpDadosBasicos.ResumeLayout(false);
             this.grpDadosBasicos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).EndInit();
@@ -570,7 +620,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblNumOrcamento;
+        private System.Windows.Forms.Label lblNumFaturamento;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtNomeCliente;
         private System.Windows.Forms.Label lblCliente;
@@ -599,11 +649,15 @@
         private System.Windows.Forms.TextBox txtValorTotal;
         private System.Windows.Forms.Label lblValorTotal;
         private System.Windows.Forms.Button btnFecharReabrir;
+        private System.Windows.Forms.Label lblFaturamentoGerado;
+        private System.Windows.Forms.TextBox txtOrcamento;
         private System.Windows.Forms.Button btnPesquisarCliente;
         private System.Windows.Forms.TextBox txtDtCriacao;
         private System.Windows.Forms.Label lblDtGeracao;
         private System.Windows.Forms.TextBox txtDtEncerramento;
         private System.Windows.Forms.Label lblDtEncerramento;
         private System.Windows.Forms.Button btnConsultarValorServico;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboFormasPagamento;
     }
 }

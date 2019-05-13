@@ -50,7 +50,7 @@ namespace SistemaGuincho.Views{
         }
 
         private void button1_Click(object sender, EventArgs e){
-
+            new Faturamentos().ShowDialog();
         }
 
         private void ordemDeServiçoToolStripMenuItem1_Click(object sender, EventArgs e){

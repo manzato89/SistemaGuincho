@@ -96,7 +96,6 @@ namespace SistemaGuincho.Repositorio {
             return true;
         }
 
-        
 
         public List<Orcamento> read() {
             try {
@@ -104,6 +103,27 @@ namespace SistemaGuincho.Repositorio {
                 connection.Open();
 
                 List<Orcamento> orcamentos = connection.Query<Orcamento>("SELECT * FROM Orcamento").ToList();
+                foreach (Orcamento orcamento in orcamentos) {
+                    orcamento.servicos = OrcamentoServicoRepositorio.Instance.getServicosPorOrcamento(orcamento.id, Servico.TipoServico.Servico);
+                    orcamento.custosAdicionais = OrcamentoServicoRepositorio.Instance.getServicosPorOrcamento(orcamento.id, Servico.TipoServico.CustoAdicional);
+                    orcamento.cliente = ClienteRepositorio.Instance.read(orcamento._idCliente);
+                    orcamento.veiculo = VeiculoRepositorio.Instance.read(orcamento._idVeiculo);
+                }
+
+                connection.Close();
+
+                return orcamentos;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+
+        public List<Orcamento> read(String complementoWhere) {
+            try {
+                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                connection.Open();
+
+                List<Orcamento> orcamentos = connection.Query<Orcamento>(String.Format("SELECT * FROM Orcamento WHERE 1 = 1 AND {0}", complementoWhere)).ToList();
                 foreach (Orcamento orcamento in orcamentos) {
                     orcamento.servicos = OrcamentoServicoRepositorio.Instance.getServicosPorOrcamento(orcamento.id, Servico.TipoServico.Servico);
                     orcamento.custosAdicionais = OrcamentoServicoRepositorio.Instance.getServicosPorOrcamento(orcamento.id, Servico.TipoServico.CustoAdicional);
