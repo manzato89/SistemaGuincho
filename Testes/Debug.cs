@@ -154,6 +154,24 @@ namespace SistemaGuincho.Testes {
             return unidades;
         }
 
+        public static List<FormaPagamento> getFormasDePagamentoDeTeste() {
+            List<FormaPagamento> formasDePagamento = new List<FormaPagamento>();
+
+            FormaPagamento formaPagamento1 = new FormaPagamento("Á vista", 1, true);   formaPagamento1.id = 1;
+            FormaPagamento formaPagamento2 = new FormaPagamento("3x", 3, false);       formaPagamento2.id = 2;
+            FormaPagamento formaPagamento3 = new FormaPagamento("6x", 6, false);       formaPagamento3.id = 3;
+            FormaPagamento formaPagamento4 = new FormaPagamento("1 + 9x", 10, true);   formaPagamento4.id = 4;
+            FormaPagamento formaPagamento5 = new FormaPagamento("1 + 11x", 12, true);  formaPagamento5.id = 5;
+
+            formasDePagamento.Add(formaPagamento1);
+            formasDePagamento.Add(formaPagamento2);
+            formasDePagamento.Add(formaPagamento3);
+            formasDePagamento.Add(formaPagamento4);
+            formasDePagamento.Add(formaPagamento5);
+
+            return formasDePagamento;
+        }
+
         public static List<Servico> getServicosDeTeste() {
             Unidade unidade1 = new Unidade("UN", "Unidade");    unidade1.id = 1;
             Unidade unidade2 = new Unidade("KM", "Kilômetro");  unidade2.id = 2;
@@ -232,6 +250,45 @@ namespace SistemaGuincho.Testes {
             orcamentos.Add(orcamento);
 
             return orcamentos;
+        }
+
+        public static List<Faturamento> getFaturamentosDeTeste() {
+            List<Faturamento> faturamentos = new List<Faturamento>();
+
+            List<Cliente> clientes = getClientesDeTeste();
+            List<Servico> servicos = getServicosDeTeste();
+            List<Orcamento> orcamentos = getOrcamentosDeTeste().FindAll(find => find.fechado);
+            List<FormaPagamento> formasDePagamento = getFormasDePagamentoDeTeste();
+            Servico servico, custoAdicional;
+
+            // Faturamento 1
+            Faturamento faturamento = new Faturamento(clientes[0], clientes[0].veiculos[0]);
+
+            servico = servicos[2];
+            servico._quantidade = 5;
+            servico._idServicoOrcFat = 3;
+            faturamento.servicos.Add(servico);
+
+            custoAdicional = servicos[1];
+            custoAdicional._quantidade = 10;
+            custoAdicional._idServicoOrcFat = 1;
+            faturamento.custosAdicionais.Add(custoAdicional);
+
+            faturamento.fechado = false;
+            faturamento.formaPagamento = formasDePagamento[2];
+            faturamento._idFormaPagamento = formasDePagamento[2].id;
+            faturamento.id = 1;
+            faturamentos.Add(faturamento);
+
+            // Faturamento 2
+            faturamento = Servicos.FaturamentoServicos.criaFaturamentoComBaseEmOrcamento(orcamentos[0]);
+
+            faturamento.formaPagamento = formasDePagamento[0];
+            faturamento._idFormaPagamento = formasDePagamento[0].id;
+            faturamento.id = 2;
+            faturamentos.Add(faturamento);
+
+            return faturamentos;
         }
 
     }

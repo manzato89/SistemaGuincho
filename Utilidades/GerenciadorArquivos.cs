@@ -21,5 +21,8 @@ namespace SistemaGuincho.Utilidades {
             System.IO.Directory.CreateDirectory(folder);
         }
 
+        public static string readFile(string file) {
+            return System.IO.File.ReadAllText(file);
+        }
     }
 }

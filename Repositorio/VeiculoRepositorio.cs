@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +27,16 @@ namespace SistemaGuincho.Repositorio {
         #endregion
 
         #region Init
-        public void createTable(SQLiteConnection connection) {
+        public void createTable(SqlConnection connection) {
             StringBuilder strSQL;
 
             // Criação da tabela auxiliar Veiculos
             if (connection.GetSchema("Tables", new[] { null, null, "Veiculo", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE Veiculo (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" idCliente INTEGER, ");
                 strSQL.AppendLine(" tpVeiculo INTEGER, ");
                 strSQL.AppendLine(" modelo NVARCHAR(30), ");
@@ -57,13 +57,13 @@ namespace SistemaGuincho.Repositorio {
         public bool create(ref Veiculo newVeiculo) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("INSERT INTO Veiculo (idCliente, tpVeiculo, modelo, cor, ano, placa, cidadePlaca, ufPlaca) ");
                 strSQL.AppendLine("VALUES (@_idCliente, @tpVeiculo, @modelo, @cor, @ano, @placa, @cidadePlaca, @ufPlaca); ");
-                strSQL.AppendLine("select last_insert_rowid();");
+                strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 newVeiculo.id = connection.Query<int>(strSQL.ToString(),
                     new {
@@ -85,7 +85,7 @@ namespace SistemaGuincho.Repositorio {
 
         public List<Veiculo> read(Cliente cliente) {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 List<Veiculo> veiculos = connection.Query<Veiculo>("SELECT * FROM Veiculo WHERE idCliente = @id", new { cliente.id }).ToList();
@@ -100,7 +100,7 @@ namespace SistemaGuincho.Repositorio {
 
         public List<Veiculo> read() {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 List<Veiculo> veiculos = connection.Query<Veiculo>("SELECT * FROM Veiculo").ToList();
@@ -115,7 +115,7 @@ namespace SistemaGuincho.Repositorio {
 
         public Veiculo read(int idVeiculo) {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 Veiculo veiculo = connection.Query<Veiculo>("SELECT * FROM Veiculo WHERE id = @idVeiculo",
@@ -134,7 +134,7 @@ namespace SistemaGuincho.Repositorio {
         public bool update(Veiculo newVeiculo) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();
@@ -169,7 +169,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(Veiculo veiculo) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();
@@ -190,7 +190,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(int idCliente) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();

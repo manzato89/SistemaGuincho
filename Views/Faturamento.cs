@@ -151,15 +151,7 @@ namespace SistemaGuincho.Views {
             Orcamento orcamentoSelecionado = consultaOrcamentoForm.orcamentoSelecionado;
 
             if (orcamentoSelecionado != null) {
-                Faturamento newFaturamento = new Faturamento(orcamentoSelecionado.cliente, orcamentoSelecionado.veiculo);
-
-                foreach (Servico servico in orcamentoSelecionado.servicos)
-                    newFaturamento.servicos.Add(servico);
-
-                foreach (Servico custoAdicional in orcamentoSelecionado.custosAdicionais)
-                    newFaturamento.custosAdicionais.Add(custoAdicional);
-
-                newFaturamento.numOrcamento = orcamentoSelecionado.id;
+                Faturamento newFaturamento = FaturamentoServicos.criaFaturamentoComBaseEmOrcamento(orcamentoSelecionado);
 
                 FaturamentoServicos.create(ref newFaturamento);
 

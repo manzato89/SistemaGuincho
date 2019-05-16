@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +26,16 @@ namespace SistemaGuincho.Repositorio {
         }
         #endregion
 
-        public void createTable(SQLiteConnection connection) {
+        public void createTable(SqlConnection connection) {
             StringBuilder strSQL;
 
             //Criação da tabela auxiliar
             if (connection.GetSchema("Tables", new[] { null, null, "Faturamento_Servicos", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE Faturamento_Servicos (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" idFaturamento INTEGER, ");
                 strSQL.AppendLine(" idServico INTEGER, ");
                 strSQL.AppendLine(" valor REAL, ");
@@ -49,11 +49,11 @@ namespace SistemaGuincho.Repositorio {
 
             //Criação da tabela auxiliar
             if (connection.GetSchema("Tables", new[] { null, null, "Faturamento_CustosAdicionais", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE Faturamento_CustosAdicionais (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" idFaturamento INTEGER, ");
                 strSQL.AppendLine(" idServico INTEGER, ");
                 strSQL.AppendLine(" valor REAL, ");
@@ -69,7 +69,7 @@ namespace SistemaGuincho.Repositorio {
         public bool criaServicosNoFaturamento(Faturamento faturamento, ref Servico servico, Servico.TipoServico tpServico) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             String classe = "";
             if (tpServico == Servico.TipoServico.Servico)
@@ -82,7 +82,7 @@ namespace SistemaGuincho.Repositorio {
                 strSQL = new StringBuilder();
                 strSQL.AppendLine(String.Format("INSERT INTO {0} (idFaturamento, idServico, valor, quantidade) ", classe));
                 strSQL.AppendLine("VALUES (@idFaturamento, @idServico, @valor, @quantidade); ");
-                strSQL.AppendLine("select last_insert_rowid();");
+                strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 int idFaturamento = faturamento.id;
                 int idServico = servico.id;
@@ -112,13 +112,13 @@ namespace SistemaGuincho.Repositorio {
             try {
                 List<Servico> servicos = new List<Servico>();
 
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
                 command.CommandText = String.Format("SELECT * FROM {0} WHERE idFaturamento = {1}", classe, idFaturamento);
 
-                SQLiteDataReader drServicos = command.ExecuteReader();
+                SqlDataReader drServicos = command.ExecuteReader();
                 while (drServicos.Read()) {
                     // Pega o ID e cria o serviço com base nele
                     int idServico = -1;
@@ -160,7 +160,7 @@ namespace SistemaGuincho.Repositorio {
 
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             int idServicoOrcFat = servico._idServicoOrcFat;
 
@@ -187,7 +187,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(Servico servico, Servico.TipoServico tpServico) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             String classe = "";
             if (tpServico == Servico.TipoServico.Servico)

@@ -41,6 +41,21 @@ namespace SistemaGuincho.Servicos {
             FaturamentoRepositorio.Instance.update(faturamento);
             return true;
         }
+
+        public static Faturamento criaFaturamentoComBaseEmOrcamento(Orcamento orcamentoSelecionado) {
+            Faturamento newFaturamento = new Faturamento(orcamentoSelecionado.cliente, orcamentoSelecionado.veiculo);
+
+            foreach (Servico servico in orcamentoSelecionado.servicos)
+                newFaturamento.servicos.Add(servico);
+
+            foreach (Servico custoAdicional in orcamentoSelecionado.custosAdicionais)
+                newFaturamento.custosAdicionais.Add(custoAdicional);
+
+            newFaturamento.numOrcamento = orcamentoSelecionado.id;
+
+            return newFaturamento;
+        }
+
         #endregion
 
         #region CRUD

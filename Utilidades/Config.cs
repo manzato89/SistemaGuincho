@@ -7,26 +7,27 @@ using System.Threading.Tasks;
 namespace SistemaGuincho.Utilidades {
     public static class Config {
         #region Propriedades
-        public static string fileNameDB { get; set; }
         public static string fileNameConfig { get; set; }
         public static string folderConfig { get; set; }
+        public static string connectionStringFile { get; set; }
+        public static string connectionStringFolder { get; set; }
 
         public static bool debug = true;
         public static bool registrosCriados = false;
         #endregion
 
-        public static void init() {
+        public static bool init() {
             folderConfig = "Config";
-            if (!(System.IO.Directory.Exists(Environment.CurrentDirectory + "\\" + folderConfig)))
-                System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + "\\" + folderConfig);
+            if (!(GerenciadorArquivos.folderExists(Environment.CurrentDirectory + "\\" + folderConfig)))
+                GerenciadorArquivos.createFolder(Environment.CurrentDirectory + "\\" + folderConfig);
 
-            if (!debug) {
-                fileNameDB = "SistemaGuincho.sqlite";
-                fileNameConfig = "SistemaGuincho.txt";
-            } else {
-                fileNameDB = "_debug_SistemaGuincho.sqlite";
-                fileNameConfig = "_debug_SistemaGuincho.txt";
-            }
+            //connectionStringFolder = Environment.CurrentDirectory + "\\" + folderConfig;
+            connectionStringFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            connectionStringFile = connectionStringFolder + "\\" + nameof(connectionStringFile) + ".txt";
+            if (!(GerenciadorArquivos.fileExists(connectionStringFile)))
+                return false;
+
+            return true;
         }
 
     }

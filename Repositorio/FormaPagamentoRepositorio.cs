@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +27,16 @@ namespace SistemaGuincho.Repositorio {
         #endregion
 
         #region Init
-        public void createTable(SQLiteConnection connection) {
+        public void createTable(SqlConnection connection) {
             StringBuilder strSQL;
 
             //Criação da tabela principal
             if (connection.GetSchema("Tables", new[] { null, null, "FormaPagamento", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE FormaPagamento (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" descricao TEXT, ");
                 strSQL.AppendLine(" numParcelas INTEGER, ");
                 strSQL.AppendLine(" entrada INTEGER) ");
@@ -52,14 +52,14 @@ namespace SistemaGuincho.Repositorio {
         public bool create(ref FormaPagamento formaPagamento) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 // Cria o cliente
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("INSERT INTO FormaPagamento (descricao, numParcelas, entrada) ");
                 strSQL.AppendLine("VALUES (@descricao, @numParcelas, @entrada); ");
-                strSQL.AppendLine("select last_insert_rowid();");
+                strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 formaPagamento.id = connection.Query<int>(strSQL.ToString(),
                     new {
@@ -76,7 +76,7 @@ namespace SistemaGuincho.Repositorio {
 
         public List<FormaPagamento> read() {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 List<FormaPagamento> formaPagamentos = connection.Query<FormaPagamento>("SELECT * FROM FormaPagamento").ToList();
@@ -91,7 +91,7 @@ namespace SistemaGuincho.Repositorio {
 
         public FormaPagamento read(int id) {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 FormaPagamento formaPagamento = connection.Query<FormaPagamento>("SELECT * FROM FormaPagamento WHERE id = @id", new { id }).First();
@@ -107,7 +107,7 @@ namespace SistemaGuincho.Repositorio {
         public bool update(FormaPagamento formaPagamento) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();
@@ -134,7 +134,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(FormaPagamento formaPagamento) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();

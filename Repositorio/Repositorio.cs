@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace SistemaGuincho.Repositorio{
     public interface Repositorio <T> {
@@ -12,6 +12,6 @@ namespace SistemaGuincho.Repositorio{
         T read(int id);
         bool update(T obj);
         bool delete(T obj);
-        void createTable(SQLiteConnection sqlLiteConnection);
+        void createTable(SqlConnection sqlServerConnection);
     }
 }

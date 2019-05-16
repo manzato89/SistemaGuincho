@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +27,16 @@ namespace SistemaGuincho.Repositorio {
         #endregion
 
         #region Init
-        public void createTable(SQLiteConnection connection) {
+        public void createTable(SqlConnection connection) {
             StringBuilder strSQL;
 
             //Criação da tabela principal
             if (connection.GetSchema("Tables", new[] { null, null, "Unidade", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE Unidade (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" codigo TEXT, ");
                 strSQL.AppendLine(" descricao TEXT) ");
 
@@ -51,14 +51,14 @@ namespace SistemaGuincho.Repositorio {
         public bool create(ref Unidade unidade) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 // Cria o cliente
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("INSERT INTO Unidade (codigo, descricao) ");
                 strSQL.AppendLine("VALUES (@codigo, @descricao); ");
-                strSQL.AppendLine("select last_insert_rowid();");
+                strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 unidade.id = connection.Query<int>(strSQL.ToString(),
                     new {
@@ -74,7 +74,7 @@ namespace SistemaGuincho.Repositorio {
 
         public List<Unidade> read() {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 List<Unidade> unidades = connection.Query<Unidade>("SELECT * FROM Unidade").ToList();
@@ -89,7 +89,7 @@ namespace SistemaGuincho.Repositorio {
 
         public Unidade read(int id) {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 Unidade unidade = connection.Query<Unidade>("SELECT * FROM Unidade WHERE id = @id", new { id }).First();
@@ -105,7 +105,7 @@ namespace SistemaGuincho.Repositorio {
         public bool update(Unidade unidade) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();
@@ -130,7 +130,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(Unidade unidade) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();

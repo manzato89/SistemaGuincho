@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +27,16 @@ namespace SistemaGuincho.Repositorio {
         #endregion
 
         #region Init
-        public void createTable(SQLiteConnection connection) {
+        public void createTable(SqlConnection connection) {
             StringBuilder strSQL;
 
             //Criação da tabela principal
             if (connection.GetSchema("Tables", new[] { null, null, "Servico", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE Servico (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" descricao TEXT, ");
                 strSQL.AppendLine(" _idUnidade INTEGER, ");
                 strSQL.AppendLine(" valor REAL) ");
@@ -52,14 +52,14 @@ namespace SistemaGuincho.Repositorio {
         public bool create(ref Servico servico) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 // Cria o cliente
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("INSERT INTO Servico (descricao, _idUnidade, valor) ");
                 strSQL.AppendLine("VALUES (@descricao, @_idUnidade, @valor); ");
-                strSQL.AppendLine("select last_insert_rowid();");
+                strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 int _idUnidade = servico.unidade.id;
 
@@ -78,7 +78,7 @@ namespace SistemaGuincho.Repositorio {
 
         public List<Servico> read(){
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 List<Servico> servicos = connection.Query<Servico>("SELECT * FROM Servico").ToList();
@@ -96,7 +96,7 @@ namespace SistemaGuincho.Repositorio {
 
         public Servico read(int id) {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
                 connection.Open();
 
                 Servico servico = connection.Query<Servico>("SELECT * FROM Servico WHERE id = @id", new { id }).First();
@@ -113,7 +113,7 @@ namespace SistemaGuincho.Repositorio {
         public bool update(Servico servico) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();
@@ -142,7 +142,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(Servico servico) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
 
             try {
                 strSQL = new StringBuilder();

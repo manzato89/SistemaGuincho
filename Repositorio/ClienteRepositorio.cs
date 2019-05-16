@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using SistemaGuincho.Model;
 
 namespace SistemaGuincho.Repositorio {
@@ -27,7 +27,7 @@ namespace SistemaGuincho.Repositorio {
         #endregion
 
         #region Init
-        public void createTable(SQLiteConnection connection) {
+        public void createTable(SqlConnection connection) {
             StringBuilder strSQL;
 
             // Criação da tabela auxiliar Endereço - É necessário criá-la primeiro pois a tabela Cliente a referencia
@@ -37,11 +37,11 @@ namespace SistemaGuincho.Repositorio {
 
             //Criação da tabela principal
             if (connection.GetSchema("Tables", new[] { null, null, "Cliente", null }).Rows.Count == 0) {
-                SQLiteCommand command = connection.CreateCommand();
+                SqlCommand command = connection.CreateCommand();
 
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("CREATE TABLE Cliente (");
-                strSQL.AppendLine(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
+                strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" nome NVARCHAR(50), ");
                 strSQL.AppendLine(" cpf NVARCHAR(11), ");
                 strSQL.AppendLine(" rg NVARCHAR(15), ");
@@ -63,7 +63,7 @@ namespace SistemaGuincho.Repositorio {
         public bool create(ref Cliente cliente) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();;
 
             // Cria o endereço
             Endereco clienteEndereco = cliente.endereco;
@@ -75,7 +75,7 @@ namespace SistemaGuincho.Repositorio {
                 strSQL = new StringBuilder();
                 strSQL.AppendLine("INSERT INTO Cliente (nome, cpf, rg, _idEndereco, dataNascimento, email, fone1, fone2) ");
                 strSQL.AppendLine("VALUES (@nome, @cpf, @rg, @_idEndereco, @dataNascimento, @email, @fone1, @fone2); ");
-                strSQL.AppendLine("select last_insert_rowid();");
+                strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 int _idEndereco = cliente.endereco.id;
 
@@ -106,7 +106,7 @@ namespace SistemaGuincho.Repositorio {
 
         public List<Cliente> read(){
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();;
                 connection.Open();
 
                 List<Cliente> clientes = connection.Query<Cliente>("SELECT * FROM Cliente").ToList();
@@ -125,7 +125,7 @@ namespace SistemaGuincho.Repositorio {
         
         public Cliente read(int id) {
             try {
-                SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+                SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();;
                 connection.Open();
 
                 Cliente cliente = connection.Query<Cliente>("SELECT * FROM Cliente WHERE id = @id", new { id }).First();
@@ -143,7 +143,7 @@ namespace SistemaGuincho.Repositorio {
         public bool update(Cliente cliente) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();;
 
             try {
                 strSQL = new StringBuilder();
@@ -191,7 +191,7 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(Cliente cliente) {
             StringBuilder strSQL = new StringBuilder();
 
-            SQLiteConnection connection = SQLiteDatabase.SQLiteDatabaseConnection();
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();;
 
             try {
                 strSQL = new StringBuilder();
