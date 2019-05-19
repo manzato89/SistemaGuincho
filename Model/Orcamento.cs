@@ -42,19 +42,28 @@ namespace SistemaGuincho.Model {
 
         }
 
-        public float valorTotal() {
+        public float valorTotalServicos() {
             float valorTotal = 0;
 
             foreach (Servico servico in servicos) {
                 valorTotal += servico.valor * servico._quantidade;
             }
 
+            return valorTotal;
+        }
+
+        public float valorTotalCustosAdicionais() {
+            float valorTotal = 0;
+
             foreach (Servico servico in custosAdicionais) {
                 valorTotal += servico.valor * servico._quantidade;
             }
 
             return valorTotal;
+        }
 
+        public float valorTotal() {
+            return valorTotalServicos() + valorTotalCustosAdicionais();
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,16 @@ namespace SistemaGuincho.Servicos {
             orcamento.dataEncerramento = null;
             OrcamentoRepositorio.Instance.update(orcamento);
             return true;
+        }
+
+        public static List<Orcamento> reportOrcamento(Relatorios.Faturamento_OrcamentoFiltroRelatorio faturamentoFiltroRelatorio) {
+            List<Orcamento> orcamentos = new List<Orcamento>();
+            List<int> idsOrcamentos = FaturamentoRepositorio.Instance.reportFaturamento(faturamentoFiltroRelatorio);
+
+            foreach(int id in idsOrcamentos)
+                orcamentos.Add(read(id));
+
+            return orcamentos;
         }
         #endregion
 

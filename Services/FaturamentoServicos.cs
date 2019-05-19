@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,15 @@ namespace SistemaGuincho.Servicos {
             return newFaturamento;
         }
 
+        public static List<Faturamento> reportFaturamento(Relatorios.Faturamento_OrcamentoFiltroRelatorio faturamentoFiltroRelatorio) {
+            List<Faturamento> faturamentos = new List<Faturamento>();
+            List<int> idsFaturamentos = FaturamentoRepositorio.Instance.reportFaturamento(faturamentoFiltroRelatorio);
+
+            foreach (int id in idsFaturamentos)
+                faturamentos.Add(read(id));
+
+            return faturamentos;
+        }
         #endregion
 
         #region CRUD

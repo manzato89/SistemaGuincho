@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using SistemaGuincho.Model;
+using SistemaGuincho.Utilidades;
 
 namespace SistemaGuincho.Repositorio {
     public class FaturamentoRepositorio : Repositorio<Faturamento> {
@@ -235,6 +236,136 @@ namespace SistemaGuincho.Repositorio {
         public bool delete(int id) {
             // TIDI
             return true;
+        }
+        #endregion
+
+        #region Relatórios
+        public List<int> reportFaturamento(Relatorios.Faturamento_OrcamentoFiltroRelatorio faturamentoFiltroRelatorio) {
+            String classePrincipal = "";
+            String campoRelacionamentoClasses = "";
+            String classeServico = "";
+            String classeCustoAdicional = "";
+
+            switch (faturamentoFiltroRelatorio.tpRelatorio) {
+                case Relatorios.Faturamento_OrcamentoFiltroRelatorio.TipoRelatorio.Orcamento:
+                    classePrincipal = "Orcamento";
+                    campoRelacionamentoClasses = "idOrcamento";
+                    classeServico = "Orcamento_Servicos";
+                    classeCustoAdicional = "Orcamento_CustosAdicionais";
+                    break;
+                case Relatorios.Faturamento_OrcamentoFiltroRelatorio.TipoRelatorio.Faturamento:
+                    classePrincipal = "Faturamento";
+                    campoRelacionamentoClasses = "idFaturamento";
+                    classeServico = "Faturamento_Servicos";
+                    classeCustoAdicional = "Faturamento_CustosAdicionais";
+                    break;
+            }
+
+            StringBuilder strSQLWhere = new StringBuilder();
+            strSQLWhere.Append(" 1 = 1\n");
+
+            if (faturamentoFiltroRelatorio.apenasFechados) {
+                strSQLWhere.AppendFormat(" AND FaturamentoOrcamento.fechado = 1\n");
+            }
+
+            if (faturamentoFiltroRelatorio.dtCriacaoInicio != null && faturamentoFiltroRelatorio.dtCriacaoFim != null) {
+                faturamentoFiltroRelatorio.dtCriacaoFim = faturamentoFiltroRelatorio.dtCriacaoFim.Value.AddHours(23).AddMinutes(59);
+                strSQLWhere.AppendFormat(" AND FaturamentoOrcamento.dataCriacao BETWEEN '{0}' AND '{1}'\n", Util.dateTimeToSQLDateTimeFormat(faturamentoFiltroRelatorio.dtCriacaoInicio.Value), Util.dateTimeToSQLDateTimeFormat(faturamentoFiltroRelatorio.dtCriacaoFim.Value));
+            }
+
+            if (faturamentoFiltroRelatorio.dtEncerramentoInicio != null && faturamentoFiltroRelatorio.dtEncerramentoFim != null) {
+                faturamentoFiltroRelatorio.dtEncerramentoFim = faturamentoFiltroRelatorio.dtEncerramentoFim.Value.AddHours(23).AddMinutes(59);
+                strSQLWhere.AppendFormat(" AND FaturamentoOrcamento.dataEncerramento BETWEEN '{0}' AND '{1}'\n", Util.dateTimeToSQLDateTimeFormat(faturamentoFiltroRelatorio.dtEncerramentoInicio.Value), Util.dateTimeToSQLDateTimeFormat(faturamentoFiltroRelatorio.dtEncerramentoFim.Value));
+            }
+
+            if (faturamentoFiltroRelatorio.servicosSelecionados != null && faturamentoFiltroRelatorio.servicosSelecionados.Count > 0) {
+                strSQLWhere.Append("AND (");
+
+                int iCount = 0;
+                Servico servico;
+                for (; iCount < faturamentoFiltroRelatorio.servicosSelecionados.Count - 1; iCount++) {
+                    servico = faturamentoFiltroRelatorio.servicosSelecionados[iCount];
+                    strSQLWhere.AppendFormat(" FO_Servico.idServico = {0} OR ", servico.id);
+                }
+                servico = faturamentoFiltroRelatorio.servicosSelecionados[iCount];
+                strSQLWhere.AppendFormat(" FO_Servico.idServico = {0}", servico.id);
+
+                strSQLWhere.Append(")\n");
+            }
+
+            if (faturamentoFiltroRelatorio.custosAdicionaisSelecionados != null && faturamentoFiltroRelatorio.custosAdicionaisSelecionados.Count > 0) {
+                strSQLWhere.Append("AND (");
+
+                int iCount = 0;
+                Servico custoAdicional;
+                for (; iCount < faturamentoFiltroRelatorio.custosAdicionaisSelecionados.Count - 1; iCount++) {
+                    custoAdicional = faturamentoFiltroRelatorio.custosAdicionaisSelecionados[iCount];
+                    strSQLWhere.AppendFormat(" FO_CustoAdicional.idServico = {0} OR ", custoAdicional.id);
+                }
+                custoAdicional = faturamentoFiltroRelatorio.custosAdicionaisSelecionados[iCount];
+                strSQLWhere.AppendFormat(" FO_CustoAdicional.idServico = {0} ", custoAdicional.id);
+
+                strSQLWhere.Append(")\n");
+            }
+
+            if (faturamentoFiltroRelatorio.clientesSelecionados != null && faturamentoFiltroRelatorio.clientesSelecionados.Count > 0) {
+                strSQLWhere.Append("AND (");
+
+                int iCount = 0;
+                Cliente cliente;
+                for (; iCount < faturamentoFiltroRelatorio.clientesSelecionados.Count - 1; iCount++) {
+                    cliente = faturamentoFiltroRelatorio.clientesSelecionados[iCount];
+                    strSQLWhere.AppendFormat(" FaturamentoOrcamento._idCliente = {0} OR ", cliente.id);
+                }
+                cliente = faturamentoFiltroRelatorio.clientesSelecionados[iCount];
+                strSQLWhere.AppendFormat(" FaturamentoOrcamento._idCliente = {0} ", cliente.id);
+
+                strSQLWhere.Append(")\n");
+            }
+
+            if (faturamentoFiltroRelatorio.tpRelatorio == Relatorios.Faturamento_OrcamentoFiltroRelatorio.TipoRelatorio.Faturamento) {
+                if (faturamentoFiltroRelatorio.formasPagamentoSelecionadas != null && faturamentoFiltroRelatorio.formasPagamentoSelecionadas.Count > 0) {
+                    strSQLWhere.Append("AND (");
+
+                    int iCount = 0;
+                    FormaPagamento formaPagamento;
+                    for (; iCount < faturamentoFiltroRelatorio.clientesSelecionados.Count - 1; iCount++) {
+                        formaPagamento = faturamentoFiltroRelatorio.formasPagamentoSelecionadas[iCount];
+                        strSQLWhere.AppendFormat(" FaturamentoOrcamento._idFormaPagamento = {0} OR ", formaPagamento.id);
+                    }
+                    formaPagamento = faturamentoFiltroRelatorio.formasPagamentoSelecionadas[iCount];
+                    strSQLWhere.AppendFormat(" FaturamentoOrcamento._idFormaPagamento = {0} ", formaPagamento.id);
+
+                    strSQLWhere.Append(")\n");
+                }
+            }
+
+            StringBuilder strSQL = new StringBuilder();
+            strSQL.Append("SELECT FaturamentoOrcamento.id \n");
+            strSQL.AppendFormat("FROM   {0} AS FaturamentoOrcamento \n", classePrincipal);
+            strSQL.AppendFormat("       LEFT JOIN {0} AS FO_Servico ON FaturamentoOrcamento.id = FO_Servico.{1} \n", classeServico, campoRelacionamentoClasses);
+            strSQL.AppendFormat("       LEFT JOIN {0} AS FO_CustoAdicional ON FaturamentoOrcamento.id = FO_CustoAdicional.{1} \n", classeCustoAdicional, campoRelacionamentoClasses);
+            strSQL.AppendFormat("WHERE {0}", strSQLWhere.ToString());
+
+
+            SqlConnection connection = SQLServerDatabase.Instance.SQLServerDatabaseConnection();
+            connection.Open();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = strSQL.ToString();
+
+            SqlDataReader reader = command.ExecuteReader();
+            List<int> registros = new List<int>();
+            while (reader.Read()) {
+                int idOrcamento = -1;
+                int.TryParse(reader["id"].ToString(), out idOrcamento);
+
+                registros.Add(idOrcamento);
+            }
+
+            connection.Close();
+
+            return registros;
         }
         #endregion
 

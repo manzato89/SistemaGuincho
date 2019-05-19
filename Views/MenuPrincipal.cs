@@ -34,6 +34,10 @@ namespace SistemaGuincho.Views{
             new Views.Unidades().ShowDialog();
         }
 
+        private void consultaFaturamentosToolStripMenuItem_Clic(object sender, EventArgs e) {
+            new Relatorios.FaturamentoReport().ShowDialog();
+        }
+
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e){
             Frm_Categoria frm = new Frm_Categoria();
             frm.Show();

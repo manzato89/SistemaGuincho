@@ -33,6 +33,7 @@
             this.serviçosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formasDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviçosCategoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,7 @@
             this.btn_Orcamento = new System.Windows.Forms.Button();
             this.btn_Cliente = new System.Windows.Forms.Button();
             this.btn_CadServico = new System.Windows.Forms.Button();
-            this.formasDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.faturamentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,10 +94,18 @@
             this.unidadesToolStripMenuItem.Text = "Unidades";
             this.unidadesToolStripMenuItem.Click += new System.EventHandler(this.unidadesToolStripMenuItem_Click);
             // 
+            // formasDePagamentoToolStripMenuItem
+            // 
+            this.formasDePagamentoToolStripMenuItem.Name = "formasDePagamentoToolStripMenuItem";
+            this.formasDePagamentoToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.formasDePagamentoToolStripMenuItem.Text = "Formas de pagamento";
+            this.formasDePagamentoToolStripMenuItem.Click += new System.EventHandler(this.formasDePagamentoToolStripMenuItem_Click);
+            // 
             // consultasToolStripMenuItem
             // 
             this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.serviçosCategoriasToolStripMenuItem});
+            this.serviçosCategoriasToolStripMenuItem,
+            this.faturamentosToolStripMenuItem});
             this.consultasToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
             this.consultasToolStripMenuItem.Size = new System.Drawing.Size(116, 19);
@@ -201,12 +210,12 @@
             this.btn_CadServico.UseVisualStyleBackColor = false;
             this.btn_CadServico.Click += new System.EventHandler(this.btn_CadServico_Click);
             // 
-            // formasDePagamentoToolStripMenuItem
+            // faturamentosToolStripMenuItem
             // 
-            this.formasDePagamentoToolStripMenuItem.Name = "formasDePagamentoToolStripMenuItem";
-            this.formasDePagamentoToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.formasDePagamentoToolStripMenuItem.Text = "Formas de pagamento";
-            this.formasDePagamentoToolStripMenuItem.Click += new System.EventHandler(this.formasDePagamentoToolStripMenuItem_Click);
+            this.faturamentosToolStripMenuItem.Name = "faturamentosToolStripMenuItem";
+            this.faturamentosToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.faturamentosToolStripMenuItem.Text = "Faturamentos";
+            this.faturamentosToolStripMenuItem.Click += new System.EventHandler(this.consultaFaturamentosToolStripMenuItem_Clic);
             // 
             // MenuPrincipal
             // 
@@ -246,6 +255,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem unidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem formasDePagamentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem faturamentosToolStripMenuItem;
     }
 }
 

@@ -50,5 +50,10 @@ namespace SistemaGuincho.Utilidades {
 
             return text.Substring(iInicio, iFim - iInicio);
         }
+
+        public static string dateTimeToSQLDateTimeFormat(DateTime dateTime) {
+            return dateTime.ToString("yyyy/MM/dd HH:mm:ss");
+        }
+
     }
 }
