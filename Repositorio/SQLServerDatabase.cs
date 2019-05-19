@@ -18,7 +18,7 @@ namespace SistemaGuincho.Repositorio {
 
                     string servidor = Util.getContentBetween(connectionStringFileContent, "SERVIDOR");
                     string bancoDeDados = Util.getContentBetween(connectionStringFileContent, "BANCO DE DADOS");
-                    string usuario = Util.getContentBetween(connectionStringFileContent, "USUÁRIO");
+                    string usuario = Util.getContentBetween(connectionStringFileContent, "USUARIO");
                     string senha = Util.getContentBetween(connectionStringFileContent, "SENHA");
 
                     if (servidor == null || bancoDeDados == null || usuario == null || senha == null)
