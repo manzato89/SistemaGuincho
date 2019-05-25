@@ -764,6 +764,12 @@ namespace SistemaGuincho.Views {
                         faturamentos[index] = faturamentoAtualizado;
 
                         fillFields();
+
+                        if (MessageBox.Show("Gostaria de imprimir o recibo?",
+                            "Recibo de Faturamento", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                            btnImprimirRecibo_Click(null, null);
+                        }
+
                     } else {
                         MessageBox.Show(String.Format("Não foi possível fechar o faturamento.\n\n{0}", mensagemRetorno),
                             "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
