@@ -80,7 +80,7 @@ namespace SistemaGuincho{
                 }
             }
 
-            Application.Run(new Views.MenuPrincipal());
+            Application.Run(new Views.Senha());
         }
     }
 }

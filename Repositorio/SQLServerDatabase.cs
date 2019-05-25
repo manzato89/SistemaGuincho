@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using SistemaGuincho.Utilidades;
+using Dapper;
 
 namespace SistemaGuincho.Repositorio {
     public class SQLServerDatabase {
@@ -81,5 +82,69 @@ namespace SistemaGuincho.Repositorio {
             connection.Close();
         }
 
+        public bool firstLogin() {
+            SqlConnection connection = Instance.SQLServerDatabaseConnection();
+            connection.Open();
+
+            bool firstLogin;
+
+            if (connection.GetSchema("Tables", new[] { null, null, "Config", null }).Rows.Count == 0)
+                firstLogin = true;
+            else
+                firstLogin = false;
+
+            connection.Close();
+
+            return firstLogin;
+        }
+
+        public void createConfigTable(String senha) {
+            SqlConnection connection =  Instance.SQLServerDatabaseConnection();
+
+            StringBuilder strSQL;
+
+            connection.Open();
+
+            if (connection.GetSchema("Tables", new[] { null, null, "Config", null }).Rows.Count == 0) {
+                SqlCommand command = connection.CreateCommand();
+
+                strSQL = new StringBuilder();
+                strSQL.AppendLine("CREATE TABLE Config (");
+                strSQL.AppendLine(" senha TEXT) ");
+
+                command.CommandText = strSQL.ToString();
+                command.ExecuteNonQuery();
+            }
+
+            strSQL = new StringBuilder();
+            strSQL.AppendLine("INSERT INTO Config (senha) ");
+            strSQL.AppendLine("VALUES (@senha); ");
+
+            connection.Query(strSQL.ToString(), new {
+                senha
+            });
+
+            connection.Close();
+        }
+
+        public bool tryLogin(String password) {
+            SqlConnection connection = Instance.SQLServerDatabaseConnection();
+            connection.Open();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT senha FROM Config";
+
+            SqlDataReader drConfig = command.ExecuteReader();
+            String senhaDoSistema = "";
+            while (drConfig.Read())
+                senhaDoSistema = drConfig["senha"].ToString();
+
+            connection.Close();
+
+            if (password.Equals(senhaDoSistema))
+                return true;
+            else
+                return false;
+        }
     }
 }

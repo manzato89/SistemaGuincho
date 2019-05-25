@@ -151,6 +151,12 @@
     <Compile Include="Views\FormasPagamento.Designer.cs">
       <DependentUpon>FormasPagamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Senha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Senha.Designer.cs">
+      <DependentUpon>Senha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Unidades.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormasPagamento.resx">
       <DependentUpon>FormasPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Senha.resx">
+      <DependentUpon>Senha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Unidades.resx">
       <DependentUpon>Unidades.cs</DependentUpon>
