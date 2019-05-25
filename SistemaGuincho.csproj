@@ -75,6 +75,12 @@
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\FaturamentoFiltroRelatorio.cs" />
+    <Compile Include="Relatorios\Recibo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\Recibo.Designer.cs">
+      <DependentUpon>Recibo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositorio\EnderecoRepositorio.cs" />
     <Compile Include="Repositorio\FaturamentoRepositorio.cs" />
     <Compile Include="Repositorio\OrcamentoRepositorio.cs" />
@@ -207,6 +213,9 @@
     </Compile>
     <EmbeddedResource Include="Frm_Categoria.resx">
       <DependentUpon>Frm_Categoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\Recibo.resx">
+      <DependentUpon>Recibo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AdicionarVeiculo.resx">
       <DependentUpon>AdicionarVeiculo.cs</DependentUpon>

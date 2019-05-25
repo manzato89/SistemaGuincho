@@ -27,5 +27,9 @@ namespace SistemaGuincho.Model {
             this.uf = uf;
         }
 
+        public override string ToString() {
+            return String.Format("{0}, {1} {2}", logradouro, numero, complemento);
+        }
+
     }
 }

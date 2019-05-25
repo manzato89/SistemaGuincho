@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 using SistemaGuincho.Model;
@@ -357,5 +359,7 @@ namespace SistemaGuincho.Relatorios {
             }
         }
         #endregion
+
+        
     }
 }

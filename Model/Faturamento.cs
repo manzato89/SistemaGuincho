@@ -44,6 +44,26 @@ namespace SistemaGuincho.Model {
                 _idVeiculo = veiculo.id;
         }
 
+        public String servicos_custosAdicionais() {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (Servico servico in servicos) {
+                stringBuilder.Append(servico.descricao);
+                stringBuilder.Append(" (");
+                stringBuilder.Append(servico._quantidade);
+                stringBuilder.Append(") ");
+            }
+
+            foreach (Servico custoAdicional in custosAdicionais) {
+                stringBuilder.Append(custoAdicional.descricao);
+                stringBuilder.Append(" (");
+                stringBuilder.Append(custoAdicional._quantidade);
+                stringBuilder.Append(")");
+            }
+
+            return stringBuilder.ToString();
+        }
+
         public float valorTotalServicos() {
             float valorTotal = 0;
 

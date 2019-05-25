@@ -62,6 +62,7 @@
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
+            this.btnImprimirRecibo = new System.Windows.Forms.Button();
             this.grpDadosBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).BeginInit();
             this.grpServicos.SuspendLayout();
@@ -415,9 +416,9 @@
             this.btnConsultarValorServico.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnConsultarValorServico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConsultarValorServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultarValorServico.Location = new System.Drawing.Point(492, 7);
+            this.btnConsultarValorServico.Location = new System.Drawing.Point(541, 7);
             this.btnConsultarValorServico.Name = "btnConsultarValorServico";
-            this.btnConsultarValorServico.Size = new System.Drawing.Size(227, 32);
+            this.btnConsultarValorServico.Size = new System.Drawing.Size(203, 32);
             this.btnConsultarValorServico.TabIndex = 55;
             this.btnConsultarValorServico.Text = "Consultar valores dos serviços";
             this.btnConsultarValorServico.UseVisualStyleBackColor = false;
@@ -584,12 +585,27 @@
             this.btnAdicionar.UseVisualStyleBackColor = false;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
+            // btnImprimirRecibo
+            // 
+            this.btnImprimirRecibo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnImprimirRecibo.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnImprimirRecibo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimirRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimirRecibo.Image = global::SistemaGuincho.Properties.Resources.search;
+            this.btnImprimirRecibo.Location = new System.Drawing.Point(473, 7);
+            this.btnImprimirRecibo.Name = "btnImprimirRecibo";
+            this.btnImprimirRecibo.Size = new System.Drawing.Size(66, 36);
+            this.btnImprimirRecibo.TabIndex = 56;
+            this.btnImprimirRecibo.UseVisualStyleBackColor = false;
+            this.btnImprimirRecibo.Click += new System.EventHandler(this.btnImprimirRecibo_Click);
+            // 
             // Faturamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(944, 561);
+            this.Controls.Add(this.btnImprimirRecibo);
             this.Controls.Add(this.btnConsultarValorServico);
             this.Controls.Add(this.btnFecharReabrir);
             this.Controls.Add(this.grpCustosAdicionais);
@@ -659,5 +675,6 @@
         private System.Windows.Forms.Button btnConsultarValorServico;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboFormasPagamento;
+        private System.Windows.Forms.Button btnImprimirRecibo;
     }
 }

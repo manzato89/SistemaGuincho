@@ -408,6 +408,7 @@ namespace SistemaGuincho.Views {
             if (index == -1 || (index > -1 && !faturamentos[index].fechado)) {
                 // Faturamento aberto
                 btnFecharReabrir.Image = Properties.Resources.cadeado_fechado;
+                btnImprimirRecibo.Enabled = false;
 
                 switch (windowMode) {
                     case Util.WindowMode.ModoNormal:
@@ -487,6 +488,7 @@ namespace SistemaGuincho.Views {
                         grpCustosAdicionais.Enabled = false;
 
                         btnFecharReabrir.Enabled = false;
+                        btnImprimirRecibo.Enabled = false;
 
                         break;
                 }
@@ -494,6 +496,7 @@ namespace SistemaGuincho.Views {
             } else {
                 // Orçamento fechado
                 btnFecharReabrir.Image = Properties.Resources.cadeado_aberto;
+                btnImprimirRecibo.Enabled = true;
 
                 enableFields(false);
 
@@ -505,6 +508,7 @@ namespace SistemaGuincho.Views {
                 btnPesquisar.Enabled = true;
 
                 btnFecharReabrir.Enabled = true;
+                btnImprimirRecibo.Enabled = true;
 
                 grpServicos.Enabled = false;
                 grpCustosAdicionais.Enabled = false;
@@ -873,6 +877,11 @@ namespace SistemaGuincho.Views {
                 }
             }
         }
+
+        private void btnImprimirRecibo_Click(object sender, EventArgs e) {
+            new Relatorios.Recibo(faturamentos[index]).ShowDialog();
+        }
+
         #endregion
     }
 }
