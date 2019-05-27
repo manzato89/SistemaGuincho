@@ -39,7 +39,7 @@
             // lblRecibo
             // 
             this.lblRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRecibo.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblRecibo.ForeColor = System.Drawing.SystemColors.Desktop;
             this.lblRecibo.Location = new System.Drawing.Point(12, 9);
             this.lblRecibo.Name = "lblRecibo";
             this.lblRecibo.Size = new System.Drawing.Size(783, 38);
@@ -153,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(808, 447);
             this.Controls.Add(this.lblCidadeData);
             this.Controls.Add(this.lblServicosCustosAdicionais);
