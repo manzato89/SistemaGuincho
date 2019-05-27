@@ -23,8 +23,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblID = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtDescricao = new System.Windows.Forms.TextBox();
@@ -33,6 +33,9 @@
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
             this.gpb_ddBasicCliente = new System.Windows.Forms.GroupBox();
+            this.chkEntrada = new System.Windows.Forms.CheckBox();
+            this.txtNumParcelas = new System.Windows.Forms.TextBox();
+            this.lblNumParcelas = new System.Windows.Forms.Label();
             this.dgvFormasPagamento = new System.Windows.Forms.DataGridView();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
@@ -46,9 +49,6 @@
             this.lblBusca = new System.Windows.Forms.Label();
             this.txtBusca = new System.Windows.Forms.TextBox();
             this.btnAdicionar = new System.Windows.Forms.Button();
-            this.txtNumParcelas = new System.Windows.Forms.TextBox();
-            this.lblNumParcelas = new System.Windows.Forms.Label();
-            this.chkEntrada = new System.Windows.Forms.CheckBox();
             this.gpb_ddBasicCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFormasPagamento)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -149,29 +149,58 @@
             this.gpb_ddBasicCliente.TabStop = false;
             this.gpb_ddBasicCliente.Text = "Unidade";
             // 
+            // chkEntrada
+            // 
+            this.chkEntrada.AutoSize = true;
+            this.chkEntrada.Location = new System.Drawing.Point(636, 31);
+            this.chkEntrada.Name = "chkEntrada";
+            this.chkEntrada.Size = new System.Drawing.Size(69, 17);
+            this.chkEntrada.TabIndex = 7;
+            this.chkEntrada.Text = "Entrada?";
+            this.chkEntrada.UseVisualStyleBackColor = true;
+            this.chkEntrada.CheckedChanged += new System.EventHandler(this.fields_keyDown);
+            // 
+            // txtNumParcelas
+            // 
+            this.txtNumParcelas.Location = new System.Drawing.Point(558, 28);
+            this.txtNumParcelas.Name = "txtNumParcelas";
+            this.txtNumParcelas.Size = new System.Drawing.Size(60, 20);
+            this.txtNumParcelas.TabIndex = 5;
+            this.txtNumParcelas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
+            // 
+            // lblNumParcelas
+            // 
+            this.lblNumParcelas.AutoSize = true;
+            this.lblNumParcelas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumParcelas.Location = new System.Drawing.Point(496, 31);
+            this.lblNumParcelas.Name = "lblNumParcelas";
+            this.lblNumParcelas.Size = new System.Drawing.Size(56, 13);
+            this.lblNumParcelas.TabIndex = 4;
+            this.lblNumParcelas.Text = "Parcelas";
+            // 
             // dgvFormasPagamento
             // 
             this.dgvFormasPagamento.AllowUserToAddRows = false;
             this.dgvFormasPagamento.AllowUserToDeleteRows = false;
             this.dgvFormasPagamento.AllowUserToOrderColumns = true;
             this.dgvFormasPagamento.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFormasPagamento.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFormasPagamento.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvFormasPagamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFormasPagamento.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFormasPagamento.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFormasPagamento.Location = new System.Drawing.Point(6, 21);
             this.dgvFormasPagamento.MultiSelect = false;
             this.dgvFormasPagamento.Name = "dgvFormasPagamento";
@@ -258,7 +287,7 @@
             this.groupBox2.Size = new System.Drawing.Size(842, 354);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Lista de unidades";
+            this.groupBox2.Text = "Lista de formas de pagamento";
             // 
             // tableLayoutPanel1
             // 
@@ -335,35 +364,6 @@
             this.btnAdicionar.UseVisualStyleBackColor = false;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
-            // txtNumParcelas
-            // 
-            this.txtNumParcelas.Location = new System.Drawing.Point(558, 28);
-            this.txtNumParcelas.Name = "txtNumParcelas";
-            this.txtNumParcelas.Size = new System.Drawing.Size(60, 20);
-            this.txtNumParcelas.TabIndex = 5;
-            this.txtNumParcelas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
-            // 
-            // lblNumParcelas
-            // 
-            this.lblNumParcelas.AutoSize = true;
-            this.lblNumParcelas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumParcelas.Location = new System.Drawing.Point(496, 31);
-            this.lblNumParcelas.Name = "lblNumParcelas";
-            this.lblNumParcelas.Size = new System.Drawing.Size(56, 13);
-            this.lblNumParcelas.TabIndex = 4;
-            this.lblNumParcelas.Text = "Parcelas";
-            // 
-            // chkEntrada
-            // 
-            this.chkEntrada.AutoSize = true;
-            this.chkEntrada.Location = new System.Drawing.Point(636, 31);
-            this.chkEntrada.Name = "chkEntrada";
-            this.chkEntrada.Size = new System.Drawing.Size(69, 17);
-            this.chkEntrada.TabIndex = 7;
-            this.chkEntrada.Text = "Entrada?";
-            this.chkEntrada.UseVisualStyleBackColor = true;
-            this.chkEntrada.CheckedChanged += new System.EventHandler(this.fields_keyDown);
-            // 
             // FormasPagamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,7 +383,7 @@
             this.Controls.Add(this.btnGravar);
             this.MaximizeBox = false;
             this.Name = "FormasPagamento";
-            this.Text = "Serviços";
+            this.Text = "Formas de Pagamento";
             this.gpb_ddBasicCliente.ResumeLayout(false);
             this.gpb_ddBasicCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFormasPagamento)).EndInit();
