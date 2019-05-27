@@ -22,8 +22,7 @@ namespace SistemaGuincho.Views{
         }
 
         private void btn_CadCategoria_Click(object sender, EventArgs e){
-            Frm_Categoria frm = new Frm_Categoria();
-            frm.Show();
+;
         }
 
         private void serviçosToolStripMenuItem_Click(object sender, EventArgs e){
@@ -39,18 +38,15 @@ namespace SistemaGuincho.Views{
         }
 
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e){
-            Frm_Categoria frm = new Frm_Categoria();
-            frm.Show();
+
         }
 
         private void serviçosCategoriasToolStripMenuItem_Click(object sender, EventArgs e){
-            Frm_ConsultaServicos frm = new Frm_ConsultaServicos();
-            frm.Show();
+
         }
 
         private void ordemDeServiçoToolStripMenuItem_Click(object sender, EventArgs e){
-            Frm_OrdemServico frm = new Frm_OrdemServico();
-            frm.Show();
+
         }
 
         private void button1_Click(object sender, EventArgs e){
@@ -58,8 +54,7 @@ namespace SistemaGuincho.Views{
         }
 
         private void ordemDeServiçoToolStripMenuItem1_Click(object sender, EventArgs e){
-            Frm_OrdemServico frm = new Frm_OrdemServico();
-            frm.Show();
+
         }
 
         private void btn_Cliente_Click(object sender, EventArgs e) {

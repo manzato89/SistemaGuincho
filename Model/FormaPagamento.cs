@@ -10,15 +10,16 @@ namespace SistemaGuincho.Model {
         public int id { get; set; }
         public string descricao { get; set; }
         public int numParcelas { get; set; }
+        public float percJuros { get; set; }
         public bool entrada { get; set; }
-
 
         public FormaPagamento() { }
 
-        public FormaPagamento(string descricao, int numParcelas, bool entrada) {
+        public FormaPagamento(string descricao, int numParcelas, bool entrada, float percJuros = 0) {
             this.descricao = descricao;
             this.numParcelas = numParcelas;
             this.entrada = entrada;
+            this.percJuros = percJuros;
         }
 
         public override string ToString() {

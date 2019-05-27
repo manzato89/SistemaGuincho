@@ -586,10 +586,14 @@ namespace SistemaGuincho.Views {
 
         private void calculaEAtualizaInformacoesServicos() {
             txtValorTotal.Text = Util.formatValor(faturamentos[index].valorTotal());
+            txtServicos.Text = Util.formatValor(faturamentos[index].valorTotalServicos());
+            txtCustosAdicionais.Text = Util.formatValor(faturamentos[index].valorTotalCustosAdicionais());
         }
 
         private void calculaEAtualizaInformacoesServicos(DataGridView dgv, Servico servico) {
             txtValorTotal.Text = Util.formatValor(faturamentos[index].valorTotal());
+            txtServicos.Text = Util.formatValor(faturamentos[index].valorTotalServicos());
+            txtCustosAdicionais.Text = Util.formatValor(faturamentos[index].valorTotalCustosAdicionais());
 
             if (dgv.Name.Equals(nameof(dgvServicos)))
                 gravarServico_Custo(servico, Servico.TipoServico.Servico);

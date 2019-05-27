@@ -85,7 +85,16 @@ namespace SistemaGuincho.Model {
         }
 
         public float valorTotal() {
-            return valorTotalServicos() + valorTotalCustosAdicionais();
+            float valorTotal = valorTotalServicos() + valorTotalCustosAdicionais();
+
+            if (!formaPagamento.entrada || formaPagamento.numParcelas > 1) {
+                int entrada = formaPagamento.entrada ? 1 : 0;
+                for (int iCount = 0; iCount < formaPagamento.numParcelas - entrada; iCount++) {
+                    valorTotal += valorTotal * (formaPagamento.percJuros / 100);
+                }
+            }
+
+            return valorTotal;
         }
 
     }

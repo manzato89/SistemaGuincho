@@ -68,12 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Frm_Categoria.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm_Categoria.Designer.cs">
-      <DependentUpon>Frm_Categoria.cs</DependentUpon>
-    </Compile>
     <Compile Include="Relatorios\FaturamentoFiltroRelatorio.cs" />
     <Compile Include="Relatorios\Recibo.cs">
       <SubType>Form</SubType>
@@ -175,31 +169,11 @@
     <Compile Include="Views\Clientes.Designer.cs">
       <DependentUpon>Clientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_ConsultaServicos.cs">
-      <SubType>Form</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Frm_ConsultaServicos.Designer.cs">
-      <DependentUpon>Frm_ConsultaServicos.cs</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Views\MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm_Orcamento.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm_Orcamento.Designer.cs">
-      <DependentUpon>Frm_Orcamento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm_OrdemServico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm_OrdemServico.Designer.cs">
-      <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Cliente.cs" />
     <Compile Include="Model\Endereco.cs" />
@@ -217,9 +191,6 @@
     <Compile Include="Views\ConsultaCliente.Designer.cs">
       <DependentUpon>ConsultaCliente.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Frm_Categoria.resx">
-      <DependentUpon>Frm_Categoria.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\Recibo.resx">
       <DependentUpon>Recibo.cs</DependentUpon>
     </EmbeddedResource>
@@ -259,18 +230,8 @@
     <EmbeddedResource Include="Views\Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_ConsultaServicos.resx">
-      <DependentUpon>Frm_ConsultaServicos.cs</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm_Orcamento.resx">
-      <DependentUpon>Frm_Orcamento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm_OrdemServico.resx">
-      <DependentUpon>Frm_OrdemServico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

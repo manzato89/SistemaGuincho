@@ -39,6 +39,7 @@ namespace SistemaGuincho.Repositorio {
                 strSQL.AppendLine(" id INT NOT NULL IDENTITY PRIMARY KEY, ");
                 strSQL.AppendLine(" descricao TEXT, ");
                 strSQL.AppendLine(" numParcelas INTEGER, ");
+                strSQL.AppendLine(" percJuros REAL, ");
                 strSQL.AppendLine(" entrada INTEGER) ");
 
                 command.CommandText = strSQL.ToString();
@@ -57,14 +58,15 @@ namespace SistemaGuincho.Repositorio {
             try {
                 // Cria o cliente
                 strSQL = new StringBuilder();
-                strSQL.AppendLine("INSERT INTO FormaPagamento (descricao, numParcelas, entrada) ");
-                strSQL.AppendLine("VALUES (@descricao, @numParcelas, @entrada); ");
+                strSQL.AppendLine("INSERT INTO FormaPagamento (descricao, numParcelas, percJuros, entrada) ");
+                strSQL.AppendLine("VALUES (@descricao, @numParcelas, @percJuros, @entrada); ");
                 strSQL.AppendLine("SELECT @@IDENTITY;");
 
                 formaPagamento.id = connection.Query<int>(strSQL.ToString(),
                     new {
                         formaPagamento.descricao,
                         formaPagamento.numParcelas,
+                        formaPagamento.percJuros,
                         formaPagamento.entrada
                     }).First();
             } catch (Exception ex) {
@@ -114,6 +116,7 @@ namespace SistemaGuincho.Repositorio {
                 strSQL.AppendLine("UPDATE   FormaPagamento ");
                 strSQL.AppendLine("SET      descricao = @descricao, ");
                 strSQL.AppendLine("         numParcelas = @numParcelas, ");
+                strSQL.AppendLine("         percJuros = @percJuros, ");
                 strSQL.AppendLine("         entrada = @entrada ");
                 strSQL.AppendLine("WHERE    id = @id");
 
@@ -121,6 +124,7 @@ namespace SistemaGuincho.Repositorio {
                     new {
                         formaPagamento.descricao,
                         formaPagamento.numParcelas,
+                        formaPagamento.percJuros,
                         formaPagamento.entrada,
                         formaPagamento.id
                     });

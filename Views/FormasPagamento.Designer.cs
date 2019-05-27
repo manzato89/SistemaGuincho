@@ -23,8 +23,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblID = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtDescricao = new System.Windows.Forms.TextBox();
@@ -36,6 +36,8 @@
             this.chkEntrada = new System.Windows.Forms.CheckBox();
             this.txtNumParcelas = new System.Windows.Forms.TextBox();
             this.lblNumParcelas = new System.Windows.Forms.Label();
+            this.txtPercJuros = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.dgvFormasPagamento = new System.Windows.Forms.DataGridView();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnUltimo = new System.Windows.Forms.Button();
@@ -70,14 +72,14 @@
             this.txtID.Location = new System.Drawing.Point(45, 28);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(91, 20);
+            this.txtID.Size = new System.Drawing.Size(66, 20);
             this.txtID.TabIndex = 1;
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Location = new System.Drawing.Point(213, 28);
+            this.txtDescricao.Location = new System.Drawing.Point(184, 28);
             this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(277, 20);
+            this.txtDescricao.Size = new System.Drawing.Size(261, 20);
             this.txtDescricao.TabIndex = 3;
             this.txtDescricao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
             // 
@@ -85,7 +87,7 @@
             // 
             this.lblDescricao.AutoSize = true;
             this.lblDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescricao.Location = new System.Drawing.Point(143, 31);
+            this.lblDescricao.Location = new System.Drawing.Point(114, 31);
             this.lblDescricao.Name = "lblDescricao";
             this.lblDescricao.Size = new System.Drawing.Size(64, 13);
             this.lblDescricao.TabIndex = 2;
@@ -142,6 +144,8 @@
             this.gpb_ddBasicCliente.Controls.Add(this.lblDescricao);
             this.gpb_ddBasicCliente.Controls.Add(this.txtID);
             this.gpb_ddBasicCliente.Controls.Add(this.lblID);
+            this.gpb_ddBasicCliente.Controls.Add(this.txtPercJuros);
+            this.gpb_ddBasicCliente.Controls.Add(this.label1);
             this.gpb_ddBasicCliente.Location = new System.Drawing.Point(20, 58);
             this.gpb_ddBasicCliente.Name = "gpb_ddBasicCliente";
             this.gpb_ddBasicCliente.Size = new System.Drawing.Size(841, 61);
@@ -152,7 +156,7 @@
             // chkEntrada
             // 
             this.chkEntrada.AutoSize = true;
-            this.chkEntrada.Location = new System.Drawing.Point(636, 31);
+            this.chkEntrada.Location = new System.Drawing.Point(765, 31);
             this.chkEntrada.Name = "chkEntrada";
             this.chkEntrada.Size = new System.Drawing.Size(69, 17);
             this.chkEntrada.TabIndex = 7;
@@ -162,7 +166,7 @@
             // 
             // txtNumParcelas
             // 
-            this.txtNumParcelas.Location = new System.Drawing.Point(558, 28);
+            this.txtNumParcelas.Location = new System.Drawing.Point(517, 28);
             this.txtNumParcelas.Name = "txtNumParcelas";
             this.txtNumParcelas.Size = new System.Drawing.Size(60, 20);
             this.txtNumParcelas.TabIndex = 5;
@@ -172,11 +176,29 @@
             // 
             this.lblNumParcelas.AutoSize = true;
             this.lblNumParcelas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumParcelas.Location = new System.Drawing.Point(496, 31);
+            this.lblNumParcelas.Location = new System.Drawing.Point(455, 31);
             this.lblNumParcelas.Name = "lblNumParcelas";
             this.lblNumParcelas.Size = new System.Drawing.Size(56, 13);
             this.lblNumParcelas.TabIndex = 4;
             this.lblNumParcelas.Text = "Parcelas";
+            // 
+            // txtPercJuros
+            // 
+            this.txtPercJuros.Location = new System.Drawing.Point(692, 29);
+            this.txtPercJuros.Name = "txtPercJuros";
+            this.txtPercJuros.Size = new System.Drawing.Size(60, 20);
+            this.txtPercJuros.TabIndex = 9;
+            this.txtPercJuros.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fields_keyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(587, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Juros p/ parcela";
             // 
             // dgvFormasPagamento
             // 
@@ -184,23 +206,23 @@
             this.dgvFormasPagamento.AllowUserToDeleteRows = false;
             this.dgvFormasPagamento.AllowUserToOrderColumns = true;
             this.dgvFormasPagamento.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFormasPagamento.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFormasPagamento.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFormasPagamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFormasPagamento.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFormasPagamento.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFormasPagamento.Location = new System.Drawing.Point(6, 21);
             this.dgvFormasPagamento.MultiSelect = false;
             this.dgvFormasPagamento.Name = "dgvFormasPagamento";
@@ -420,5 +442,7 @@
         private System.Windows.Forms.TextBox txtNumParcelas;
         private System.Windows.Forms.Label lblNumParcelas;
         private System.Windows.Forms.CheckBox chkEntrada;
+        private System.Windows.Forms.TextBox txtPercJuros;
+        private System.Windows.Forms.Label label1;
     }
 }

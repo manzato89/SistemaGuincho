@@ -124,9 +124,10 @@ namespace SistemaGuincho.Views {
             // Cria os dados básicos do cliente
             string descricao = txtDescricao.Text;
             int numParcelas = -1; int.TryParse(txtNumParcelas.Text, out numParcelas);
+            float percJuros = -1; float.TryParse(txtPercJuros.Text, out percJuros);
             bool entrada = chkEntrada.Checked;
 
-            newFormaPagamento = new FormaPagamento(descricao, numParcelas, entrada);
+            newFormaPagamento = new FormaPagamento(descricao, numParcelas, entrada, percJuros);
             
             // Verifica se vai inserir um novo registro ou então salvá-lo
             if (windowMode == Util.WindowMode.ModoDeInsercao) {
@@ -191,6 +192,7 @@ namespace SistemaGuincho.Views {
                 txtID.Text = formasPagamento_view[index].id.ToString();
                 txtDescricao.Text = formasPagamento_view[index].descricao.ToString();
                 txtNumParcelas.Text = formasPagamento_view[index].numParcelas.ToString();
+                txtPercJuros.Text = formasPagamento_view[index].percJuros.ToString();
                 chkEntrada.Checked = formasPagamento_view[index].entrada;
 
                 windowMode = Util.WindowMode.ModoNormal;
@@ -237,8 +239,15 @@ namespace SistemaGuincho.Views {
                         dgvFormasPagamento.Columns[iCount].ReadOnly = true;
                         break;
 
-                    case nameof(FormaPagamento.entrada):
+                    case nameof(FormaPagamento.percJuros):
                         dgvFormasPagamento.Columns[iCount].DisplayIndex = 3;
+                        dgvFormasPagamento.Columns[iCount].HeaderText = "% de Juros p/ Parcela";
+                        dgvFormasPagamento.Columns[iCount].Width = 100;
+                        dgvFormasPagamento.Columns[iCount].ReadOnly = true;
+                        break;
+
+                    case nameof(FormaPagamento.entrada):
+                        dgvFormasPagamento.Columns[iCount].DisplayIndex = 4;
                         dgvFormasPagamento.Columns[iCount].HeaderText = "Entrada?";
                         dgvFormasPagamento.Columns[iCount].Width = 100;
                         dgvFormasPagamento.Columns[iCount].ReadOnly = true;
