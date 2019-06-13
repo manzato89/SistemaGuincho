@@ -346,6 +346,7 @@ namespace SistemaGuincho.Views {
             if (index == -1 || (index > -1 && !orcamentos[index].fechado)) {
                 // Orçamento aberto
                 btnFecharReabrir.Image = Properties.Resources.cadeado_fechado;
+                toolTip1.SetToolTip(btnFecharReabrir, "Fechar orçamento");
 
 
                 switch (windowMode) {
@@ -432,6 +433,7 @@ namespace SistemaGuincho.Views {
             } else {
                 // Orçamento fechado
                 btnFecharReabrir.Image = Properties.Resources.cadeado_aberto;
+                toolTip1.SetToolTip(btnFecharReabrir, "Reabrir orçamento");
 
                 enableFields(false);
 
@@ -750,7 +752,29 @@ namespace SistemaGuincho.Views {
             String url = sender.Tag.ToString();
             System.Diagnostics.Process.Start(url);
         }
-        
+
         #endregion
+
+        private void Orcamentos_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar orçamento");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir orçamento");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+            toolTip1.SetToolTip(btnFecharReabrir, ""); // O tooltip é definido em outro momento
+            toolTip1.SetToolTip(btnPesquisar, "Pesquisar orçamentos");
+
+            toolTip1.SetToolTip(btnPesquisarCliente, "Pesquisar cliente");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para o primeiro orçamento");
+            toolTip1.SetToolTip(btnAnterior, "Ir para o orçamento anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para o próximo orçamento");
+            toolTip1.SetToolTip(btnUltimo, "Ir para o último orçamento");
+
+            toolTip1.SetToolTip(btnAdicionarServico, "Adicionar serviço");
+            toolTip1.SetToolTip(btnExcluirServico, "Excluir serviço");
+            toolTip1.SetToolTip(btnAdicionarCustoAdicional, "Adicionar custo adicional");
+            toolTip1.SetToolTip(btnExcluirCustoAdicional, "Excluir custo adicional");
+        }
     }
 }

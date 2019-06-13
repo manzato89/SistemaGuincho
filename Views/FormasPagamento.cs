@@ -384,5 +384,21 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Específico
         #endregion
+
+        private void FormasPagamento_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar forma de pagamento");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir forma de pagamento");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para a primeira forma de pagamento");
+            toolTip1.SetToolTip(btnAnterior, "Ir para a forma de pagamento anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para a próxima forma de pagamento");
+            toolTip1.SetToolTip(btnUltimo, "Ir para a última forma de pagamento");
+
+            toolTip1.SetToolTip(txtBusca, "Tecle ENTER para realizar a busca");
+            toolTip1.SetToolTip(cboCamposBusca, "Tecle ENTER para realizar a busca");
+        }
     }
 }

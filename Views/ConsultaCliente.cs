@@ -48,6 +48,9 @@ namespace SistemaGuincho.Views {
             cboCamposBusca.Items.Add("Veículo");
             cboCamposBusca.Items.Add("Placa do veículo");
             cboCamposBusca.SelectedIndex = 0;
+
+            toolTip1.SetToolTip(txtBusca, "Tecle ENTER para realizar a busca");
+            toolTip1.SetToolTip(cboCamposBusca, "Tecle ENTER para realizar a busca");
         }
         #endregion
 

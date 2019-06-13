@@ -295,5 +295,18 @@ namespace SistemaGuincho.Views {
         }
 
         #endregion
+
+        private void AdicionarVeiculo_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar veículo");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir veículo");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para o primeiro veículo");
+            toolTip1.SetToolTip(btnAnterior, "Ir para o veículo anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para o próximo veículo");
+            toolTip1.SetToolTip(btnUltimo, "Ir para o último veículo");
+        }
     }
 }

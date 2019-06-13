@@ -399,5 +399,22 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Específico
         #endregion
+
+        private void Servicos_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar serviço");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir serviço");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para o primeiro serviço");
+            toolTip1.SetToolTip(btnAnterior, "Ir para o serviço anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para o próximo serviço");
+            toolTip1.SetToolTip(btnUltimo, "Ir para o último serviço");
+
+            toolTip1.SetToolTip(txtBusca, "Tecle ENTER para realizar a busca");
+            toolTip1.SetToolTip(cboCamposBusca, "Tecle ENTER para realizar a busca");
+
+        }
     }
 }

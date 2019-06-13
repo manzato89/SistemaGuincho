@@ -349,5 +349,21 @@ namespace SistemaGuincho.Views {
 
         #region Interfaces - Específico
         #endregion
+
+        private void Unidades_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar unidade");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir unidade");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para a primeira unidade");
+            toolTip1.SetToolTip(btnAnterior, "Ir para a unidade anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para a próxima unidade");
+            toolTip1.SetToolTip(btnUltimo, "Ir para a última unidade");
+
+            toolTip1.SetToolTip(txtBusca, "Tecle ENTER para realizar a busca");
+            toolTip1.SetToolTip(cboCamposBusca, "Tecle ENTER para realizar a busca");
+        }
     }
 }

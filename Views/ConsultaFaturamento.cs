@@ -61,6 +61,9 @@ namespace SistemaGuincho.Views {
             cboCamposBusca.Items.Add("Valor");
             cboCamposBusca.Items.Add("Fechado? (S/N)");
             cboCamposBusca.SelectedIndex = 0;
+
+            toolTip1.SetToolTip(txtBusca, "Tecle ENTER para realizar a busca");
+            toolTip1.SetToolTip(cboCamposBusca, "Tecle ENTER para realizar a busca");
         }
         #endregion
 

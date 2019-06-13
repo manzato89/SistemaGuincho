@@ -429,5 +429,19 @@ namespace SistemaGuincho.Views {
             refreshDataGridView();
         }
         #endregion
+
+        private void Clientes_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar cliente");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir cliente");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+            toolTip1.SetToolTip(btnPesquisar, "Pesquisar clientes");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para o primeiro cliente");
+            toolTip1.SetToolTip(btnAnterior, "Ir para o cliente anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para o próximo cliente");
+            toolTip1.SetToolTip(btnUltimo, "Ir para o último cliente");
+        }
     }
 }

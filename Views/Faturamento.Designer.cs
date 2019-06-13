@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.lblNumFaturamento = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
@@ -44,9 +45,13 @@
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.dgvServicos = new System.Windows.Forms.DataGridView();
             this.grpServicos = new System.Windows.Forms.GroupBox();
+            this.txtServicos = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnAdicionarServico = new System.Windows.Forms.Button();
             this.btnExcluirServico = new System.Windows.Forms.Button();
             this.grpCustosAdicionais = new System.Windows.Forms.GroupBox();
+            this.txtCustosAdicionais = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.dgvCustosAdicionais = new System.Windows.Forms.DataGridView();
             this.btnAdicionarCustoAdicional = new System.Windows.Forms.Button();
             this.btnExcluirCustoAdicional = new System.Windows.Forms.Button();
@@ -63,10 +68,7 @@
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
-            this.txtServicos = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCustosAdicionais = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.grpDadosBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).BeginInit();
             this.grpServicos.SuspendLayout();
@@ -324,6 +326,27 @@
             this.grpServicos.TabStop = false;
             this.grpServicos.Text = "Serviços";
             // 
+            // txtServicos
+            // 
+            this.txtServicos.BackColor = System.Drawing.SystemColors.Control;
+            this.txtServicos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServicos.Location = new System.Drawing.Point(788, 25);
+            this.txtServicos.Name = "txtServicos";
+            this.txtServicos.ReadOnly = true;
+            this.txtServicos.Size = new System.Drawing.Size(116, 23);
+            this.txtServicos.TabIndex = 58;
+            this.txtServicos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(641, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 17);
+            this.label2.TabIndex = 57;
+            this.label2.Text = "Valor dos Serviços";
+            // 
             // btnAdicionarServico
             // 
             this.btnAdicionarServico.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -370,6 +393,27 @@
             this.grpCustosAdicionais.TabIndex = 49;
             this.grpCustosAdicionais.TabStop = false;
             this.grpCustosAdicionais.Text = "Custos Adicionais";
+            // 
+            // txtCustosAdicionais
+            // 
+            this.txtCustosAdicionais.BackColor = System.Drawing.SystemColors.Control;
+            this.txtCustosAdicionais.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustosAdicionais.Location = new System.Drawing.Point(788, 25);
+            this.txtCustosAdicionais.Name = "txtCustosAdicionais";
+            this.txtCustosAdicionais.ReadOnly = true;
+            this.txtCustosAdicionais.Size = new System.Drawing.Size(116, 23);
+            this.txtCustosAdicionais.TabIndex = 60;
+            this.txtCustosAdicionais.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(575, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(210, 17);
+            this.label3.TabIndex = 59;
+            this.label3.Text = "Valor dos Custos Adicionais";
             // 
             // dgvCustosAdicionais
             // 
@@ -607,48 +651,6 @@
             this.btnAdicionar.UseVisualStyleBackColor = false;
             this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
-            // txtServicos
-            // 
-            this.txtServicos.BackColor = System.Drawing.SystemColors.Control;
-            this.txtServicos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServicos.Location = new System.Drawing.Point(788, 25);
-            this.txtServicos.Name = "txtServicos";
-            this.txtServicos.ReadOnly = true;
-            this.txtServicos.Size = new System.Drawing.Size(116, 23);
-            this.txtServicos.TabIndex = 58;
-            this.txtServicos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(641, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(144, 17);
-            this.label2.TabIndex = 57;
-            this.label2.Text = "Valor dos Serviços";
-            // 
-            // txtCustosAdicionais
-            // 
-            this.txtCustosAdicionais.BackColor = System.Drawing.SystemColors.Control;
-            this.txtCustosAdicionais.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustosAdicionais.Location = new System.Drawing.Point(788, 25);
-            this.txtCustosAdicionais.Name = "txtCustosAdicionais";
-            this.txtCustosAdicionais.ReadOnly = true;
-            this.txtCustosAdicionais.Size = new System.Drawing.Size(116, 23);
-            this.txtCustosAdicionais.TabIndex = 60;
-            this.txtCustosAdicionais.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(575, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(210, 17);
-            this.label3.TabIndex = 59;
-            this.label3.Text = "Valor dos Custos Adicionais";
-            // 
             // Faturamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -674,6 +676,7 @@
             this.MaximizeBox = false;
             this.Name = "Faturamentos";
             this.Text = "Faturamento";
+            this.Load += new System.EventHandler(this.Faturamentos_Load);
             this.grpDadosBasicos.ResumeLayout(false);
             this.grpDadosBasicos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).EndInit();
@@ -732,5 +735,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCustosAdicionais;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.lbl_CdCliente = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.lbl_NomeCliente = new System.Windows.Forms.Label();
@@ -50,6 +51,7 @@
             this.btnAnterior = new System.Windows.Forms.Button();
             this.btnProximo = new System.Windows.Forms.Button();
             this.btnPrimeiro = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.gpb_ddBasicCliente.SuspendLayout();
             this.gpb_LocalCliente.SuspendLayout();
             this.SuspendLayout();
@@ -380,6 +382,7 @@
             this.MaximizeBox = false;
             this.Name = "AdicionarVeiculo";
             this.Text = " - Veículos";
+            this.Load += new System.EventHandler(this.AdicionarVeiculo_Load);
             this.gpb_ddBasicCliente.ResumeLayout(false);
             this.gpb_ddBasicCliente.PerformLayout();
             this.gpb_LocalCliente.ResumeLayout(false);
@@ -417,5 +420,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtAno;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -408,6 +408,7 @@ namespace SistemaGuincho.Views {
             if (index == -1 || (index > -1 && !faturamentos[index].fechado)) {
                 // Faturamento aberto
                 btnFecharReabrir.Image = Properties.Resources.cadeado_fechado;
+                toolTip1.SetToolTip(btnFecharReabrir, "Fechar faturamento");
                 btnImprimirRecibo.Enabled = false;
 
                 switch (windowMode) {
@@ -496,6 +497,7 @@ namespace SistemaGuincho.Views {
             } else {
                 // Orçamento fechado
                 btnFecharReabrir.Image = Properties.Resources.cadeado_aberto;
+                toolTip1.SetToolTip(btnFecharReabrir, "Reabrir faturamento");
                 btnImprimirRecibo.Enabled = true;
 
                 enableFields(false);
@@ -893,5 +895,28 @@ namespace SistemaGuincho.Views {
         }
 
         #endregion
+
+        private void Faturamentos_Load(object sender, EventArgs e) {
+            toolTip1.SetToolTip(btnAdicionar, "Adicionar faturamento");
+            toolTip1.SetToolTip(btnGravar, "Gravar alterações");
+            toolTip1.SetToolTip(btnCancelar, "Cancelar alterações");
+            toolTip1.SetToolTip(btnExcluir, "Excluir faturamento");
+            toolTip1.SetToolTip(btnAtualizar, "Atualizar informações");
+            toolTip1.SetToolTip(btnFecharReabrir, ""); // O tooltip é definido em outro momento
+            toolTip1.SetToolTip(btnPesquisar, "Pesquisar faturamentos");
+            toolTip1.SetToolTip(btnImprimirRecibo, "Imprimir recibo");
+
+            toolTip1.SetToolTip(btnPesquisarCliente, "Pesquisar cliente");
+
+            toolTip1.SetToolTip(btnPrimeiro, "Ir para o primeiro faturamento");
+            toolTip1.SetToolTip(btnAnterior, "Ir para o faturamento anterior");
+            toolTip1.SetToolTip(btnProximo, "Ir para o próximo faturamento");
+            toolTip1.SetToolTip(btnUltimo, "Ir para o último faturamento");
+
+            toolTip1.SetToolTip(btnAdicionarServico, "Adicionar serviço");
+            toolTip1.SetToolTip(btnExcluirServico, "Excluir serviço");
+            toolTip1.SetToolTip(btnAdicionarCustoAdicional, "Adicionar custo adicional");
+            toolTip1.SetToolTip(btnExcluirCustoAdicional, "Excluir custo adicional");
+        }
     }
 }

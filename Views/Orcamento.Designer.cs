@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.lblNumOrcamento = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
@@ -58,6 +59,7 @@
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.grpDadosBasicos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).BeginInit();
             this.grpServicos.SuspendLayout();
@@ -558,6 +560,7 @@
             this.MaximizeBox = false;
             this.Name = "Orcamentos";
             this.Text = "Orçamento";
+            this.Load += new System.EventHandler(this.Orcamentos_Load);
             this.grpDadosBasicos.ResumeLayout(false);
             this.grpDadosBasicos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServicos)).EndInit();
@@ -605,5 +608,6 @@
         private System.Windows.Forms.TextBox txtDtEncerramento;
         private System.Windows.Forms.Label lblDtEncerramento;
         private System.Windows.Forms.Button btnConsultarValorServico;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
