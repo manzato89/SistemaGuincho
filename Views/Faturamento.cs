@@ -548,7 +548,6 @@ namespace SistemaGuincho.Views {
             txtCdCliente.Text = "";
             txtNomeCliente.Text = "";
             cboVeiculo.Items.Clear();
-            cboFormasPagamento.Items.Clear();
             txtOrcamento.Text = "";
             txtValorTotal.Text = "";
             txtDtCriacao.Text = "";
