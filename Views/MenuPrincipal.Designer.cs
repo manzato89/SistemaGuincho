@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.castrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviçosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.categoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formasDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +60,6 @@
             // 
             this.castrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.serviçosToolStripMenuItem,
-            this.categoriasToolStripMenuItem,
             this.unidadesToolStripMenuItem,
             this.formasDePagamentoToolStripMenuItem});
             this.castrosToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -75,13 +73,6 @@
             this.serviçosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.serviçosToolStripMenuItem.Text = "Serviços";
             this.serviçosToolStripMenuItem.Click += new System.EventHandler(this.serviçosToolStripMenuItem_Click);
-            // 
-            // categoriasToolStripMenuItem
-            // 
-            this.categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
-            this.categoriasToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.categoriasToolStripMenuItem.Text = "Categorias";
-            this.categoriasToolStripMenuItem.Click += new System.EventHandler(this.categoriasToolStripMenuItem_Click);
             // 
             // unidadesToolStripMenuItem
             // 
@@ -109,7 +100,7 @@
             // faturamentosToolStripMenuItem
             // 
             this.faturamentosToolStripMenuItem.Name = "faturamentosToolStripMenuItem";
-            this.faturamentosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.faturamentosToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.faturamentosToolStripMenuItem.Text = "Faturamentos";
             this.faturamentosToolStripMenuItem.Click += new System.EventHandler(this.consultaFaturamentosToolStripMenuItem_Clic);
             // 
@@ -217,7 +208,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem castrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviçosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem categoriasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem;
         private System.Windows.Forms.Button btn_Cliente;
         private System.Windows.Forms.Button btn_Orcamento;
