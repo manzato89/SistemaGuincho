@@ -12,7 +12,7 @@ namespace SistemaGuincho.Utilidades {
         public static string connectionStringFile { get; set; }
         public static string connectionStringFolder { get; set; }
 
-        public static bool debug = true;
+        public static bool debug = false;
         public static bool registrosCriados = false;
         #endregion
 
