@@ -176,7 +176,7 @@ namespace SistemaGuincho.Repositorio {
                         servico.valor,
                         servico._quantidade,
                         idServicoOrcFat
-                    }).First();
+                    });
             } catch (Exception ex) {
                 return false;
             }
@@ -202,8 +202,8 @@ namespace SistemaGuincho.Repositorio {
 
                 connection.Query(strSQL.ToString(),
                     new {
-                        servico._idServicoOrcFat
-                    }).First();
+                        id = servico._idServicoOrcFat
+                    });
             } catch (Exception ex) {
                 return false;
             }

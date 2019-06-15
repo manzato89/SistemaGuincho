@@ -78,7 +78,7 @@ namespace SistemaGuincho.Repositorio {
                     new {
                         faturamento.numOrcamento,
                         faturamento._idCliente,
-                        faturamento._idFormaPagamento,
+                        _idFormaPagamento = faturamento._idFormaPagamento == 0 ? 1 : faturamento._idFormaPagamento,
                         faturamento.fechado,
                         faturamento._idVeiculo,
                         faturamento.dataCriacao,

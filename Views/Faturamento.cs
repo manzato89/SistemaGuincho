@@ -240,6 +240,7 @@ namespace SistemaGuincho.Views {
                     faturamentos[index].ToString(), "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 FaturamentoServicos.delete(faturamentos[index]);
 
+                index = -1;
                 getFromRepositorio();
                 clearFields();
             }
