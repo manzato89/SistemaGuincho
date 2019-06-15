@@ -81,6 +81,8 @@ namespace SistemaGuincho.Views {
             for (var iCount = 0; iCount < dgvClientes.Columns.Count; iCount++) {
                 switch (dgvClientes.Columns[iCount].DataPropertyName) {
                     case nameof(Servico._quantidade):
+                    case nameof(Servico._idUnidade):
+                    case nameof(Servico._idServicoOrcFat):
                     case nameof(Servico._total):
                         dgvClientes.Columns[iCount].Visible = false;
                         break;
