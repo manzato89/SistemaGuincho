@@ -225,7 +225,7 @@ namespace SistemaGuincho.Repositorio {
                 connection.Query(strSQL.ToString(),
                     new {
                         faturamento.id
-                    }).First();
+                    });
             } catch (Exception ex) {
                 return false;
             }

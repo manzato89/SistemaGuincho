@@ -181,7 +181,7 @@ namespace SistemaGuincho.Repositorio {
                         orcamento.dataCriacao,
                         orcamento.dataEncerramento,
                         orcamento.id
-                    }).First();
+                    });
             } catch (Exception ex) {
                 return false;
             }
