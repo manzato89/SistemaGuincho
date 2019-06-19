@@ -214,6 +214,7 @@ namespace SistemaGuincho.Views {
                     newFaturamento.servicos = faturamentos[index].servicos;
                     newFaturamento.custosAdicionais = faturamentos[index].custosAdicionais;
                     newFaturamento.dataCriacao = faturamentos[index].dataCriacao;
+                    newFaturamento.numOrcamento = faturamentos[index].numOrcamento;
 
                     if (cliente != null)
                         newFaturamento._idCliente = cliente.id;
